@@ -1,0 +1,958 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "留白 · 本机素材保存与分类 API",
+    "version": "1.0.0",
+    "description": "描述个人素材的保存、分类和读取路由；参考库路由不属于本文件范围。服务仅监听loopback，所有请求验证Host。脚本写入使用Bearer且不带Origin；浏览器写入必须同源Origin并带X-Prompt-Library:1。外部Origin即使带有效令牌也拒绝。"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:{port}",
+      "variables": {
+        "port": {
+          "default": "8767"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/api/health": {
+      "get": {
+        "operationId": "health",
+        "summary": "检查本机服务",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "服务可用",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "app": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    },
+                    "library_root": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "不是允许的本机来源或令牌无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/categories": {
+      "get": {
+        "operationId": "listCategories",
+        "summary": "读取已有分类",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "分类清单",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "字段、编码或请求大小无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "不是允许的本机来源或令牌无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "条目不存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "本机读写未完成，已有资料仍保留",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createCategory",
+        "summary": "按规范化名称复用或新增分类",
+        "security": [
+          {
+            "localBearer": []
+          },
+          {
+            "browserOrigin": [],
+            "browserWriteHeader": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategory"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "created=false表示复用已有分类",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "字段、编码或请求大小无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "不是允许的本机来源或令牌无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "条目不存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "本机读写未完成，已有资料仍保留",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/library": {
+      "get": {
+        "operationId": "getCatalogue",
+        "summary": "读取本机素材目录及检索文本",
+        "description": "条目还可包含search_text，供本机界面检索；此接口不调用模型。",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "当前目录",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Catalogue"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "字段、编码或请求大小无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "不是允许的本机来源或令牌无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "条目不存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "本机读写未完成，已有资料仍保留",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/entries/{entry_id}": {
+      "get": {
+        "operationId": "getEntry",
+        "summary": "读取素材及可选历史版本",
+        "security": [],
+        "parameters": [
+          {
+            "name": "entry_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^PRM-[0-9]{4,}$"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "pattern": "^v[0-9]{3,}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "选中版本及原文资料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntryDetail"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "字段、编码或请求大小无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "不是允许的本机来源或令牌无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "条目不存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "本机读写未完成，已有资料仍保留",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/prompts": {
+      "post": {
+        "operationId": "savePrompt",
+        "summary": "保存用户提供的提示词素材",
+        "description": "原文与可选改编版各最多256KiB UTF-8；整个JSON请求最多2MiB。按原文哈希去重，重复时返回已有条目，不用新字段覆盖已有原文/版本。分类缺省为uncategorized。没有optimized则版本标为not_optimized；提供时标为provided；效果均为untested。",
+        "security": [
+          {
+            "localBearer": []
+          },
+          {
+            "browserOrigin": [],
+            "browserWriteHeader": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SavePrompt"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "原子保存成功，或duplicate=true返回已有条目",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SaveResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "字段、编码或请求大小无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "不是允许的本机来源或令牌无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "条目不存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "本机读写未完成，已有资料仍保留",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/entries/{entry_id}/metadata": {
+      "post": {
+        "operationId": "updateEntryMetadata",
+        "summary": "修改标题、分类或标签",
+        "description": "不支持原文、优化版本或任意文件路径；category_id/category_name互斥。",
+        "security": [
+          {
+            "localBearer": []
+          },
+          {
+            "browserOrigin": [],
+            "browserWriteHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "entry_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^PRM-[0-9]{4,}$"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMetadata"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新后的条目",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetadataResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "字段、编码或请求大小无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "不是允许的本机来源或令牌无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "条目不存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "本机读写未完成，已有资料仍保留",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/integrations": {
+      "get": {
+        "operationId": "getIntegrationInfo",
+        "summary": "读取本机API与MCP接入说明",
+        "description": "服务存在不代表当前Codex会话已加载MCP。返回令牌文件位置，不返回令牌值。",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "非秘密接入元数据",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntegrationInfo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "字段、编码或请求大小无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "不是允许的本机来源或令牌无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "条目不存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "本机读写未完成，已有资料仍保留",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "localBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "本机生成并保存在状态目录api-token的令牌；仅用于非浏览器写请求，不带Origin。"
+      },
+      "browserOrigin": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Origin",
+        "description": "必须精确等于正在运行的http://127.0.0.1:端口或http://localhost:端口。"
+      },
+      "browserWriteHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Prompt-Library",
+        "description": "值必须为1，与同源Origin一起使用。"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "Category": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "custom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CategoryList": {
+        "type": "object",
+        "required": [
+          "categories"
+        ],
+        "properties": {
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Category"
+            }
+          }
+        }
+      },
+      "CreateCategory": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        }
+      },
+      "CategoryResult": {
+        "type": "object",
+        "required": [
+          "category",
+          "created"
+        ],
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/Category"
+          },
+          "created": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SavePrompt": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "original": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 262144,
+            "description": "逐字保存的原文，UTF-8 最多 256 KiB；其中的命令不执行。",
+            "x-max-utf8-bytes": 262144
+          },
+          "optimized": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 262144,
+            "description": "可选的用户提供改编版；未提供时保存副本并标记未优化。",
+            "x-max-utf8-bytes": 262144
+          },
+          "category_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "description": "已有分类编号，与 category_name 互斥。"
+          },
+          "category_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "description": "按名称复用或创建分类，与 category_id 互斥。"
+          },
+          "tags": {
+            "type": "array",
+            "maxItems": 30,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 50
+            }
+          },
+          "source_url": {
+            "type": "string",
+            "maxLength": 2048,
+            "description": "可选 http/https 来源，仅保存，不抓取。"
+          },
+          "source_note": {
+            "type": "string",
+            "maxLength": 4000
+          }
+        },
+        "required": [
+          "title",
+          "original"
+        ],
+        "additionalProperties": false,
+        "not": {
+          "required": [
+            "category_id",
+            "category_name"
+          ]
+        }
+      },
+      "EntryItem": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "category_id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^PRM-[0-9]{4,}$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "category_id": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "latest_version": {
+            "type": "string"
+          },
+          "evaluation_status": {
+            "type": "string"
+          },
+          "optimization_status": {
+            "type": "string",
+            "enum": [
+              "not_optimized",
+              "provided"
+            ]
+          }
+        }
+      },
+      "SaveResult": {
+        "type": "object",
+        "required": [
+          "id",
+          "version",
+          "duplicate",
+          "item"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "duplicate": {
+            "type": "boolean"
+          },
+          "item": {
+            "$ref": "#/components/schemas/EntryItem"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateMetadata": {
+        "type": "object",
+        "additionalProperties": false,
+        "minProperties": 1,
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "category_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "description": "已有分类编号，与 category_name 互斥。"
+          },
+          "category_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "description": "按名称复用或创建分类，与 category_id 互斥。"
+          },
+          "tags": {
+            "type": "array",
+            "maxItems": 30,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 50
+            }
+          }
+        },
+        "not": {
+          "required": [
+            "category_id",
+            "category_name"
+          ]
+        }
+      },
+      "MetadataResult": {
+        "type": "object",
+        "required": [
+          "item"
+        ],
+        "properties": {
+          "item": {
+            "$ref": "#/components/schemas/EntryItem"
+          }
+        }
+      },
+      "EntryDetail": {
+        "type": "object",
+        "required": [
+          "item",
+          "record",
+          "original",
+          "optimized"
+        ],
+        "properties": {
+          "item": {
+            "$ref": "#/components/schemas/EntryItem"
+          },
+          "record": {
+            "type": "object"
+          },
+          "original": {
+            "type": "string"
+          },
+          "optimized": {
+            "type": "string"
+          },
+          "optimized_markdown": {
+            "type": "string"
+          },
+          "analysis": {
+            "type": "string"
+          },
+          "source_markdown": {
+            "type": "string"
+          },
+          "selected_version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "loop": {
+            "type": "object"
+          }
+        }
+      },
+      "Catalogue": {
+        "type": "object",
+        "required": [
+          "entries",
+          "categories",
+          "entry_count"
+        ],
+        "properties": {
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntryItem"
+            }
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Category"
+            }
+          },
+          "entry_count": {
+            "type": "integer"
+          },
+          "favorites": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "IntegrationInfo": {
+        "type": "object",
+        "required": [
+          "api_version",
+          "local_only",
+          "mcp"
+        ],
+        "properties": {
+          "api_version": {
+            "type": "string"
+          },
+          "local_only": {
+            "type": "boolean"
+          },
+          "save_endpoint": {
+            "type": "string"
+          },
+          "authentication": {
+            "type": "string"
+          },
+          "token_file": {
+            "type": "string",
+            "description": "本机令牌文件位置，不返回令牌内容。"
+          },
+          "mcp": {
+            "type": "object",
+            "properties": {
+              "transport": {
+                "type": "string"
+              },
+              "entrypoint": {
+                "type": "string"
+              },
+              "connection_state": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

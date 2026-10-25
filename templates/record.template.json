@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": null,
+  "title": null,
+  "summary": null,
+  "category_id": null,
+  "classification_status": "needs_review",
+  "tags": [],
+  "source": {"type": "user_submission", "url": null, "note": null},
+  "created_at": null,
+  "updated_at": null,
+  "original": {"file": "original.md", "sha256": null},
+  "related_ids": [],
+  "variables": [],
+  "applicable_models": [],
+  "open_questions": [],
+  "versions": [],
+  "quality_review": {
+    "reviewed_version": null,
+    "reviewed_at": null,
+    "review_basis": null,
+    "criteria": {
+      "goal_clarity": {"status": "unreviewed", "note": null},
+      "input_clarity": {"status": "unreviewed", "note": null},
+      "constraint_quality": {"status": "unreviewed", "note": null},
+      "output_checkability": {"status": "unreviewed", "note": null},
+      "usage_evidence": {"status": "unreviewed", "note": null},
+      "task_fit": {"status": "unreviewed", "note": null}
+    }
+  },
+  "loop_review": {
+    "reviewed_version": null,
+    "reviewed_at": null,
+    "applicability": "unreviewed",
+    "explicit_loop_present": null,
+    "reminder": null
+  },
+  "review_history": [],
+  "feedback": []
+}
