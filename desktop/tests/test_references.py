@@ -271,9 +271,11 @@ def test_restart_recovers_prepared_transaction(store):
 def test_separate_processes_cannot_duplicate_adoption(store):
     ref_id = prepared(store)
     script = "import sys;sys.path.insert(0,sys.argv[1]);from reference_store import ReferenceStore;s=ReferenceStore(sys.argv[2]);p=s.adoption_preview(sys.argv[3]);print(s.adopt(sys.argv[3],expected_snapshot=p['snapshot_id'],expected_analysis_version=p['analysis_version']))"
-    workers = [subprocess.Popen([sys.executable, "-c", script, str(MODULE.parent), str(store.root), ref_id], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) for _ in range(3)]
+    child_environment = {**os.environ, "PYTHONIOENCODING": "utf-8"}
+    workers = [subprocess.Popen([sys.executable, "-X", "utf8", "-c", script, str(MODULE.parent), str(store.root), ref_id], env=child_environment, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding="utf-8", errors="replace") for _ in range(3)]
     outputs = [worker.communicate(timeout=25) for worker in workers]
-    assert all(worker.returncode == 0 for worker in workers), outputs
+    failures = [f"child {number}, exit {worker.returncode}:\n{stderr}" for number, (worker, (_, stderr)) in enumerate(zip(workers, outputs), 1) if worker.returncode != 0]
+    assert not failures, "\n\n".join(failures)
     index = store._personal_index()
     assert index["entry_count"] == 1
     record = json.loads((store.root / index["entries"][0]["record_file"]).read_text(encoding="utf-8"))

@@ -3,6 +3,7 @@
 from hashlib import sha256
 from pathlib import Path
 import json
+import os
 import re
 import subprocess
 import sys
@@ -177,9 +178,11 @@ def test_concurrent_manual_and_reference_adoption_share_id_allocation_and_dedup(
     reference = ReferenceStore(prompts.root)
     ref_id = prepared(reference)
     script = "import sys;sys.path.insert(0,sys.argv[1]);from prompt_store import PromptStore;from reference_store import ReferenceStore;root=sys.argv[2];mode=sys.argv[3];s=PromptStore(root) if mode=='save' else ReferenceStore(root);p=None if mode=='save' else s.adoption_preview(sys.argv[4]);print(s.save_prompt({'title':'manual','original':'A separate user submission'}) if mode=='save' else s.adopt(sys.argv[4],expected_snapshot=p['snapshot_id'],expected_analysis_version=p['analysis_version']))"
-    processes = [subprocess.Popen([sys.executable, "-c", script, str(DESKTOP), str(prompts.root), mode, ref_id], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding="utf-8", errors="replace") for mode in ("save", "adopt", "save", "adopt")]
+    child_environment = {**os.environ, "PYTHONIOENCODING": "utf-8"}
+    processes = [subprocess.Popen([sys.executable, "-X", "utf8", "-c", script, str(DESKTOP), str(prompts.root), mode, ref_id], env=child_environment, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding="utf-8", errors="replace") for mode in ("save", "adopt", "save", "adopt")]
     outputs = [process.communicate(timeout=40) for process in processes]
-    assert all(process.returncode == 0 for process in processes), outputs
+    failures = [f"child {number}, exit {process.returncode}:\n{stderr}" for number, (process, (_, stderr)) in enumerate(zip(processes, outputs), 1) if process.returncode != 0]
+    assert not failures, "\n\n".join(failures)
     index = json.loads((prompts.root / "index.json").read_text(encoding="utf-8"))
     assert index["entry_count"] == 2
     assert {item["id"] for item in index["entries"]} == {"PRM-0001", "PRM-0002"}
