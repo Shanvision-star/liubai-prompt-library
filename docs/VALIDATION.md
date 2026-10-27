@@ -6,6 +6,9 @@
 - 本地原文、提示词版本与参考快照1005个文件哈希检查无改动；本机222条与公开222条当前版本均可加载匹配教学。教学是独立资源，不重写个人素材。
 - Chromium实际验证：总索引学习路线、同窗口案例跳转、设计逻辑全文复制、键盘标签页、令牌桶算例、390px详情与返回；无JavaScript运行错误，无页面横向溢出。静态语法检查与Python启动/服务/MCP导入通过。
 - 教学笔记逐条区分已有要求、整理建议、AI机制推断与未执行对照；新素材无分析时显示真实空状态。工程检查不证明作者内部意图、提示词生成效果或用户学习效果。
+- GitHub Actions在Windows、macOS、Linux × Python 3.11/3.12六组全部通过，程序提交 `7c7dc853772d18dd5d03c6e5ee0e75adbb62cc49`，见[运行记录](https://github.com/Shanvision-star/liubai-prompt-library/actions/runs/40556196221)。本地测试夹具隔离改动后另跑12项通过，导入与语法检查通过。
+- 最终Windows安装包真实执行安装、启动、读取教学与学习路线、HTTP/MCP各保存一条、重装、卸载；PATH只保留System32并清除Python相关环境变量。224条测试资料在重装与卸载后哈希保持。此项未使用干净虚拟机，也未验证提示词效果。
+- 安装包 `Liubai-Setup-0.6.0-windows-x64.exe` SHA-256：`f5139d0ec2a66618932fb7f6cbb4da3935a73bbb7ee94fa0c5c0515f9ad59e50`。安装包未做发行者代码签名。打包仅使用公开素材清单，排除运行锁和个人状态。
 
 教学编排说明见 [learning-library](../learning-library/README.md)，页面截图见 [学习路线](images/learning-guide.png) 与 [具体案例](images/teaching-analysis.png)。
 
