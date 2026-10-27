@@ -38,7 +38,10 @@ def launch_args(data_root, port):
 
 @contextmanager
 def running_launcher(data_root, port):
-    child = subprocess.Popen(launch_args(data_root, port), cwd=data_root.parent, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    args = launch_args(data_root, port)
+    # 启动超时时保留子进程堆栈，区分程序阻塞与 CI 机器慢，不靠延长等待掩盖错误。
+    diagnostic = "import faulthandler,runpy,sys; faulthandler.dump_traceback_later(8); sys.argv=sys.argv[1:]; runpy.run_path(sys.argv[0],run_name='__main__')"
+    child = subprocess.Popen([*args[:3], "-c", diagnostic, *args[3:]], cwd=data_root.parent, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     try:
         deadline = time.monotonic() + 15
         while time.monotonic() < deadline:
@@ -51,7 +54,9 @@ def running_launcher(data_root, port):
             except (URLError, OSError, ValueError):
                 time.sleep(0.1)
         else:
-            pytest.fail("临时服务未就绪")
+            child.terminate()
+            stdout, stderr = child.communicate(timeout=10)
+            pytest.fail(f"临时服务未就绪：{stdout.decode('utf-8')}\n{stderr.decode('utf-8')}")
         yield child
     finally:
         if child.poll() is None:
