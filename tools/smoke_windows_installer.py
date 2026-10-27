@@ -103,7 +103,8 @@ def main():
         assert all(sha256((data / name).read_bytes()).hexdigest() == digest for name, digest in before.items())
         report["uninstall_preserves_data"] = True
     (work / "report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(json.dumps(report, ensure_ascii=False))
+    # CI 控制台可能仍是 cp1252；文件报告保留 UTF-8，控制台 JSON 使用可移植转义。
+    print(json.dumps(report, ensure_ascii=True))
 
 
 if __name__ == "__main__":

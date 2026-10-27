@@ -27,9 +27,9 @@ jobs:
           if ($installed.ExitCode -ne 0) { throw 'Compiler setup failed' }
           "LIUBAI_ISCC=$compilerFolder\ISCC.exe" >> $env:GITHUB_ENV
       - name: Build installer
-        run: python tools/build_windows.py --iscc "$env:LIUBAI_ISCC" --output dist/windows
+        run: python -X utf8 tools/build_windows.py --iscc "$env:LIUBAI_ISCC" --output dist/windows
       - name: Install, run, reinstall and uninstall
-        run: python tools/smoke_windows_installer.py --installer dist/windows/release/Liubai-Setup-0.5.0-windows-x64.exe --workdir "$env:RUNNER_TEMP/liubai-smoke"
+        run: python -X utf8 tools/smoke_windows_installer.py --installer dist/windows/release/Liubai-Setup-0.5.0-windows-x64.exe --workdir "$env:RUNNER_TEMP/liubai-smoke"
       - uses: actions/upload-artifact@v4
         with:
           name: liubai-windows-installer
