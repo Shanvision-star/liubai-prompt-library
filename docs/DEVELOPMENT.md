@@ -14,6 +14,8 @@
 | `reference_service.py` | 参考库HTTP用例与导出 |
 | `server.py` | 本机HTTP与静态页面 |
 | `mcp_server.py` | 本地stdio工具，复用同一文件库 |
+| `library_export.py` | 当前实例配置与可迁移 ZIP 备份，不导出机器授权/调度 |
+| `../start.py` | 跨平台终端启动、服务身份核对与浏览器打开 |
 
 ## 文件规则
 

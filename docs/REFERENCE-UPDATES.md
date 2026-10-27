@@ -13,12 +13,14 @@
 可以由现有调度工具调用：
 
 ```sh
-python -X utf8 desktop/reference_runner.py status
-python -X utf8 desktop/reference_runner.py run --force --trigger manual
-python -X utf8 desktop/reference_runner.py pending
+python -X utf8 desktop/reference_runner.py status --root ./private-library
+python -X utf8 desktop/reference_runner.py run --root ./private-library --force --trigger manual
+python -X utf8 desktop/reference_runner.py pending --root ./private-library
 ```
 
-如果使用Codex自动化：先通过Codex创建一个实际运行的本机任务，再把工具返回的任务编号交给`reference_runner.py register --automation-id <实际编号>`登记。登记命令本身不创建任务。定时任务调用`run --trigger codex_heartbeat`，只处理到期周期。默认上海时间每日09:00，周日额外发现；改为每周时，发现跟随选定星期运行。
+将 `./private-library` 替换为启动界面或 MCP 时使用的同一数据目录；默认在仓库根保存的用户使用 `--root .`。定时任务建议使用绝对路径，避免工作目录变化后维护了另一份空库。
+
+如果使用Codex自动化：先通过Codex创建一个实际运行的本机任务，再把工具返回的任务编号交给`reference_runner.py register --root <数据目录绝对路径> --automation-id <实际编号>`登记。登记命令本身不创建任务。定时任务调用`run --root <同一数据目录绝对路径> --trigger codex_heartbeat`，只处理到期周期。默认上海时间每日09:00，周日额外发现；改为每周时，发现跟随选定星期运行。
 
 网页暂停/频率设置控制采集门禁，外部调度器仍可能唤醒后检查门禁。若要停用整个唤醒，在对应调度器操作。共用运行锁与周期记录，不重入、不重复建档，恢复后只处理最近周期并最多补跑一次。
 

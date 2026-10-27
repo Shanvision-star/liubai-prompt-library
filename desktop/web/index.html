@@ -11,30 +11,36 @@
 <body>
   <div class="app-shell">
     <aside class="sidebar" aria-label="素材导航">
-      <a class="brand" href="/" aria-label="留白，返回全部素材"><img src="/icon.svg" alt="" width="40" height="40"><span><strong>留白</strong><small>PROMPT LIBRARY</small></span></a>
+      <div class="brand-row"><a class="brand" href="/" aria-label="留白，返回全部素材"><img src="/icon.svg" alt="" width="40" height="40"><strong>留白</strong></a><button id="help-button" class="icon-button" aria-label="使用与数据" title="使用与数据">?</button></div>
       <div class="sidebar-body">
         <p class="nav-label">我的空间</p><nav id="space-nav"></nav>
         <div class="category-heading"><p class="nav-label">按用途分类</p><span id="category-total"></span><button class="icon-button category-add-button" data-prompt-action="new-category" aria-label="新增分类"><span data-icon="plus"></span></button></div><nav id="category-nav"></nav>
         <button class="more-categories" id="more-categories" aria-expanded="false">查看全部分类 <span>⌄</span></button>
-        <div class="sidebar-note"><div class="note-line"></div><p>好的提示词，<br>值得被留下。</p><small>收集 · 理解 · 复用</small></div>
       </div>
-      <div class="local-status"><span class="status-dot"></span><div><strong>本机素材库</strong><small id="local-caption">正在读取素材…</small></div><button id="help-button" class="icon-button" aria-label="使用说明">?</button></div>
+      <div class="local-status"><span class="status-dot"></span><div><strong>本机素材库</strong><small id="local-caption">正在读取素材…</small></div></div>
     </aside>
     <main class="main">
-      <header class="topbar"><nav class="space-switch" aria-label="素材与参考"><button id="personal-space-button" class="active" aria-pressed="true">我的素材</button><button id="reference-space-button" aria-pressed="false">参考库</button></nav><div class="toolbar"><button id="new-prompt-button" class="reference-button" data-prompt-action="new"><span data-icon="plus"></span>新建素材</button><button id="refresh-button" class="text-button" aria-label="刷新素材库"><span data-icon="refresh"></span>刷新</button><span class="local-pill">LOCAL</span></div></header>
+      <header class="topbar"><nav class="space-switch" aria-label="素材与参考"><button id="personal-space-button" class="active" aria-pressed="true">我的素材</button><button id="reference-space-button" aria-pressed="false">参考库</button></nav><div class="toolbar"><button class="text-button" data-prompt-action="import" aria-label="导入文本文件">导入</button><button id="new-prompt-button" class="reference-button" data-prompt-action="new"><span data-icon="plus"></span>新建素材</button><button id="refresh-button" class="icon-button" aria-label="刷新素材库" title="刷新素材库"><span data-icon="refresh"></span></button></div></header>
       <div id="personal-space">
-      <section class="library-heading"><div><p class="eyebrow">YOUR PERSONAL COLLECTION</p><h1 id="view-title">全部素材<span id="title-count"></span></h1><p id="view-description">把好想法留下来，让下一次创作更从容。</p></div><div class="search-wrap"><span data-icon="search"></span><input id="search" type="search" placeholder="搜索标题、标签或提示词正文" aria-label="搜索素材" autocomplete="off"><kbd>Ctrl K</kbd></div></section>
-      <div class="filterbar"><div id="quick-filters" class="quick-filters" aria-label="快捷分类"></div><button class="icon-button mobile-category-add" data-prompt-action="new-category" aria-label="新增分类"><span data-icon="plus"></span></button><label class="sort-control"><span data-icon="sort"></span><select id="sort" aria-label="排序"><option value="updated">最近更新</option><option value="recent">最近收录</option><option value="title">标题排序</option></select></label></div>
+      <section class="library-heading"><h1 id="view-title">全部素材<span id="title-count"></span></h1><div class="search-wrap"><span data-icon="search"></span><input id="search" type="search" placeholder="搜索标题、标签或正文" aria-label="搜索素材" autocomplete="off"><kbd>Ctrl K</kbd></div></section>
+      <div class="filterbar"><div id="quick-filters" class="quick-filters" aria-label="快捷分类"></div><label class="mobile-browse"><span class="sr-only">浏览素材与分类</span><select id="mobile-browse" aria-label="浏览素材与分类"><option value="view:all">全部素材</option></select></label><button class="icon-button mobile-category-add" data-prompt-action="new-category" aria-label="新增分类"><span data-icon="plus"></span></button><label class="sort-control"><span data-icon="sort"></span><select id="sort" aria-label="排序"><option value="updated">最近更新</option><option value="recent">最近收录</option><option value="title">标题排序</option></select></label></div>
       <div id="error-banner" class="error-banner" role="alert" hidden></div>
       <div class="workspace">
-        <section class="collection-pane" aria-label="素材列表"><div class="collection-caption"><span id="result-count">读取中</span><span>灵感，随时取用</span></div><div id="entry-list" class="entry-list"></div></section>
+        <section class="collection-pane" aria-label="素材列表"><div class="collection-caption"><span id="result-count" role="status" aria-live="polite">读取中</span></div><div id="entry-list" class="entry-list"></div></section>
         <section id="detail-pane" class="detail-pane" aria-label="素材详情" aria-busy="true"><div class="empty-detail">正在打开你的素材库…</div></section>
       </div>
-      <footer class="app-footer"><span>原文留存 · 版本独立 · 来源可查</span><span id="footer-count"></span></footer>
+      <footer class="app-footer"><span id="footer-count"></span></footer>
       </div>
       <section id="references-space" aria-label="参考库" hidden></section>
     </main>
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
-  <dialog id="help-dialog"><div class="dialog-top"><span class="eyebrow">ABOUT YOUR LIBRARY</span><button id="close-help" class="icon-button" aria-label="关闭使用说明">×</button></div><h2>你的提示词，有了一个家。</h2><p>这里直接读取本机已保存的素材，原文、优化版与设计逻辑可以随时查看、复制和导出。</p><div class="help-row"><span data-icon="plus"></span><div><strong>如何收录新素材</strong><p>点击“新建素材”，粘贴原文并选择分类即可保存。也可以继续在已连接的 Codex 对话中整理入库，保存后刷新查看。</p></div></div><div class="help-row"><span data-icon="star"></span><div><strong>把常用的留下</strong><p>点星标收藏，记录会保存在本机。原始提示词和优化版本不会被收藏操作改写。</p></div></div><div class="help-row"><span data-icon="check"></span><div><strong>用过，再判断</strong><p>“待实测”表示优化版尚未在实际任务中验证。真实结果与反馈可以继续交给对话整理。</p></div></div><p class="dialog-foot">关闭窗口后可通过“打开提示词库”再次打开。</p></dialog>
+  <dialog id="help-dialog" class="data-dialog" aria-labelledby="help-title">
+    <div class="dialog-top"><h2 id="help-title">使用与数据</h2><button id="close-help" class="icon-button" aria-label="关闭使用与数据">×</button></div>
+    <section class="help-section"><h3>保存提示词</h3><p>粘贴原文或导入 UTF-8 的 .md / .txt 文件，选择分类后保存。优化版可选，未实测的内容会保留相应状态。</p><div class="help-actions"><button class="reference-button" data-prompt-action="new">新建素材</button><button class="reference-button" data-prompt-action="import">导入文本文件</button></div></section>
+    <div id="app-info-error" class="error-banner" role="alert" hidden></div><button id="app-info-retry" class="reference-button" hidden>重新读取</button>
+    <section class="help-section" id="app-info-section" aria-busy="true"><h3>本机数据</h3><dl class="help-data"><dt>数据目录</dt><dd id="library-location">正在读取…</dd><dt>应用版本</dt><dd id="app-version">—</dd></dl><p>备份包含素材、参考记录与收藏。请妥善保存，不要公开分享私人资料。</p><div class="help-actions"><button id="backup-download" class="reference-button" disabled><span data-icon="download"></span>导出备份</button></div></section>
+    <section class="help-section"><h3>连接 Codex / MCP 客户端</h3><p id="mcp-instructions">将配置添加到客户端的 MCP 设置，再重载客户端。连接状态以客户端显示为准；保存素材不会自动调用模型优化。</p><label for="mcp-config" class="sr-only">本机 MCP 配置</label><textarea id="mcp-config" class="mcp-config" rows="6" readonly spellcheck="false" aria-describedby="mcp-instructions" placeholder="正在读取配置…"></textarea><div class="help-actions"><button id="copy-mcp-config" class="reference-button" disabled><span data-icon="copy"></span>复制配置</button></div></section>
+    <p class="dialog-foot">关闭浏览器窗口不会停止本机服务。Windows 可再次双击 Open-Desktop.cmd 打开。</p>
+  </dialog>
 </body></html>

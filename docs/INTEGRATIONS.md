@@ -20,6 +20,8 @@ HTTP 只监听本机回环地址。网页自身的写入使用同源 `Origin` �
 | --- | --- |
 | `GET /api/health` | 检查本机服务 |
 | `GET /api/categories` | 读取分类 |
+| `GET /api/app-info` | 当前数据位置、应用版本和本机 MCP 配置；无令牌内容 |
+| `GET /download/library-backup` | 下载资料 ZIP（不含机器授权、调度和执行记录） |
 | `POST /api/categories` | 按名称复用或新增分类 |
 | `GET /api/library` | 读取素材目录及检索文本 |
 | `GET /api/entries/PRM-0001?version=v001` | 读取一条素材及可选历史版本 |
@@ -69,6 +71,10 @@ python -X utf8 desktop/mcp_server.py --data-root ./private-library
 这个命令会等待 MCP 客户端的协议消息，终端不显示普通菜单。标准输出仅用于 JSON-RPC，诊断信息发到标准错误。
 
 ### 注册到本机 Codex
+
+最直接的方式：打开留白的“使用与数据”，点击“复制配置”，将生成的 `[mcp_servers.liubai]` 表加入 Codex 配置文件。配置使用当前库目录与本机 Python 的绝对路径。已有同名表时修改该表，不重复添加；保留其他模型、上下文和工具配置。格式按 [OpenAI 官方 MCP 文档](https://learn.chatgpt.com/docs/extend/mcp?surface=cli)核对，连接仍需在客户端重载后检查。
+
+移动安装目录或换电脑后重新复制配置。留白不会自动修改 Codex 设置或读取聊天数据库。
 
 在仓库根目录的 PowerShell 中执行，路径由当前安装位置解析：
 

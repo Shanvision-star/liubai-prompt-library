@@ -15,6 +15,7 @@ from reference_service import ReferenceService
 from prompt_store import PromptStore
 from library_init import ensure_library
 from integration_auth import integration_token
+from library_export import APP_VERSION, app_info, export_library
 
 APP_ID = "prompt-library-desktop"
 WEB_ROOT = Path(__file__).parent / "web"
@@ -176,7 +177,13 @@ class RequestHandler(BaseHTTPRequestHandler):
         snapshot = query.get("snapshot", [None])[0]
         try:
             if path == "/api/health":
-                return self.reply(200, {"app": APP_ID, "library_root": str(self.server.library.root), "version": "0.3.0"})
+                return self.reply(200, {"app": APP_ID, "library_root": str(self.server.library.root), "version": APP_VERSION})
+            if path == "/api/app-info":
+                return self.reply(200, app_info(self.server.library))
+            if path == "/download/library-backup":
+                if self.headers.get("Sec-Fetch-Site") == "cross-site":
+                    return self.reply(403, {"error": "请从本机素材库下载备份"})
+                return self.reply(200, export_library(self.server.library), "application/zip", "liubai-library-backup.zip")
             if path == "/api/library":
                 return self.reply(200, self.server.library.catalogue())
             if path == "/api/categories":
@@ -288,19 +295,24 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.reply(500, {"error": "本机操作未完成，请检查目录权限或稍后重试；已有资料仍保留"})
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--port", type=int, default=8767)
     parser.add_argument("--data-root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--state-dir", type=Path)
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     library = Library(args.data_root, args.state_dir)
     logging.basicConfig(filename=library.state_dir / "server.log", encoding="utf-8", level=logging.INFO, format="%(asctime)s %(message)s")
     server = LocalServer(("127.0.0.1", args.port), library)
     if server.references.runner.due()["due"]:
         server.references.runner.start(force=False, trigger="startup_catch_up")
     logging.info("服务启动 http://127.0.0.1:%s", server.server_port)
-    server.serve_forever()
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        logging.info("服务已由用户停止")
+    finally:
+        server.server_close()
 
 
 if __name__ == "__main__":

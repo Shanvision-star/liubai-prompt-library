@@ -26,8 +26,12 @@ const dateLabel = value => {const date = new Date(value); return Number.isNaN(da
 const safeURL = value => {try {const url = new URL(value); return ['http:','https:'].includes(url.protocol)?url.href:null;}catch{return null;}};
 
 async function api(path, options={}) {
-  const response = await fetch(path,options);
-  const data = await response.json();
+  let response;
+  try {response = await fetch(path,options);}
+  catch {throw new Error('无法连接本机素材库。请重新启动留白，再点击重试或刷新；已保存的素材仍在本机。');}
+  let data;
+  try {data = await response.json();}
+  catch {throw new Error('本机服务返回了无法识别的内容，请重启留白后重试。');}
   if (!response.ok) throw new Error(data.error || '暂时无法读取素材');
   return data;
 }
@@ -58,6 +62,15 @@ function renderNavigation() {
   $('more-categories').innerHTML=`${state.expanded?'收起空分类':'查看全部分类'} <span>${state.expanded?'⌃':'⌄'}</span>`;
   $('more-categories').setAttribute('aria-expanded',String(state.expanded));
   $('quick-filters').innerHTML=[{id:'all',name:'全部'},...activeCategories].map(c=>`<button class="filter-chip ${state.category===c.id?'active':''}" data-category="${c.id}" aria-pressed="${state.category===c.id}">${escapeHTML(c.name)}<span class="chip-count">${c.id==='all'?state.entries.length:count(c.id)}</span></button>`).join('');
+  $('mobile-browse').innerHTML='<optgroup label="我的素材"><option value="view:all">全部素材</option><option value="view:favorites">我的收藏</option><option value="view:recent">最近收录</option></optgroup><optgroup label="全部分类">'+state.categories.map(c=>`<option value="category:${escapeHTML(c.id)}">${escapeHTML(c.name)} · ${count(c.id)}</option>`).join('')+'</optgroup>';
+  $('mobile-browse').value=state.category==='all'?'view:'+state.view:'category:'+state.category;
+}
+
+function emptyCollection() {
+  if(state.query.trim())return '<div class="empty-list"><strong>没有找到相关素材</strong><p>换个关键词，或查看全部素材。</p><button class="reference-button" data-action="clear-filters">清空筛选</button></div>';
+  if(state.view==='favorites')return '<div class="empty-list"><strong>还没有收藏</strong><p>打开素材后，点击星标收藏。</p><button class="reference-button" data-action="clear-filters">浏览全部素材</button></div>';
+  const first=state.entries.length===0&&state.category==='all';
+  return `<div class="empty-list welcome-empty"><span class="empty-symbol">${icon('folder')}</span><strong>${first?'保存你的第一条提示词':'这个分类还没有素材'}</strong><p>粘贴原文或导入文件，选择分类后保存到本机。</p><div class="empty-actions"><button class="reference-button primary" data-prompt-action="new">${first?'保存第一条素材':'新建素材'}</button><button class="reference-button" data-prompt-action="import">导入文本文件</button></div></div>`;
 }
 
 function renderList() {
@@ -65,26 +78,32 @@ function renderList() {
   const title=state.category!=='all'?categoryName(state.category):({all:'全部素材',favorites:'我的收藏',recent:'最近收录'}[state.view]);
   $('view-title').replaceChildren(document.createTextNode(title));
   const badge=document.createElement('span');badge.id='title-count';badge.textContent=rows.length;$('view-title').append(badge);
-  $('view-description').textContent=state.view==='favorites'?'把常用的灵感，放在触手可及的地方。':state.category==='taste'?'理解选择背后的理由，慢慢形成自己的判断。':state.category==='ui_design'?'从视觉方向，到真正可用的界面。':'把好想法留下来，让下一次创作更从容。';
   $('result-count').textContent=`${rows.length} 条素材${state.query?' · 搜索结果':''}`;
   $('footer-count').textContent=`${state.entries.length} 条已留存 / ${state.categories.length} 个分类`;
-  $('entry-list').innerHTML=rows.length?rows.map(e=>`<button class="entry-card ${state.selected===e.id?'selected':''}" data-entry="${e.id}" aria-pressed="${state.selected===e.id}" aria-label="${escapeHTML(e.id+' '+e.title)}"><div class="entry-card-top"><span class="entry-category">${icon(categoryIcon(e.category_id))}${escapeHTML(categoryName(e.category_id))}</span><span class="entry-id">${e.id.replace('PRM-','#')}</span></div><h3>${escapeHTML(e.title)}</h3>${String(e.summary||'').trim()?`<p>${escapeHTML(e.summary)}</p>`:''}<div class="entry-card-bottom">${e.tags.slice(0,2).map(t=>`<span class="tiny-tag">${escapeHTML(t)}</span>`).join('')}${state.favorites.includes(e.id)?`<span class="saved-star">${icon('star')}</span>`:''}</div></button>`).join(''):`<div class="empty-list"><strong>${state.query?'没有找到相关素材':state.view==='favorites'?'还没有收藏':'这个分类还在生长'}</strong>${state.query?'试试更短的关键词，或清空搜索。':state.view==='favorites'?'打开一条素材，点星标就能收藏。':'点击“新建素材”，保存第一条提示词。'}</div>`;
+  $('entry-list').innerHTML=rows.length?rows.map(e=>`<button class="entry-card ${state.selected===e.id?'selected':''}" data-entry="${e.id}" aria-pressed="${state.selected===e.id}" aria-label="${escapeHTML(e.id+' '+e.title)}"><div class="entry-card-top"><span class="entry-category">${icon(categoryIcon(e.category_id))}${escapeHTML(categoryName(e.category_id))}</span><span class="entry-id">${e.id.replace('PRM-','#')}</span></div><h3>${escapeHTML(e.title)}</h3>${String(e.summary||'').trim()?`<p>${escapeHTML(e.summary)}</p>`:''}<div class="entry-card-bottom">${e.tags.slice(0,2).map(t=>`<span class="tiny-tag">${escapeHTML(t)}</span>`).join('')}${state.favorites.includes(e.id)?`<span class="saved-star">${icon('star')}</span>`:''}</div></button>`).join(''):emptyCollection();
+  document.querySelector('.workspace').classList.toggle('is-empty',rows.length===0);
   if(!rows.some(e=>e.id===state.selected)) {
     if(rows.length)selectEntry(rows[0].id,false);
-    else {state.selected=null;state.detail=null;state.request++;$('detail-pane').innerHTML='<div class="empty-detail">选一条素材，开始下一次创作。</div>';$('detail-pane').setAttribute('aria-busy','false');document.querySelector('.workspace').classList.remove('show-detail');}
+    else {state.selected=null;state.detail=null;state.request++;$('detail-pane').replaceChildren();$('detail-pane').setAttribute('aria-busy','false');document.querySelector('.workspace').classList.remove('show-detail');}
   }
 }
 
 function updateView(){renderNavigation();renderList();window.ReferenceLibrary?.decorateNavigation();}
 
+function returnToList() {
+  document.querySelector('.workspace').classList.remove('show-detail');
+  const selected=Array.from(document.querySelectorAll('[data-entry]')).find(node=>node.dataset.entry===state.selected);
+  (selected||$('search')).focus({preventScroll:true});
+}
+
 async function selectEntry(id, reveal=true, version=null) {
   state.selected=id;state.detail=null;state.tab='optimized';const request=++state.request;
   $('detail-pane').setAttribute('aria-busy','true');
-  $('detail-pane').innerHTML='<div class="empty-detail">正在读取素材…</div>';
+  $('detail-pane').innerHTML='<div id="detail-loading" class="detail-message" tabindex="-1"><p role="status">正在读取素材…</p><button class="reference-button mobile-back" data-action="back">返回素材列表</button></div>';
   document.querySelectorAll('[data-entry]').forEach(node=>{node.classList.toggle('selected',node.dataset.entry===id);node.setAttribute('aria-pressed',String(node.dataset.entry===id));});
-  if(reveal)document.querySelector('.workspace').classList.add('show-detail');
-  try {const detail=await api('/api/entries/'+encodeURIComponent(id)+(version?'?version='+encodeURIComponent(version):''));if(request!==state.request)return;state.detail=detail;renderDetail();}
-  catch(e){if(request!==state.request)return;$('detail-pane').replaceChildren();const box=document.createElement('div');box.className='empty-detail';box.textContent=e.message;$('detail-pane').append(box);}
+  if(reveal){document.querySelector('.workspace').classList.add('show-detail');if(matchMedia('(max-width:900px)').matches)$('detail-loading').focus({preventScroll:true});}
+  try {const detail=await api('/api/entries/'+encodeURIComponent(id)+(version?'?version='+encodeURIComponent(version):''));if(request!==state.request)return;state.detail=detail;renderDetail();if(reveal&&matchMedia('(max-width:900px)').matches&&document.querySelector('.workspace').classList.contains('show-detail'))$('detail-title')?.focus({preventScroll:true});}
+  catch(e){if(request!==state.request)return;$('detail-pane').innerHTML=`<div id="detail-error" class="detail-message" tabindex="-1"><p role="alert">${escapeHTML(e.message)}</p><div class="empty-actions"><button class="reference-button" data-action="retry-detail" data-version="${escapeHTML(version||'')}">重试</button><button class="reference-button mobile-back" data-action="back">返回素材列表</button></div></div>`;if(reveal&&document.querySelector('.workspace').classList.contains('show-detail'))$('detail-error').focus({preventScroll:true});}
   finally{if(request===state.request)$('detail-pane').setAttribute('aria-busy','false');}
 }
 
@@ -131,7 +150,7 @@ function renderDetail() {
   const notOptimized=versionRecord?.optimization_status==='not_optimized';
   const optimizedLabel=notOptimized?'保存版':'优化版';
   queueMicrotask(()=>{window.ReferenceLibrary?.renderRelated(e.id);window.PromptEditor?.decorateDetail();});
-  $('detail-pane').innerHTML=`<div class="detail-header"><div class="detail-topline"><div class="detail-controls"><button class="icon-button mobile-back" data-action="back" aria-label="返回素材列表">${icon('back')}</button><div class="detail-symbol">${icon(categoryIcon(e.category_id))}</div></div><div class="detail-controls"><button class="icon-button ${saved?'saved':''}" data-action="favorite" aria-label="${saved?'取消收藏':'收藏这条素材'}" aria-pressed="${saved}">${icon('star')}</button><button class="icon-button" data-action="download" aria-label="导出${state.tab==='original'?'原文':optimizedLabel} Markdown">${icon('download')}</button></div></div><h2>${escapeHTML(e.title)}</h2>${String(e.summary||'').trim()?`<p class="detail-summary">${escapeHTML(e.summary)}</p>`:''}<div class="detail-meta"><span class="meta-tag">${escapeHTML(categoryName(e.category_id))}</span><span>${e.id}</span><span class="meta-dot"></span><span>${dateLabel(e.created_at)}</span><span class="meta-dot"></span><span>${notOptimized?'尚未优化':e.evaluation_status==='untested'?'待实测':'查看评测记录'}</span></div></div><div class="detail-tabs" role="tablist" aria-label="素材内容">${tabs.map(([value,label])=>`<button id="tab-${value}" class="detail-tab ${state.tab===value?'active':''}" role="tab" aria-selected="${state.tab===value}" aria-controls="detail-content" tabindex="${state.tab===value?'0':'-1'}" data-tab="${value}">${value==='optimized'?optimizedLabel:label}</button>`).join('')}</div><div id="detail-content" class="detail-content" role="tabpanel" aria-labelledby="tab-${state.tab}" tabindex="0"></div><div class="detail-bottom"><span class="copy-hint">${state.tab==='original'?'保留原文，尊重每一份创作。':'理解它，再用在自己的项目里。'}</span><button class="copy-button" data-action="copy">${icon('copy')}<span>${state.tab==='optimized'?'复制提示词':state.tab==='loop'?'复制 Loop':'复制'+tabs.find(t=>t[0]===state.tab)[1]}</span></button></div>`;
+  $('detail-pane').innerHTML=`<div class="detail-header"><div class="detail-topline"><div class="detail-controls"><button class="icon-button mobile-back" data-action="back" aria-label="返回素材列表">${icon('back')}</button><div class="detail-symbol">${icon(categoryIcon(e.category_id))}</div></div><div class="detail-controls"><button class="icon-button ${saved?'saved':''}" data-action="favorite" aria-label="${saved?'取消收藏':'收藏这条素材'}" aria-pressed="${saved}">${icon('star')}</button><button class="icon-button" data-action="download" aria-label="导出${state.tab==='original'?'原文':optimizedLabel} Markdown">${icon('download')}</button></div></div><h2 id="detail-title" tabindex="-1">${escapeHTML(e.title)}</h2>${String(e.summary||'').trim()?`<p class="detail-summary">${escapeHTML(e.summary)}</p>`:''}<div class="detail-meta"><span class="meta-tag">${escapeHTML(categoryName(e.category_id))}</span><span>${e.id}</span><span class="meta-dot"></span><span>${dateLabel(e.created_at)}</span><span class="meta-dot"></span><span>${notOptimized?'尚未优化':e.evaluation_status==='untested'?'待实测':'查看评测记录'}</span></div></div><div class="detail-tabs" role="tablist" aria-label="素材内容">${tabs.map(([value,label])=>`<button id="tab-${value}" class="detail-tab ${state.tab===value?'active':''}" role="tab" aria-selected="${state.tab===value}" aria-controls="detail-content" tabindex="${state.tab===value?'0':'-1'}" data-tab="${value}">${value==='optimized'?optimizedLabel:label}</button>`).join('')}</div><div id="detail-content" class="detail-content" role="tabpanel" aria-labelledby="tab-${state.tab}" tabindex="0"></div><div class="detail-bottom"><button class="copy-button" data-action="copy">${icon('copy')}<span>${state.tab==='optimized'?'复制提示词':state.tab==='loop'?'复制 Loop':'复制'+tabs.find(t=>t[0]===state.tab)[1]}</span></button></div>`;
   const content=$('detail-content');
   if(['optimized','original'].includes(state.tab)){
     const versions=r.versions||[];
@@ -182,6 +201,37 @@ async function loadLibrary(){
   finally{button.disabled=false;}
 }
 
+let appInfo=null;
+async function loadAppInfo(){
+  $('app-info-section').setAttribute('aria-busy','true');$('app-info-error').hidden=true;$('app-info-retry').hidden=true;
+  $('backup-download').disabled=true;$('copy-mcp-config').disabled=true;
+  try{
+    appInfo=await api('/api/app-info');
+    $('library-location').textContent=appInfo.library_root;$('app-version').textContent=appInfo.version;
+    $('mcp-config').value=appInfo.mcp_config||'';$('copy-mcp-config').disabled=!$('mcp-config').value;
+    $('backup-download').disabled=appInfo.backup_url!=='/download/library-backup';
+  }catch(e){appInfo=null;$('library-location').textContent='暂不可用';$('mcp-config').value='';$('mcp-config').placeholder='配置读取失败，请重试';$('app-info-error').textContent='读取应用信息失败：'+e.message;$('app-info-error').hidden=false;$('app-info-retry').hidden=false;}
+  finally{$('app-info-section').setAttribute('aria-busy','false');}
+}
+function openHelp(){if(!$('help-dialog').open)$('help-dialog').showModal();loadAppInfo();}
+async function downloadBackup(){
+  if(!appInfo||$('backup-download').disabled)return;
+  const button=$('backup-download');button.disabled=true;$('app-info-error').hidden=true;
+  try{
+    const response=await fetch(appInfo.backup_url);
+    if(!response.ok){const data=await response.json().catch(()=>({}));throw new Error(data.error||'备份暂时无法下载');}
+    const blob=await response.blob();const url=URL.createObjectURL(blob);const link=document.createElement('a');
+    const name=response.headers.get('Content-Disposition')?.match(/filename="?([^";]+)"?/)?.[1];
+    link.href=url;link.download=name||'liubai-backup.zip';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('备份文件已准备，请在浏览器下载中查看');
+  }catch(e){$('app-info-error').textContent='导出备份失败：'+e.message;$('app-info-error').hidden=false;}
+  finally{button.disabled=false;}
+}
+async function copyMcpConfig(){
+  const field=$('mcp-config');if(!field.value)return;
+  try{await navigator.clipboard.writeText(field.value);toast('配置已复制，请在客户端添加并重载');}
+  catch{field.focus();field.select();let copied=false;try{copied=document.execCommand('copy');}catch{}toast(copied?'配置已复制':'请选中配置后手动复制');}
+}
+
 document.addEventListener('click',event=>{
   const view=event.target.closest('[data-view]');if(view){window.ReferenceLibrary?.leave();state.view=view.dataset.view;state.category='all';if(state.view==='recent'){state.sort='recent';$('sort').value='recent';}document.querySelector('.workspace').classList.remove('show-detail');return updateView();}
   const category=event.target.closest('[data-category]');if(category){window.ReferenceLibrary?.leave();state.category=category.dataset.category;state.view='all';document.querySelector('.workspace').classList.remove('show-detail');return updateView();}
@@ -190,18 +240,25 @@ document.addEventListener('click',event=>{
   const action=event.target.closest('[data-action]');if(!action)return;
   if(action.dataset.action==='copy')copyCurrent();
   if(action.dataset.action==='favorite')toggleFavorite(action);
-  if(action.dataset.action==='back')document.querySelector('.workspace').classList.remove('show-detail');
+  if(action.dataset.action==='back')returnToList();
+  if(action.dataset.action==='retry-detail')selectEntry(state.selected,true,action.dataset.version||null);
+  if(action.dataset.action==='clear-filters'){state.query='';$('search').value='';state.view='all';state.category='all';updateView();$('search').focus();}
   if(action.dataset.action==='download'){const a=document.createElement('a');const version=state.detail?.selected_version;a.href=`/download/${state.selected}/${state.tab==='original'?'original':'optimized'}`+(state.tab!=='original'&&version?'?version='+encodeURIComponent(version):'');a.download='';a.click();}
 });
 document.addEventListener('change',event=>{if(event.target.id==='personal-version')selectEntry(state.selected,false,event.target.value);});
 document.addEventListener('keydown',event=>{
-  if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){event.preventDefault();const search=window.ReferenceLibrary?.active() ? $('reference-search') : $('search');search?.focus();search?.select();}
+  if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'&&!document.querySelector('dialog[open]')){event.preventDefault();const search=window.ReferenceLibrary?.active() ? $('reference-search') : $('search');search?.focus();search?.select();}
+  if(event.key==='Escape'&&!document.querySelector('dialog[open]')&&document.querySelector('.workspace').classList.contains('show-detail')&&matchMedia('(max-width:900px)').matches){event.preventDefault();returnToList();}
   if(event.target.matches('[data-tab][role="tab"]')&&['ArrowRight','ArrowLeft','Home','End'].includes(event.key)){event.preventDefault();const at=tabs.findIndex(t=>t[0]===state.tab);const next=event.key==='Home'?0:event.key==='End'?tabs.length-1:(at+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;state.tab=tabs[next][0];renderDetail();$('tab-'+state.tab).focus();}
 });
 $('search').addEventListener('input',event=>{state.query=event.target.value;document.querySelector('.workspace').classList.remove('show-detail');renderList();});
 $('sort').addEventListener('change',event=>{state.sort=event.target.value;renderList();});
+$('mobile-browse').addEventListener('change',event=>{const [kind,value]=event.target.value.split(':');window.ReferenceLibrary?.leave();state.view=kind==='view'?value:'all';state.category=kind==='category'?value:'all';if(state.view==='recent'){state.sort='recent';$('sort').value='recent';}document.querySelector('.workspace').classList.remove('show-detail');updateView();});
 $('more-categories').addEventListener('click',()=>{state.expanded=!state.expanded;renderNavigation();});
 $('refresh-button').addEventListener('click',()=>window.ReferenceLibrary?.active() ? window.ReferenceLibrary.refresh() : loadLibrary());
-$('help-button').addEventListener('click',()=>$('help-dialog').showModal());
+$('help-button').addEventListener('click',openHelp);
 $('close-help').addEventListener('click',()=>$('help-dialog').close());
+$('app-info-retry').addEventListener('click',loadAppInfo);
+$('backup-download').addEventListener('click',downloadBackup);
+$('copy-mcp-config').addEventListener('click',copyMcpConfig);
 putIcons();loadLibrary();

@@ -3,6 +3,7 @@ __pycache__/
 desktop/.runtime/
 desktop/output/
 desktop/.playwright-cli/
+.playwright-cli/
 references/.store.lock
 references/.operations/*.lock
 references/.transactions/

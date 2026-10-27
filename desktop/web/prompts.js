@@ -2,7 +2,7 @@
 
 // 手动收录只保存用户填写的内容；不把原文当作 HTML 或可执行指令。
 (() => {
-  const editor={saving:false,categorySaving:false,classifying:false,classifyId:null,classifyVersion:null,opener:null};
+  const editor={saving:false,importing:false,imported:null,categorySaving:false,classifying:false,classifyId:null,classifyVersion:null,opener:null};
   const NEW_CATEGORY='__new__';
   const send=(path,body)=>api(path,{method:'POST',headers:{'Content-Type':'application/json','X-Prompt-Library':'1'},body:JSON.stringify(body)});
   const closeButton=id=>`<button type="button" class="icon-button" data-prompt-close="${id}" aria-label="关闭窗口">×</button>`;
@@ -12,8 +12,12 @@
     <dialog id="category-create-dialog" class="prompt-dialog compact" aria-labelledby="category-create-heading"><div class="dialog-top"><h2 id="category-create-heading">新增分类</h2>${closeButton('category-create-dialog')}</div><form id="category-create-form"><fieldset id="category-create-fields"><label for="category-name">分类名称</label><input id="category-name" name="name" maxlength="80" required autocomplete="off"></fieldset><div id="category-create-error" class="prompt-error" role="alert" hidden></div><div class="prompt-form-actions"><button type="button" class="reference-button" data-prompt-close="category-create-dialog">取消</button><button id="category-save-button" type="submit" class="reference-button primary">添加分类</button></div></form></dialog>
     <dialog id="prompt-classify-dialog" class="prompt-dialog compact" aria-labelledby="prompt-classify-heading"><div class="dialog-top"><h2 id="prompt-classify-heading">修改分类</h2>${closeButton('prompt-classify-dialog')}</div><p id="prompt-classify-title" class="prompt-context-title"></p><form id="prompt-classify-form"><fieldset id="prompt-classify-fields">${categoryFields('classify')}</fieldset><div id="prompt-classify-error" class="prompt-error" role="alert" hidden></div><div class="prompt-form-actions"><button type="button" class="reference-button" data-prompt-close="prompt-classify-dialog">取消</button><button id="prompt-classify-save-button" type="submit" class="reference-button primary">保存分类</button></div></form></dialog>`;
   document.body.append(dialogs);
+  const fileInput=document.createElement('input');fileInput.type='file';fileInput.id='prompt-import-file';fileInput.accept='.md,.txt,text/plain,text/markdown';fileInput.hidden=true;fileInput.setAttribute('aria-label','选择提示词文本文件');document.body.append(fileInput);
+  const importButton=document.createElement('button');importButton.type='button';importButton.className='reference-button prompt-import-button';importButton.dataset.promptAction='import';importButton.textContent='导入文件';$('prompt-create-dialog').querySelector('.dialog-top').insertBefore(importButton,$('prompt-create-dialog').querySelector('[data-prompt-close]'));
+  const importNote=document.createElement('p');importNote.id='prompt-import-note';importNote.className='prompt-import-note';importNote.textContent='文件导入支持 UTF-8 的 .md / .txt，最大 256 KiB；确认后才会保存。';$('prompt-original').after(importNote);$('prompt-original').setAttribute('aria-describedby','prompt-import-note');
 
   function showError(id,message){$(id).textContent=message;$(id).hidden=!message;}
+  function hasDraft(){return ['prompt-title','prompt-original','prompt-optimized','prompt-tags','prompt-new-category'].some(id=>$(id).value.length>0);}
   function categoryOptions(prefix,preferred){
     const select=$(prefix+'-category');const previous=select.value;
     select.innerHTML=state.categories.map(category=>`<option value="${escapeHTML(category.id)}">${escapeHTML(category.name)}</option>`).join('')+`<option value="${NEW_CATEGORY}">新分类…</option>`;
@@ -24,7 +28,7 @@
     const expanded=$(prefix+'-category').value===NEW_CATEGORY;$(prefix+'-new-category-field').hidden=!expanded;$(prefix+'-new-category').disabled=!expanded;$(prefix+'-new-category').required=expanded;
   }
   function categoryPayload(prefix){return $(prefix+'-category').value===NEW_CATEGORY?{category_name:$(prefix+'-new-category').value.trim()}:{category_id:$(prefix+'-category').value};}
-  function showDialog(id,focusId){editor.opener=document.activeElement;$(id).showModal();$(focusId)?.focus();}
+  function showDialog(id,focusId){if(!$(id).open){editor.opener=document.activeElement;$(id).showModal();}$(focusId)?.focus();}
   function clearFilters(category='all'){
     window.ReferenceLibrary?.leave();state.query='';$('search').value='';state.view='all';state.category=category;state.expanded=state.expanded||category!=='all';
   }
@@ -32,10 +36,26 @@
     const data=await api('/api/categories');state.categories=data.categories;renderNavigation();window.ReferenceLibrary?.decorateNavigation();
   }
   async function openCreate(){
-    const hasDraft=!!($('prompt-title').value||$('prompt-original').value||$('prompt-optimized').value);
-    categoryOptions('prompt',hasDraft?$('prompt-category').value:state.category==='all'?'uncategorized':state.category);
+    categoryOptions('prompt',hasDraft()?$('prompt-category').value:state.category==='all'?'uncategorized':state.category);
     showError('prompt-create-error','');showDialog('prompt-create-dialog','prompt-title');
     try{await refreshCategories();categoryOptions('prompt');}catch(error){showError('prompt-create-error','分类读取失败：'+error.message);}
+  }
+  async function importPromptFile(){
+    const file=fileInput.files?.[0];fileInput.value='';if(!file||editor.saving||editor.importing)return;
+    showError('prompt-create-error','');editor.importing=true;importButton.disabled=true;$('prompt-save-button').disabled=true;
+    try{
+      if(!/\.(md|txt)$/i.test(file.name))throw new Error('请选择 .md 或 .txt 文件。');
+      if(file.size>256*1024)throw new Error('文件超过 256 KiB，请拆分后导入。');
+      let original;try{original=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(await file.arrayBuffer());}catch{throw new Error('文件不是有效的 UTF-8 文本，请转换编码后重试。');}
+      if(!original.trim())throw new Error('文件内容为空，请选择包含提示词的文件。');
+      if(hasDraft()&&!window.confirm('导入文件会替换当前未保存的草稿，是否继续？'))return;
+      const category=$('prompt-category').value;$('prompt-create-form').reset();categoryOptions('prompt',category===NEW_CATEGORY?'uncategorized':category);$('prompt-optional-optimized').open=false;
+      $('prompt-title').value=Array.from(file.name.replace(/\.(md|txt)$/i,'')).slice(0,200).join('');$('prompt-original').value=original;
+      // textarea 会统一换行；未改正文时保留导入文件的原始 CRLF / LF 与 BOM。
+      editor.imported={original,displayed:$('prompt-original').value};
+      importNote.textContent='已读取 '+file.name+'；请确认标题、原文和分类后保存。';$('prompt-original').focus();
+    }catch(error){showError('prompt-create-error',error.message);}
+    finally{editor.importing=false;importButton.disabled=false;$('prompt-save-button').disabled=editor.saving;}
   }
   function decorateDetail(){
     if(!state.detail||document.querySelector('#detail-pane [data-prompt-action="classify"]'))return;
@@ -48,14 +68,15 @@
     try{await refreshCategories();categoryOptions('classify');}catch(error){showError('prompt-classify-error','分类读取失败：'+error.message);}
   }
   async function savePrompt(event){
-    event.preventDefault();if(editor.saving)return;
-    const original=$('prompt-original').value,optimized=$('prompt-optimized').value;
+    event.preventDefault();if(editor.saving||editor.importing)return;
+    const displayed=$('prompt-original').value;
+    const original=editor.imported&&displayed===editor.imported.displayed?editor.imported.original:displayed,optimized=$('prompt-optimized').value;
     if(new TextEncoder().encode(original).byteLength>256*1024){showError('prompt-create-error','原文超过 256 KiB，请拆分后保存。');return;}
     const body={title:$('prompt-title').value.trim(),original,...categoryPayload('prompt'),tags:[...new Set($('prompt-tags').value.split(/[,，、]/).map(tag=>tag.trim()).filter(Boolean))]};
     if(optimized.length)body.optimized=optimized;
     editor.saving=true;$('prompt-create-fields').disabled=true;$('prompt-save-button').disabled=true;$('prompt-save-button').textContent='保存中…';showError('prompt-create-error','');
     try{
-      const result=await send('/api/prompts',body);$('prompt-create-dialog').close();$('prompt-create-form').reset();$('prompt-optional-optimized').open=false;toggleNewCategory('prompt');
+      const result=await send('/api/prompts',body);$('prompt-create-dialog').close();$('prompt-create-form').reset();editor.imported=null;importNote.textContent='文件导入支持 UTF-8 的 .md / .txt，最大 256 KiB；确认后才会保存。';$('prompt-optional-optimized').open=false;toggleNewCategory('prompt');
       clearFilters();await loadLibrary();const item=state.entries.find(entry=>entry.id===result.id);if(item){state.category=item.category_id;updateView();await selectEntry(result.id,true,result.version||null);$('tab-optimized')?.focus({preventScroll:true});}toast(result.duplicate?'已存在相同原文，已打开已有素材':'素材已保存');
     }catch(error){showError('prompt-create-error',error.message);if(!$('prompt-create-dialog').open)$('prompt-create-dialog').showModal();}
     finally{editor.saving=false;$('prompt-create-fields').disabled=false;toggleNewCategory('prompt');$('prompt-save-button').disabled=false;$('prompt-save-button').textContent='保存素材';}
@@ -76,10 +97,15 @@
   document.addEventListener('click',event=>{
     const closer=event.target.closest('[data-prompt-close]');if(closer){$(closer.dataset.promptClose).close();return;}
     const action=event.target.closest('[data-prompt-action]');if(!action)return;
+    if(editor.saving){toast('正在保存，请稍候。');return;}
+    if($('help-dialog').open)$('help-dialog').close();
     if(action.dataset.promptAction==='new')openCreate();
+    if(action.dataset.promptAction==='import'&&!editor.saving&&!editor.importing){if(!$('prompt-create-dialog').open)openCreate();fileInput.click();}
     if(action.dataset.promptAction==='new-category'){showError('category-create-error','');showDialog('category-create-dialog','category-name');}
     if(action.dataset.promptAction==='classify')openClassification();
   });
+  fileInput.addEventListener('change',importPromptFile);
+  window.addEventListener('beforeunload',event=>{if(hasDraft()){event.preventDefault();event.returnValue='';}});
   ['prompt','classify'].forEach(prefix=>$(prefix+'-category').addEventListener('change',()=>{toggleNewCategory(prefix);if($(prefix+'-category').value===NEW_CATEGORY)$(prefix+'-new-category').focus();}));
   ['prompt-create-dialog','category-create-dialog','prompt-classify-dialog'].forEach(id=>$(id).addEventListener('close',()=>{if(editor.opener?.isConnected)editor.opener.focus({preventScroll:true});}));
   $('prompt-create-form').addEventListener('submit',savePrompt);$('category-create-form').addEventListener('submit',createCategory);$('prompt-classify-form').addEventListener('submit',updateClassification);

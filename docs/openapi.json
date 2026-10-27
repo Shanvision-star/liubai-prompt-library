@@ -554,6 +554,78 @@
           }
         }
       }
+    },
+    "/api/app-info": {
+      "get": {
+        "summary": "当前实例和 MCP 配置",
+        "responses": {
+          "200": {
+            "description": "版本、数据目录、Python路径、MCP配置与备份地址；不含令牌",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "version",
+                    "library_root",
+                    "python_executable",
+                    "mcp_server",
+                    "mcp_config",
+                    "backup_url"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    },
+                    "library_root": {
+                      "type": "string"
+                    },
+                    "python_executable": {
+                      "type": "string"
+                    },
+                    "mcp_server": {
+                      "type": "string"
+                    },
+                    "mcp_config": {
+                      "type": "string"
+                    },
+                    "backup_url": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/download/library-backup": {
+      "get": {
+        "summary": "下载资料备份",
+        "responses": {
+          "200": {
+            "description": "包含校验清单的ZIP，不含授权、调度或执行记录",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "符号链接或资源上限导致备份停止"
+          },
+          "403": {
+            "description": "拒绝外站触发或非本机Host"
+          },
+          "500": {
+            "description": "目录或文件读取失败，未返回成功备份"
+          }
+        }
+      }
     }
   },
   "components": {

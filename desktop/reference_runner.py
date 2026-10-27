@@ -344,7 +344,7 @@ class ReferenceRunner:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("command", choices=["status", "due", "run", "pending", "register", "analyze"])
-    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
+    parser.add_argument("--root", "--data-root", dest="root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--acceptance", action="store_true")
     parser.add_argument("--trigger", default="codex_heartbeat")
