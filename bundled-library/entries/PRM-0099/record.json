@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "id": "PRM-0099",
+  "title": "[Prompt Motion] 15秒求职作品集高光",
+  "summary": "",
+  "category_id": "custom_76332646d0c2",
+  "classification_status": "classified",
+  "tags": [
+    "Prompt Motion · 动效视频",
+    "产品/UI",
+    "图表",
+    "摘录与提炼",
+    "英语",
+    "未测试",
+    "aistocksavvy-3fb9f5"
+  ],
+  "source": {
+    "type": "manual_submission",
+    "url": "https://prompt-motion.com/aistocksavvy-3fb9f5",
+    "note": "公开版只含整理者的原创复用方案、分析和来源；未授权转载的上游原文和逐句译文不发布。",
+    "verification_status": "user_provided_unverified",
+    "provenance_file": "SOURCE.md"
+  },
+  "created_at": "2026-10-27T11:39:19+08:00",
+  "updated_at": "2026-10-27T11:39:19+08:00",
+  "original": {
+    "file": "original.md",
+    "sha256": "fa9032bec9bfa5a9b9d2e4474f334a55446c5da921c020c1cade101cab24cd56",
+    "encoding": "UTF-8",
+    "byte_count": 1281
+  },
+  "related_ids": [],
+  "variables": [],
+  "applicable_models": [],
+  "open_questions": [],
+  "versions": [
+    {
+      "version": "v001",
+      "file": "optimized-v001.md",
+      "created_at": "2026-10-27T11:39:19+08:00",
+      "created_by": "用户提交保存",
+      "based_on": "original",
+      "reason": "保存原文副本，尚未进行优化",
+      "optimization_status": "not_optimized",
+      "evaluation_status": "untested",
+      "sha256": "fa9032bec9bfa5a9b9d2e4474f334a55446c5da921c020c1cade101cab24cd56"
+    },
+    {
+      "version": "v002",
+      "file": "optimized-v002.md",
+      "created_at": "2026-10-28T00:27:57+08:00",
+      "reason": "公开版提取已有中文原创复用方案，补输入检查与有限修订；非来源全文翻译",
+      "optimization_status": "provided",
+      "public_template": true,
+      "evaluation_status": "untested",
+      "analysis_file": "ANALYSIS.md",
+      "sha256": "840c66a92113dee89f7754b9b1f20302cd4be2d857947c90f16eada529936259"
+    }
+  ],
+  "optimization_status": "provided",
+  "evaluation_status": "untested",
+  "loop_review": {
+    "reviewed_version": "v002",
+    "applicability": "conditional",
+    "max_rounds": 2,
+    "reminder": "按本条设计要点检查；最多修正两轮，达标或没有新证据时停止，列出未解决项。",
+    "effectiveness_verified": false
+  },
+  "quality_review": {
+    "reviewed_version": null,
+    "review_basis": "not_reviewed",
+    "criteria": {}
+  },
+  "review_history": [],
+  "feedback": [],
+  "design_analysis_file": "ANALYSIS.md",
+  "publication": {
+    "authorized_by_owner": true,
+    "edition": "public-2026-10-28",
+    "private_original_preserved": true,
+    "original_kind": "curation"
+  }
+}

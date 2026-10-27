@@ -1,0 +1,3 @@
+Make me a 30-second motion design video in code, 1080x1080, 60 fps. The music is [path to your track].
+
+First measure the track with numpy. Find the BPM, the beat times and the drop, then cut 30 seconds starting on its first downbeat. If the song ends too soon after it, pick an alternative segment. Use spring easing with small overshoots instead of ease-in-out. Include a cursor that clicks or drags before each change. Apply 4 subframes per frame blended into motion blur. Ensure one element morphs through 8-12 states without a cut. Render the final output as an MP4.

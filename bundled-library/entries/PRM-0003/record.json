@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "id": "PRM-0003",
+  "title": "设计减法：删掉干扰，保留信息与功能",
+  "summary": "按用户任务判断保留、删除、合并和延后展示，避免把极简误解为删功能或删内容。",
+  "category_id": "taste",
+  "classification_status": "classified",
+  "tags": [
+    "设计减法",
+    "信息层级",
+    "内容密度",
+    "方案取舍",
+    "UI 设计"
+  ],
+  "source": {
+    "type": "public_repository",
+    "url": "https://github.com/pbakaus/impeccable/blob/5cb95eea9c96479f57afe0732a45470d30183326/skill/reference/distill.md",
+    "raw_url": "https://raw.githubusercontent.com/pbakaus/impeccable/5cb95eea9c96479f57afe0732a45470d30183326/skill/reference/distill.md",
+    "repository": "pbakaus/impeccable",
+    "repository_path": "skill/reference/distill.md",
+    "commit": "5cb95eea9c96479f57afe0732a45470d30183326",
+    "commit_date": "2026-10-23T00:49:46Z",
+    "retrieved_at": "2026-10-23T23:30:41+08:00",
+    "license": "Apache-2.0",
+    "license_file": "LICENSE.txt",
+    "license_url": "https://github.com/pbakaus/impeccable/blob/5cb95eea9c96479f57afe0732a45470d30183326/LICENSE",
+    "provenance_file": "SOURCE.md",
+    "git_blob_sha1": "394dc062c56964e1f3aff38c68879d5d45750e29",
+    "archive_scope": "complete_selected_file_not_complete_skill",
+    "dependencies": [
+      "原文包含 {{ask_instruction}}、{{command_prefix}} 等宿主占位符及后续 polish 命令。",
+      "执行文件修改与验证需要原项目源码或可编辑设计；本次只归档指令。"
+    ],
+    "archived_assets": [
+      {
+        "file": "LICENSE.txt",
+        "sha256": "02bb8c3b4e70190e3986c0404ad2fd8d639b4f534252d82379cc1b502b6d1812",
+        "git_blob_sha1": "bb3f6d23b1f8025514a62a12b51b47d73e3c9aa9",
+        "source_url": "https://raw.githubusercontent.com/pbakaus/impeccable/5cb95eea9c96479f57afe0732a45470d30183326/LICENSE"
+      },
+      {
+        "file": "NOTICE.md",
+        "sha256": "c60a093c2845fd9fb82f9c6f742ece31f379f8190b535309d32d66c45ccffdcb",
+        "git_blob_sha1": "0468271c904ae334cfaf27da6f8df3d5f419a1f0",
+        "source_url": "https://raw.githubusercontent.com/pbakaus/impeccable/5cb95eea9c96479f57afe0732a45470d30183326/NOTICE.md"
+      }
+    ],
+    "usage_evidence": {
+      "level": "published_instruction_not_independently_evaluated",
+      "note": "公开指令包含删减方法及反例；未提供可由本次材料复现的任务完成时间对照，中文优化版未经实际项目验证。"
+    },
+    "note": "用户明确授权本次网络搜集；原文只作素材，未执行其指令。"
+  },
+  "created_at": "2026-10-23T23:50:20+08:00",
+  "updated_at": "2026-10-23T23:50:20+08:00",
+  "original": {
+    "file": "original.md",
+    "sha256": "d087dc612fdeb0aa8d5b56fa0ca006802f71511beafb56ffca55179393234e2b",
+    "encoding": "UTF-8",
+    "byte_count": 5539
+  },
+  "related_ids": [],
+  "variables": [
+    {
+      "name": "design_material",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": true
+    },
+    {
+      "name": "audience",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "primary_task",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "must_keep",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "editable_scope",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "out_of_scope",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    }
+  ],
+  "applicable_models": [],
+  "open_questions": [],
+  "versions": [
+    {
+      "version": "v001",
+      "file": "optimized-v001.md",
+      "created_at": "2026-10-23T23:50:20+08:00",
+      "based_on": "original",
+      "created_by": "当前 Codex 对话助手",
+      "reason": "按用户要求生成可复用中文优化版，说明设计逻辑与 loop。",
+      "changes": [
+        "将原文固定字体、颜色数量等风格规则改成按内容复杂度决定的建议。",
+        "把删除与隐藏分开：隐藏重要操作可能增加找寻成本，并非自动变好。",
+        "明确保护关键披露、权限反馈、错误恢复和辅助技术信息；删除代码限于已确认无用且被授权的范围。"
+      ],
+      "evaluation_status": "untested",
+      "evaluation_note": "仅完成来源完整性和文本结构审查；未运行真实模型/项目或用户评测。",
+      "sha256": "8778b9c435ca0d73b54e09207f246042c1a565f17a7187217b6d778e011d8e3c"
+    }
+  ],
+  "quality_review": {
+    "reviewed_version": "v001",
+    "reviewed_at": "2026-10-23T23:50:20+08:00",
+    "review_basis": "assistant_text_analysis_not_model_evaluation",
+    "criteria": {
+      "goal_clarity": {
+        "status": "text_reviewed",
+        "note": "降低妨碍主要任务的冗余，同时保护必要信息。"
+      },
+      "input_clarity": {
+        "status": "text_reviewed",
+        "note": "需要现状、首要任务、不可删清单和修改权限。"
+      },
+      "constraint_quality": {
+        "status": "text_reviewed",
+        "note": "有保留清单和恢复条件，避免为极简牺牲功能。"
+      },
+      "output_checkability": {
+        "status": "text_reviewed",
+        "note": "以逐项减法清单、前后对照和功能复查判断结果。"
+      },
+      "usage_evidence": {
+        "status": "unverified",
+        "note": "有公开方法说明；效率提升需要真实任务测试，目前没有。"
+      },
+      "task_fit": {
+        "status": "text_reviewed",
+        "note": "适合积累‘为什么删、为什么留’的审美判断，而非单纯追求空白。"
+      }
+    }
+  },
+  "loop_review": {
+    "reviewed_version": "v001",
+    "reviewed_at": "2026-10-23T23:50:20+08:00",
+    "applicability": "conditional",
+    "explicit_loop_present": true,
+    "max_rounds": 2,
+    "reminder": "有可编辑材料与检查条件时最多 2 轮；否则只交付建议。",
+    "copyable_loop": "如已授权修改且有可检查的材料，最多做 2 轮‘提出删减 → 小范围修改 → 同一任务复查’。每轮只处理优先级最高的一组冗余，保留前版与改动清单。检查必需信息仍可找到、关键操作仍可完成、错误与权限反馈仍可见。任一项退化就恢复相关改动。达到既定清晰度且没有功能损失即停止；不能验证、需要牺牲已冻结内容、连续一轮无可观察改善或达到上限时停止，交付取舍而非继续删减。",
+    "effectiveness_verified": false
+  },
+  "review_history": [],
+  "feedback": [],
+  "classification_reason": "主要交付物是删减的审美与信息取舍，而非新组件实现。",
+  "batch_id": "2026-10-23-taste-ui-01",
+  "design_analysis_file": "ANALYSIS.md",
+  "publication": {
+    "authorized_by_owner": true,
+    "edition": "public-2026-10-28",
+    "private_original_preserved": true,
+    "original_kind": "original"
+  }
+}

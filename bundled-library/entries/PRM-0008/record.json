@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "id": "PRM-0008",
+  "title": "响应式适配：让任务在不同屏幕与输入方式下成立",
+  "summary": "围绕同一核心任务调整布局、信息顺序与输入反馈，明确浏览器模拟与真实设备证据的差别。",
+  "category_id": "ui_design",
+  "classification_status": "classified",
+  "tags": [
+    "响应式",
+    "移动端",
+    "交互",
+    "可访问性",
+    "验证"
+  ],
+  "source": {
+    "type": "public_repository",
+    "url": "https://github.com/pbakaus/impeccable/blob/5cb95eea9c96479f57afe0732a45470d30183326/skill/reference/adapt.md",
+    "raw_url": "https://raw.githubusercontent.com/pbakaus/impeccable/5cb95eea9c96479f57afe0732a45470d30183326/skill/reference/adapt.md",
+    "repository": "pbakaus/impeccable",
+    "repository_path": "skill/reference/adapt.md",
+    "commit": "5cb95eea9c96479f57afe0732a45470d30183326",
+    "commit_date": "2026-10-23T00:49:46Z",
+    "retrieved_at": "2026-10-23T23:30:41+08:00",
+    "license": "Apache-2.0",
+    "license_file": "LICENSE.txt",
+    "license_url": "https://github.com/pbakaus/impeccable/blob/5cb95eea9c96479f57afe0732a45470d30183326/LICENSE",
+    "provenance_file": "SOURCE.md",
+    "git_blob_sha1": "e6add003e67fa841655d906fd55458b2473f2127",
+    "archive_scope": "complete_selected_file_not_complete_skill",
+    "dependencies": [
+      "源文件是 Web 适配指令；原生平台会转向 adapt.native.md，本次未归档该分支文件。",
+      "实际验证依赖项目环境、浏览器/输入自动化或设备；本次未运行。",
+      "原文含 {{command_prefix}} 等宿主占位符。"
+    ],
+    "archived_assets": [
+      {
+        "file": "LICENSE.txt",
+        "sha256": "02bb8c3b4e70190e3986c0404ad2fd8d639b4f534252d82379cc1b502b6d1812",
+        "git_blob_sha1": "bb3f6d23b1f8025514a62a12b51b47d73e3c9aa9",
+        "source_url": "https://raw.githubusercontent.com/pbakaus/impeccable/5cb95eea9c96479f57afe0732a45470d30183326/LICENSE"
+      },
+      {
+        "file": "NOTICE.md",
+        "sha256": "c60a093c2845fd9fb82f9c6f742ece31f379f8190b535309d32d66c45ccffdcb",
+        "git_blob_sha1": "0468271c904ae334cfaf27da6f8df3d5f419a1f0",
+        "source_url": "https://raw.githubusercontent.com/pbakaus/impeccable/5cb95eea9c96479f57afe0732a45470d30183326/NOTICE.md"
+      }
+    ],
+    "usage_evidence": {
+      "level": "published_instruction_not_independently_evaluated",
+      "note": "公开原文包含具体 Web 适配和手势检查办法；本次没有运行页面、浏览器输入或真实设备测试。"
+    },
+    "note": "用户明确授权本次网络搜集；原文只作素材，未执行其指令。"
+  },
+  "created_at": "2026-10-23T23:50:20+08:00",
+  "updated_at": "2026-10-23T23:50:20+08:00",
+  "original": {
+    "file": "original.md",
+    "sha256": "004b339416187222206adee5ff08ef1fa9bc346d4ceba2932f770d640449ec6d",
+    "encoding": "UTF-8",
+    "byte_count": 11330
+  },
+  "related_ids": [
+    "PRM-0006"
+  ],
+  "variables": [
+    {
+      "name": "web_page_or_component",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": true
+    },
+    {
+      "name": "target_contexts",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "primary_task",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "stack",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "source_or_design",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "must_keep",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "editable_scope",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "known_failures",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    }
+  ],
+  "applicable_models": [],
+  "open_questions": [],
+  "versions": [
+    {
+      "version": "v001",
+      "file": "optimized-v001.md",
+      "created_at": "2026-10-23T23:50:20+08:00",
+      "based_on": "original",
+      "created_by": "当前 Codex 对话助手",
+      "reason": "按用户要求生成可复用中文优化版，说明设计逻辑与 loop。",
+      "changes": [
+        "把固定断点和尺寸数字改成项目目标优先；示例视口只用于缺省检查，不声称覆盖设备全集。",
+        "保留输入与手势证据来源区分，未做真机测试必须留为缺口。",
+        "限制改动范围，避免借移动适配删除关键功能，增加三轮和无进展停止条件。"
+      ],
+      "evaluation_status": "untested",
+      "evaluation_note": "仅完成来源完整性和文本结构审查；未运行真实模型/项目或用户评测。",
+      "sha256": "eb29b8be657376bd29fe08a9cf193cf10323303c599a1bd18622b8fafd61f3b2"
+    }
+  ],
+  "quality_review": {
+    "reviewed_version": "v001",
+    "reviewed_at": "2026-10-23T23:50:20+08:00",
+    "review_basis": "assistant_text_analysis_not_model_evaluation",
+    "criteria": {
+      "goal_clarity": {
+        "status": "text_reviewed",
+        "note": "保证核心任务跨目标视口与输入方式可完成。"
+      },
+      "input_clarity": {
+        "status": "text_reviewed",
+        "note": "需要现状、核心任务、目标设备和支持边界。"
+      },
+      "constraint_quality": {
+        "status": "text_reviewed",
+        "note": "保留关键任务与权限反馈，不以缩放或隐藏替代适配。"
+      },
+      "output_checkability": {
+        "status": "text_reviewed",
+        "note": "情境矩阵、同场景前后证据和输入方式标记便于验收。"
+      },
+      "usage_evidence": {
+        "status": "unverified",
+        "note": "有详细公开方法；本次未实测，尤其未覆盖真机。"
+      },
+      "task_fit": {
+        "status": "text_reviewed",
+        "note": "适合 UI 构建之后专项复查，不适合直接套用到原生 iOS/Android。"
+      }
+    }
+  },
+  "loop_review": {
+    "reviewed_version": "v001",
+    "reviewed_at": "2026-10-23T23:50:20+08:00",
+    "applicability": "conditional",
+    "explicit_loop_present": true,
+    "max_rounds": 3,
+    "reminder": "有页面与工具时建议使用，最多 3 轮。",
+    "copyable_loop": "在用户已授权实现且可运行目标页面时，最多 3 轮‘检查情境矩阵 → 修复最高影响失败 → 复测失败与相邻情境’。每轮保存视口、浏览器、输入方式、操作步骤和前后结果。优先处理主任务受阻、遮挡和误操作，不为循环增加新平台。目标情境通过即停止；连续一轮无法减少已确认失败、缺真机/材料/权限、需要改业务范围或达到上限时停止，列出未覆盖项。新改动导致原情境退化时恢复或修正相关改动。纯建议任务只交付矩阵与方案，不伪造测试结果。",
+    "effectiveness_verified": false
+  },
+  "review_history": [],
+  "feedback": [],
+  "classification_reason": "主要交付物是不同设备情境下的 UI 布局与交互适配。",
+  "batch_id": "2026-10-23-taste-ui-01",
+  "design_analysis_file": "ANALYSIS.md",
+  "publication": {
+    "authorized_by_owner": true,
+    "edition": "public-2026-10-28",
+    "private_original_preserved": true,
+    "original_kind": "original"
+  }
+}

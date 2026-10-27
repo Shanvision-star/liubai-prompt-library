@@ -22,6 +22,7 @@ HTTP 只监听本机回环地址。网页自身的写入使用同源 `Origin` �
 | `GET /api/categories` | 读取分类 |
 | `GET /api/app-info` | 当前数据位置、应用版本和本机 MCP 配置；无令牌内容 |
 | `GET /download/library-backup` | 下载资料 ZIP（不含机器授权、调度和执行记录） |
+| `POST /api/application/quit` | 显式停止当前本机服务；同源操作或有效 Bearer 授权 |
 | `POST /api/categories` | 按名称复用或新增分类 |
 | `GET /api/library` | 读取素材目录及检索文本 |
 | `GET /api/entries/PRM-0001?version=v001` | 读取一条素材及可选历史版本 |
@@ -61,6 +62,8 @@ print(saved["id"], saved["version"], saved["duplicate"])
 原文与可选改编版各最多 256 KiB（UTF-8 字节）；标题最多 200 个字符，分类名称 80 个字符，标签最多 30 个且每个 50 个字符。HTTP 新写入路由的整个 JSON 请求上限为 2 MiB。接口错误返回 `{ "error": "原因" }`；失败不会被报告为保存成功。
 
 ## 2. 通过 MCP 连接 Codex
+
+Windows 安装版在“使用与数据”生成的配置会调用 `mcp/Liubai-MCP.exe --data-root ...`，无需系统 Python。以下 Python 命令适用于源码安装。
 
 MCP 通过标准输入输出直接读写同一个数据目录，不需要启动 HTTP 服务或传递令牌。启动命令：
 

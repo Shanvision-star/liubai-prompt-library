@@ -10,9 +10,10 @@ import sys
 import zipfile
 
 from reference_store import ReferenceStore, ENTRY_ID, REF_ID, _now
+from runtime_paths import bundled_mcp
 
 
-APP_VERSION = "0.4.0"
+APP_VERSION = "0.5.0"
 MAX_BACKUP_BYTES = 256 * 1024 * 1024
 MAX_BACKUP_FILES = 10000
 
@@ -25,6 +26,9 @@ def app_info(library):
     mcp = Path(__file__).with_name("mcp_server.py").resolve()
     quote = lambda value: json.dumps(str(value), ensure_ascii=False)
     args = ["-X", "utf8", str(mcp), "--data-root", str(library.root)]
+    if getattr(sys, "frozen", False):
+        python = mcp = bundled_mcp()
+        args = ["--data-root", str(library.root)]
     config = "\n".join([
         "[mcp_servers.liubai]", "command = " + quote(python),
         "args = " + json.dumps(args, ensure_ascii=False),

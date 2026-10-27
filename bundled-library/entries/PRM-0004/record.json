@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "id": "PRM-0004",
+  "title": "视觉方向：从真实内容长出独特风格",
+  "summary": "从主体、受众、事实和已有素材推导不同视觉方向，再用同内容样张比较和选择。",
+  "category_id": "taste",
+  "classification_status": "classified",
+  "tags": [
+    "艺术指导",
+    "风格选择",
+    "参考分析",
+    "品牌",
+    "视觉方向"
+  ],
+  "source": {
+    "type": "public_repository",
+    "url": "https://github.com/Leonxlnx/taste-skill/blob/6010f91a9935f1c167dfc500fb1a475681892e6b/skills/taste-skill/SKILL.md",
+    "raw_url": "https://raw.githubusercontent.com/Leonxlnx/taste-skill/6010f91a9935f1c167dfc500fb1a475681892e6b/skills/taste-skill/SKILL.md",
+    "repository": "Leonxlnx/taste-skill",
+    "repository_path": "skills/taste-skill/SKILL.md",
+    "commit": "6010f91a9935f1c167dfc500fb1a475681892e6b",
+    "commit_date": "2026-10-20T18:38:06Z",
+    "retrieved_at": "2026-10-23T23:30:42+08:00",
+    "license": "MIT",
+    "license_file": "LICENSE.txt",
+    "license_url": "https://github.com/Leonxlnx/taste-skill/blob/6010f91a9935f1c167dfc500fb1a475681892e6b/LICENSE",
+    "provenance_file": "SOURCE.md",
+    "git_blob_sha1": "433d92105c76671250013e0312d82cb413f552bc",
+    "archive_scope": "complete_selected_file_not_complete_skill",
+    "dependencies": [
+      "原版依赖 scripts/draw.mjs、inspect.mjs 等脚本，以及 references/ 和 library/ 的方向、字体、配色、照片等资源。",
+      "原文说明相关脚本需要 Node 22+ 与 Chrome/Edge/Chromium；应用屏幕另依赖 references/app-screens.md。",
+      "本次保存完整 SKILL.md 及许可证，没有复制或安装完整技能、运行脚本、取得其参考库图片。"
+    ],
+    "archived_assets": [
+      {
+        "file": "LICENSE.txt",
+        "sha256": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
+        "git_blob_sha1": "48a2f6640b81ff8eca9ce7f6a96337692713ef5b",
+        "source_url": "https://raw.githubusercontent.com/Leonxlnx/taste-skill/6010f91a9935f1c167dfc500fb1a475681892e6b/LICENSE"
+      }
+    ],
+    "usage_evidence": {
+      "level": "published_instruction_not_independently_evaluated",
+      "note": "作者在源文中称参考研究覆盖 247 个站点并提到测试；本次只核实公开文本存在，没有审计样本库、盲评方法或复现结果。不能据此认定改编版有效。"
+    },
+    "note": "用户明确授权本次网络搜集；原文只作素材，未执行其指令。"
+  },
+  "created_at": "2026-10-23T23:50:20+08:00",
+  "updated_at": "2026-10-23T23:50:20+08:00",
+  "original": {
+    "file": "original.md",
+    "sha256": "d955dae4ba8ab2d994f4bb06b4bf412a1d9875433a8597939c391f4bae91dd7a",
+    "encoding": "UTF-8",
+    "byte_count": 38458
+  },
+  "related_ids": [
+    "PRM-0006"
+  ],
+  "variables": [
+    {
+      "name": "subject",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": true
+    },
+    {
+      "name": "audience",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "primary_goal",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "available_content_and_assets",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "brand_constraints",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "references_and_preferences",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "deliverable_scope",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    }
+  ],
+  "applicable_models": [],
+  "open_questions": [],
+  "versions": [
+    {
+      "version": "v001",
+      "file": "optimized-v001.md",
+      "created_at": "2026-10-23T23:50:20+08:00",
+      "based_on": "original",
+      "created_by": "当前 Codex 对话助手",
+      "reason": "按用户要求生成可复用中文优化版，说明设计逻辑与 loop。",
+      "changes": [
+        "将源码库抽签选风格改成以真实材料提出三个方向，保留说明取舍的要求，不冒充调用原方向库。",
+        "去除原版特定 house style 的普遍禁令，保留品牌、任务与用户明确偏好的优先地位。",
+        "将完整网站构建流程收窄为视觉方向与样张选择；需要 UI 实现时衔接 PRM-0006。",
+        "为浏览器 look-and-fix 增加三轮上限、无改善停止与退化回退。"
+      ],
+      "evaluation_status": "untested",
+      "evaluation_note": "仅完成来源完整性和文本结构审查；未运行真实模型/项目或用户评测。",
+      "sha256": "35a6e0df8065e85647dff964149658ab048e93209693c4eff4dbc7d62e62e221"
+    }
+  ],
+  "quality_review": {
+    "reviewed_version": "v001",
+    "reviewed_at": "2026-10-23T23:50:20+08:00",
+    "review_basis": "assistant_text_analysis_not_model_evaluation",
+    "criteria": {
+      "goal_clarity": {
+        "status": "text_reviewed",
+        "note": "为一个具体主体选定可解释的视觉方向。"
+      },
+      "input_clarity": {
+        "status": "text_reviewed",
+        "note": "要求事实、受众、目标、素材、品牌和参考偏好；不足时不伪造特有事实。"
+      },
+      "constraint_quality": {
+        "status": "text_reviewed",
+        "note": "用目标和品牌替代‘一律禁止某类元素’，限制为有材料支撑的选择。"
+      },
+      "output_checkability": {
+        "status": "text_reviewed",
+        "note": "三方向共用内容并产出同一关键区域样张，便于比较。"
+      },
+      "usage_evidence": {
+        "status": "unverified",
+        "note": "作者有研究与测试陈述，但本次未独立复现；中文改编版未测。"
+      },
+      "task_fit": {
+        "status": "text_reviewed",
+        "note": "适合建立个人 Taste 的选择依据，并将判断迁移到不同项目。"
+      }
+    }
+  },
+  "loop_review": {
+    "reviewed_version": "v001",
+    "reviewed_at": "2026-10-23T23:50:20+08:00",
+    "applicability": "conditional",
+    "explicit_loop_present": true,
+    "max_rounds": 3,
+    "reminder": "方向确定并有可见样张后最多 3 轮；人负责偏好取舍。",
+    "copyable_loop": "选择方向后，如有可见样张，最多做 3 轮‘呈现 → 按固定标准评审 → 只修最高影响的问题 → 再呈现’。先固定主体表达、信息层级、品牌一致性、可读性和实际素材使用这五项标准，每轮最多修改 2 个问题。保留同内容、同视口的前后图及修改理由。满足标准即停止；连续一轮无可观察改善、素材不足、出现互相冲突的偏好或达到上限时停止。退化则恢复上一版。涉及用户喜欢哪种风格时记录选项并等待该取舍，不让模型通过自评分替用户决定。没有样张时只做方向论证，不声称完成视觉验证。",
+    "effectiveness_verified": false
+  },
+  "review_history": [],
+  "feedback": [],
+  "classification_reason": "原文覆盖完整前端流程；本次优化版明确聚焦视觉方向和方案取舍，因此主分类为 Taste。",
+  "batch_id": "2026-10-23-taste-ui-01",
+  "design_analysis_file": "ANALYSIS.md",
+  "publication": {
+    "authorized_by_owner": true,
+    "edition": "public-2026-10-28",
+    "private_original_preserved": true,
+    "original_kind": "original"
+  }
+}

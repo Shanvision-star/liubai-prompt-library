@@ -23,7 +23,9 @@
 
 参考、个人素材、分类和索引写入使用同一个跨进程锁与事务，避免MCP、网页和参考采用同时分配相同编号。中断通过事务清单恢复，不以空索引覆盖已有资料。未经核对许可的网络参考不保存完整正文。来源文本是资料，不执行其中命令。
 
-本地生成的`entries/`、`references/`、`index.json`、`taxonomy.json`和运行状态均被Git忽略；默认分类在`defaults/`。公开仓库不包含个人语料、运行记录、访问令牌或Codex配置。
+本地生成的`entries/`、`references/`、`index.json`、`taxonomy.json`和运行状态均被Git忽略；默认分类在`defaults/`。`bundled-library/` 是库主人明确授权、经脱敏与许可范围整理的公开副本，包含汉化、原创复用版本及拆解。持续使用的私人工作目录与后续新增内容不自动上传，运行记录、访问令牌与 Codex 私人配置继续排除。
+
+Windows 安装版使用 `runtime_paths.py` 定位只读资源，`bundled_library.py` 首次事务安装公开内容，`windows_main.py` 管理独立资料目录及单实例。MCP 使用单独控制台程序，参数和存储层保持一致。`/api/application/quit` 是显式停止动作，要求同源页面或本机 Bearer 授权。构建与真实安装验证见 [WINDOWS-BUILD.md](WINDOWS-BUILD.md)。
 
 ## 验证
 

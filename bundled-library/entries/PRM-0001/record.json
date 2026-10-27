@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "id": "PRM-0001",
+  "title": "跨项目开发协作：主线核查、范围约束与证据交付",
+  "summary": "从用户提供的 AGENTS.md 指令提炼可跨项目复用的开发协作提示词，保留代码审计、权威顺序、分支隔离、最小修改和验证纪律。",
+  "category_id": "development",
+  "classification_status": "classified",
+  "classification_reason": "主要用途是约束软件项目中的开发协作和交付流程；通用助手属性通过标签表达。",
+  "tags": [
+    "开发协作",
+    "AGENTS.md",
+    "仓库审计",
+    "分支管理",
+    "验证交付",
+    "跨项目复用"
+  ],
+  "source": {
+    "type": "user_submission",
+    "url": null,
+    "note": "根据用户本次明确入库请求，从会话原始消息文本提取。保留标题、INSTRUCTIONS 标签、全部章节、截断开头、编号及 Markdown 原格式；不包含运行环境信息，也未补写缺失段落。"
+  },
+  "created_at": "2026-10-23T17:50:36+08:00",
+  "updated_at": "2026-10-23T23:14:47+08:00",
+  "original": {
+    "file": "original.md",
+    "sha256": "70bb707d48e951109fbfbd252ecf45fb3ee143fe946da29056f7f18d40dc5f00",
+    "encoding": "UTF-8",
+    "byte_count": 7395
+  },
+  "related_ids": [],
+  "variables": [
+    {
+      "name": "project_name",
+      "description": "项目名称",
+      "required": false
+    },
+    {
+      "name": "repository_path",
+      "description": "仓库或工作目录",
+      "required": false
+    },
+    {
+      "name": "task_and_acceptance",
+      "description": "当前任务与验收目标",
+      "required": false
+    },
+    {
+      "name": "mainline_ref",
+      "description": "已确认的主线分支或基准",
+      "required": false
+    },
+    {
+      "name": "authority_documents",
+      "description": "项目权威文档及优先级",
+      "required": false
+    },
+    {
+      "name": "scope_and_exclusions",
+      "description": "本期范围与明确排除项",
+      "required": false
+    },
+    {
+      "name": "stack_and_checks",
+      "description": "技术栈与验证入口",
+      "required": false
+    }
+  ],
+  "applicable_models": [],
+  "open_questions": [],
+  "versions": [
+    {
+      "version": "v001",
+      "file": "optimized-v001.md",
+      "created_at": "2026-10-23T17:50:36+08:00",
+      "based_on": "original",
+      "created_by": "当前 Codex 对话助手",
+      "reason": "用户要求将既有项目经验优化为其他项目可复用的开发协作提示词。",
+      "changes": [
+        "将 ChatPaperHub、具体主线和未来层清单替换为 7 个可填写的项目参数；参数缺失时先核查仓库。",
+        "合并重复的操作规则、经验总结与启动清单，整理为项目地图、缺口分类、编辑纪律、验证、Agent 条件规则、文档同步和交付要求。",
+        "明确代码证明实际状态、权威文档约束目标；冲突先辨别缺口，避免盲从旧计划或默认现有代码即正确。",
+        "保留 Python、前端和 Agent 的核心约束，按项目实际技术栈和任务启用；避免把特定技术栈强加给所有项目。",
+        "保留 Original / Revised / Reason or Impact、隔离分支、缓存运行历史及真实 provider smoke 边界。",
+        "增加参数缺失处理、已有用户改动保护和交付状态说明，使提示词在不同仓库中可直接使用。",
+        "将长期记忆写入约束为用户明确授权，避免模板被理解为自动修改全局记忆。"
+      ],
+      "evaluation_status": "untested",
+      "evaluation_note": "已进行文本整理和要求覆盖检查；尚未在其他真实项目运行，不能据此认定协作效率或交付效果提升。",
+      "sha256": "e04726b9cfaf3dc5169af5c33e76a4171ac7861cd5eaa7ccce3f4f803e9045a6"
+    }
+  ],
+  "feedback": [],
+  "quality_review": {
+    "reviewed_version": "v001",
+    "reviewed_at": "2026-10-23T23:14:47+08:00",
+    "review_basis": "assistant_text_analysis",
+    "criteria": {
+      "goal_clarity": {
+        "status": "clear",
+        "note": "明确要求核查现状、限定范围、完成最小必要修改并提供交付证据。"
+      },
+      "input_clarity": {
+        "status": "clear",
+        "note": "列出 7 个项目参数，并规定未填写时先从仓库核查，关键缺失再澄清。"
+      },
+      "constraint_quality": {
+        "status": "needs_adaptation",
+        "note": "范围、分支和证据约束较明确；codex/ 分支名、中文文档字符串等要求仍需核对目标项目约定。"
+      },
+      "output_checkability": {
+        "status": "needs_project_criteria",
+        "note": "规定交付结果和验证依据，但具体任务的验收标准与检查命令仍需绑定实际仓库。"
+      },
+      "usage_evidence": {
+        "status": "not_provided",
+        "note": "只有保存和文本检查证据，尚无跨项目实际使用结果或原版/优化版对比。"
+      },
+      "task_fit": {
+        "status": "conditional",
+        "note": "适合软件项目开发协作；简单单次任务可简化，其他技术栈需替换验证入口。"
+      }
+    }
+  },
+  "loop_review": {
+    "reviewed_version": "v001",
+    "reviewed_at": "2026-10-23T23:14:47+08:00",
+    "applicability": "conditional",
+    "explicit_loop_present": false,
+    "reminder": "用于实现、验证、修复任务时，可附加受限 loop：绑定真实验收检查，每轮只修复未通过项；最多 3 轮，连续 2 轮无改善或缺少必要输入时停止并报告。单次阅读、查找和分类无需强行循环。v001 本文未因此改变。"
+  },
+  "review_history": [],
+  "publication": {
+    "authorized_by_owner": true,
+    "edition": "public-2026-10-28",
+    "private_original_preserved": true,
+    "original_kind": "original"
+  }
+}

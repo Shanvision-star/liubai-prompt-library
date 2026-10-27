@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "id": "PRM-0034",
+  "title": "[awesome-opus5-5-videos · UI动效] 中文解读｜PRM-0023｜提示框到胶片时间轴交互演示",
+  "summary": "",
+  "category_id": "custom_c0b0109d9439",
+  "classification_status": "classified",
+  "tags": [
+    "awesome-opus5-5-videos · UI动效",
+    "中文解读",
+    "原文:PRM-0023",
+    "UI动效",
+    "未测试",
+    "@notdwd",
+    "notdwd-766641"
+  ],
+  "source": {
+    "type": "manual_submission",
+    "url": "https://github.com/yihui-dev/awesome-opus5-5-videos/blob/92aee2f586ac0715cb3cbcb6384834f98a33383d/prompts/notdwd-766641.md",
+    "note": "关联原记录：PRM-0023；本条为中文解读。原文及历史来源保留于原记录，原文SHA-256：cf34a0ae0a7ebd996af42245c5d970c64038a0d789ff715781239689e1e723b3。\n独立来源组：awesome-opus5-5-videos · UI动效\n仓库：yihui-dev/awesome-opus5-5-videos\n作者（仓库标注）：@notdwd\n作者页面：https://x.com/notdwd\n原帖：https://x.com/notdwd/status/2105031774904766641\nGitHub文件：prompts/notdwd-766641.md\n固定版本：92aee2f586ac0715cb3cbcb6384834f98a33383d\n用途：提示输入、确认按钮、逐帧胶片、播放头与预览区形成12秒交互动画。\n内容完整性：结构完整；内含抽象弹跳球作为预览内容，主体为输入和时间轴交互。\n本记录范围：关联原文的完整中文翻译及明确分开的制作思路；保留原文约束，不补全缺失内容。制作分析属于本次整理，不是原作者原文。\n验证状态：仅核验来源文本与入库；未测试、未执行提示词、未调用生成模型、未下载或镜像原视频。tech_tags 是仓库复刻标签，不作为原作者技术证据。\n许可：仓库 MIT；原帖署名按仓库保留。音乐、产品素材与视频不在本次复制范围。\n许可来源：https://github.com/yihui-dev/awesome-opus5-5-videos/blob/92aee2f586ac0715cb3cbcb6384834f98a33383d/LICENSE\n\n\nMIT License\n\nCopyright (c) 2026 yihui-dev\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+    "verification_status": "user_provided_unverified",
+    "provenance_file": "SOURCE.md"
+  },
+  "created_at": "2026-10-27T09:46:45+08:00",
+  "updated_at": "2026-10-27T09:46:45+08:00",
+  "original": {
+    "file": "original.md",
+    "sha256": "3cd5c12856a15018e85feb6b24dd850ff2425f04e2eb69b691d82570cc8c72a2",
+    "encoding": "UTF-8",
+    "byte_count": 7174
+  },
+  "related_ids": [],
+  "variables": [],
+  "applicable_models": [],
+  "open_questions": [],
+  "versions": [
+    {
+      "version": "v001",
+      "file": "optimized-v001.md",
+      "created_at": "2026-10-27T09:46:45+08:00",
+      "created_by": "用户提交保存",
+      "based_on": "original",
+      "reason": "保存原文副本，尚未进行优化",
+      "optimization_status": "not_optimized",
+      "evaluation_status": "untested",
+      "sha256": "3cd5c12856a15018e85feb6b24dd850ff2425f04e2eb69b691d82570cc8c72a2"
+    },
+    {
+      "version": "v002",
+      "file": "optimized-v002.md",
+      "created_at": "2026-10-28T00:27:57+08:00",
+      "reason": "从已有汉化整理中提取中文提示词，拆解单独呈现；原文与许可证保留",
+      "optimization_status": "provided",
+      "public_template": true,
+      "analysis_file": "ANALYSIS.md",
+      "evaluation_status": "untested",
+      "sha256": "9d41abfd912ea58954290f450aa7c35f583479d8d8dd9f3ef71f8a01dbca5ad5"
+    }
+  ],
+  "optimization_status": "provided",
+  "evaluation_status": "untested",
+  "loop_review": {
+    "reviewed_version": "v001",
+    "applicability": "unreviewed",
+    "reminder": "尚未分析是否需要 Loop。",
+    "effectiveness_verified": false
+  },
+  "quality_review": {
+    "reviewed_version": null,
+    "review_basis": "not_reviewed",
+    "criteria": {}
+  },
+  "review_history": [],
+  "feedback": [],
+  "design_analysis_file": "ANALYSIS.md",
+  "publication": {
+    "authorized_by_owner": true,
+    "edition": "public-2026-10-28",
+    "private_original_preserved": true,
+    "original_kind": "original"
+  }
+}

@@ -82,11 +82,12 @@ def main(argv=None):
         print("留白需要 Python 3.11 或更新版本。", file=sys.stderr)
         return 1
     parser = argparse.ArgumentParser(description="启动留白 · 提示词素材库")
-    parser.add_argument("--data-root", type=Path, default=PROJECT_ROOT, help="资料目录，默认当前程序目录")
+    parser.add_argument("--data-root", type=Path, help="资料目录，默认当前程序目录")
+    parser.add_argument("--with-collection", action="store_true", help="向全新目录安装公开汉化与拆解素材；已有库不覆盖")
     parser.add_argument("--port", type=port_number, default=8767, help="本机端口，默认 8767")
     parser.add_argument("--no-browser", action="store_true", help="只启动服务，不打开浏览器")
     args = parser.parse_args(argv)
-    data_root = args.data_root.expanduser().resolve()
+    data_root = (args.data_root or PROJECT_ROOT).expanduser().resolve()
     url = f"http://127.0.0.1:{args.port}"
     stopped = threading.Event()
     try:
@@ -98,6 +99,9 @@ def main(argv=None):
         if str(PROJECT_ROOT / "desktop") not in sys.path:
             sys.path.insert(0, str(PROJECT_ROOT / "desktop"))
         from server import main as serve
+        if args.with_collection or args.data_root is None:
+            from bundled_library import install_collection
+            install_collection(data_root)
 
         print(f"正在启动留白：{url}\n资料目录：{data_root}\n按 Ctrl+C 停止服务。", flush=True)
         if not args.no_browser:

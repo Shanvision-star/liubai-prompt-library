@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "id": "PRM-0006",
+  "title": "UI 构建：从产品内容到可用界面",
+  "summary": "先确定内容、行为、视觉角色和布局，再沿现有技术栈构建有辨识度的界面。",
+  "category_id": "ui_design",
+  "classification_status": "classified",
+  "tags": [
+    "界面构建",
+    "信息架构",
+    "设计系统",
+    "交互",
+    "审美 Taste"
+  ],
+  "source": {
+    "type": "public_repository",
+    "url": "https://github.com/anthropics/skills/blob/dbd4588f9e1033efb41dad4bef2f7947c8993d44/skills/frontend-design/SKILL.md",
+    "raw_url": "https://raw.githubusercontent.com/anthropics/skills/dbd4588f9e1033efb41dad4bef2f7947c8993d44/skills/frontend-design/SKILL.md",
+    "repository": "anthropics/skills",
+    "repository_path": "skills/frontend-design/SKILL.md",
+    "commit": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+    "commit_date": "2026-10-09T18:45:49Z",
+    "retrieved_at": "2026-10-23T23:30:38+08:00",
+    "license": "Apache-2.0",
+    "license_file": "LICENSE.txt",
+    "license_url": "https://github.com/anthropics/skills/blob/dbd4588f9e1033efb41dad4bef2f7947c8993d44/skills/frontend-design/LICENSE.txt",
+    "provenance_file": "SOURCE.md",
+    "git_blob_sha1": "a5333457c414d20d625f307df945842c0952ecc3",
+    "archive_scope": "complete_selected_file_not_complete_skill",
+    "dependencies": [
+      "实现需要项目源码、技术栈和真实内容；视觉验证需要实际渲染或浏览器能力。",
+      "原文涉及字体和图像选择，但本次未附带字体、图片或项目实现。"
+    ],
+    "archived_assets": [
+      {
+        "file": "LICENSE.txt",
+        "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+        "git_blob_sha1": "f433b1a53f5b830a205fd2df78e2b34974656c7b",
+        "source_url": "https://raw.githubusercontent.com/anthropics/skills/dbd4588f9e1033efb41dad4bef2f7947c8993d44/skills/frontend-design/LICENSE.txt"
+      },
+      {
+        "file": "NOTICE.md",
+        "sha256": "a8ff7a84dee9dfb42ab448de281784387ceafdf63881b7c070ee2de7f6ed865c",
+        "git_blob_sha1": "ffef92c48b351a3ed036556ed32dda934e8cf41a",
+        "source_url": "https://raw.githubusercontent.com/anthropics/skills/dbd4588f9e1033efb41dad4bef2f7947c8993d44/THIRD_PARTY_NOTICES.md"
+      }
+    ],
+    "usage_evidence": {
+      "level": "published_instruction_not_independently_evaluated",
+      "note": "官方技能仓库提供完整前端设计指令；来源身份只能证明出处，不能证明该提示词在你的项目必然更好。本次未运行页面生成或模型对照。"
+    },
+    "note": "用户明确授权本次网络搜集；原文只作素材，未执行其指令。"
+  },
+  "created_at": "2026-10-23T23:50:20+08:00",
+  "updated_at": "2026-10-23T23:50:20+08:00",
+  "original": {
+    "file": "original.md",
+    "sha256": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3",
+    "encoding": "UTF-8",
+    "byte_count": 9390
+  },
+  "related_ids": [],
+  "variables": [
+    {
+      "name": "product_and_page",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": true
+    },
+    {
+      "name": "audience",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "primary_task",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "deliverable_scope",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "content_and_assets",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "design_constraints",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "stack_and_repository",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "acceptance_criteria",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    }
+  ],
+  "applicable_models": [],
+  "open_questions": [],
+  "versions": [
+    {
+      "version": "v001",
+      "file": "optimized-v001.md",
+      "created_at": "2026-10-23T23:50:20+08:00",
+      "based_on": "original",
+      "created_by": "当前 Codex 对话助手",
+      "reason": "按用户要求生成可复用中文优化版，说明设计逻辑与 loop。",
+      "changes": [
+        "明确设计稿与代码交付两种范围，沿用已有组件、客户端和类型，避免为风格重建系统。",
+        "将风格建议绑定到产品语境，不把特定字体、布局或装饰当作通用禁令。",
+        "加入关键状态、真实内容边界、可观察验收与三轮修正上限。"
+      ],
+      "evaluation_status": "untested",
+      "evaluation_note": "仅完成来源完整性和文本结构审查；未运行真实模型/项目或用户评测。",
+      "sha256": "bda2760345ad14c2c2642ffc87947861cd9ac05006a6232388670d9370334c36"
+    }
+  ],
+  "quality_review": {
+    "reviewed_version": "v001",
+    "reviewed_at": "2026-10-23T23:50:20+08:00",
+    "review_basis": "assistant_text_analysis_not_model_evaluation",
+    "criteria": {
+      "goal_clarity": {
+        "status": "text_reviewed",
+        "note": "交付支持主要用户任务的界面，并明确方案或实现范围。"
+      },
+      "input_clarity": {
+        "status": "text_reviewed",
+        "note": "要求内容、任务、品牌、技术栈和可用素材，缺关键事实时不伪造。"
+      },
+      "constraint_quality": {
+        "status": "text_reviewed",
+        "note": "复用已有系统、保留真实信息，装饰服务内容与行为。"
+      },
+      "output_checkability": {
+        "status": "text_reviewed",
+        "note": "设计规格、布局、状态和渲染/交互/构建证据分别交付。"
+      },
+      "usage_evidence": {
+        "status": "unverified",
+        "note": "有官方公开指令；本次优化版尚无运行与对照结果。"
+      },
+      "task_fit": {
+        "status": "text_reviewed",
+        "note": "适合 Taste 方向确定后的界面构建，后续可用适配与加固条目专项检查。"
+      }
+    }
+  },
+  "loop_review": {
+    "reviewed_version": "v001",
+    "reviewed_at": "2026-10-23T23:50:20+08:00",
+    "applicability": "conditional",
+    "explicit_loop_present": true,
+    "max_rounds": 3,
+    "reminder": "实现后建议检查修正，最多 3 轮；纯文字方案只做一致性检查。",
+    "copyable_loop": "当已授权实现且可以运行检查时，最多 3 轮‘构建/更新 → 渲染与关键任务检查 → 修正 → 复查’。首轮固定标准：主任务可完成、内容真实且完整、层级清楚、目标视口无阻断性溢出、关键状态可理解、已有功能不退化。每轮最多解决 3 个最高影响的问题，保留前后截图和相关测试结果。标准通过即停止；同一阻塞连续出现且没有新证据、需要超出范围修改、达到上限或无法运行时停止并报告。未运行的浏览器、接口或真机检查不得标为通过。纯方案任务不假装执行实现循环。",
+    "effectiveness_verified": false
+  },
+  "review_history": [],
+  "feedback": [],
+  "classification_reason": "主要交付物是界面方案或实现，以及能支撑交付结论的检查记录。",
+  "batch_id": "2026-10-23-taste-ui-01",
+  "design_analysis_file": "ANALYSIS.md",
+  "publication": {
+    "authorized_by_owner": true,
+    "edition": "public-2026-10-28",
+    "private_original_preserved": true,
+    "original_kind": "original"
+  }
+}

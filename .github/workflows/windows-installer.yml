@@ -1,0 +1,36 @@
+name: Windows installer
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  installer:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-build.txt
+      - name: Prepare signed Inno Setup compiler
+        shell: pwsh
+        run: |
+          $compilerDownload = Join-Path $env:RUNNER_TEMP 'innosetup.exe'
+          Invoke-WebRequest 'https://github.com/jrsoftware/issrc/releases/download/is-6_7_3/innosetup-6.7.3.exe' -OutFile $compilerDownload
+          $signature = Get-AuthenticodeSignature $compilerDownload
+          if ($signature.Status -ne 'Valid' -or $signature.SignerCertificate.Subject -notmatch 'Pyrsys B.V.') { throw 'Compiler signature mismatch' }
+          $compilerFolder = Join-Path $env:RUNNER_TEMP 'inno'
+          $installed = Start-Process $compilerDownload -ArgumentList @('/PORTABLE=1', '/VERYSILENT', '/CURRENTUSER', '/SUPPRESSMSGBOXES', '/NORESTART', ('/DIR="' + $compilerFolder + '"')) -WindowStyle Hidden -Wait -PassThru
+          if ($installed.ExitCode -ne 0) { throw 'Compiler setup failed' }
+          "LIUBAI_ISCC=$compilerFolder\ISCC.exe" >> $env:GITHUB_ENV
+      - name: Build installer
+        run: python tools/build_windows.py --iscc "$env:LIUBAI_ISCC" --output dist/windows
+      - name: Install, run, reinstall and uninstall
+        run: python tools/smoke_windows_installer.py --installer dist/windows/release/Liubai-Setup-0.5.0-windows-x64.exe --workdir "$env:RUNNER_TEMP/liubai-smoke"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: liubai-windows-installer
+          path: dist/windows/release/*

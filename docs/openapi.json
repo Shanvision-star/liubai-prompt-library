@@ -626,6 +626,30 @@
           }
         }
       }
+    },
+    "/api/application/quit": {
+      "post": {
+        "summary": "显式停止本机服务",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "已发起停止；资料保留"
+          },
+          "403": {
+            "description": "需要同源标记或本机Bearer令牌"
+          }
+        }
+      }
     }
   },
   "components": {

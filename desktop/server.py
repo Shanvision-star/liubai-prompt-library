@@ -17,9 +17,10 @@ from prompt_store import PromptStore
 from library_init import ensure_library
 from integration_auth import integration_token
 from library_export import APP_VERSION, app_info, export_library
+from runtime_paths import resource_root
 
 APP_ID = "prompt-library-desktop"
-WEB_ROOT = Path(__file__).parent / "web"
+WEB_ROOT = resource_root() / "desktop" / "web"
 ENTRY_ID = re.compile(r"PRM-\d{4,}")
 
 
@@ -245,7 +246,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         origin = self.headers.get("Origin")
         allowed_origins = {f"http://127.0.0.1:{self.server.server_port}", f"http://localhost:{self.server.server_port}"}
         metadata_route = re.fullmatch(r"/api/entries/(PRM-\d{4,})/metadata", self.path)
-        integration_route = self.path in {"/api/prompts", "/api/categories"} or bool(metadata_route)
+        integration_route = self.path in {"/api/prompts", "/api/categories", "/api/application/quit"} or bool(metadata_route)
         browser_allowed = origin in allowed_origins and self.headers.get("X-Prompt-Library") == "1"
         authorization = self.headers.get("Authorization", "")
         supplied_token = authorization.removeprefix("Bearer ")
@@ -265,6 +266,10 @@ class RequestHandler(BaseHTTPRequestHandler):
             if not isinstance(body, dict):
                 raise ValueError("请求需要 JSON 对象")
             references = self.server.references
+            if self.path == "/api/application/quit":
+                self.reply(200, {"stopping": True})
+                threading.Thread(target=self.server.shutdown, daemon=True).start()
+                return
             if self.path == "/api/prompts":
                 result = self.server.prompts.save_prompt(body)
             elif self.path == "/api/categories":

@@ -33,3 +33,7 @@ api-token
 .codex/
 .DS_Store
 Thumbs.db
+/build/
+/dist/
+/installed-collection.json
+/.venv-build/

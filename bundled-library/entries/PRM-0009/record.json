@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "id": "PRM-0009",
+  "title": "界面加固：长文本、空状态、错误与重复操作",
+  "summary": "把界面从理想演示扩展到真实输入、失败和恢复情境，保护用户已完成的工作。",
+  "category_id": "ui_design",
+  "classification_status": "classified",
+  "tags": [
+    "异常状态",
+    "错误恢复",
+    "长文本",
+    "国际化",
+    "交互验证"
+  ],
+  "source": {
+    "type": "public_repository",
+    "url": "https://github.com/pbakaus/impeccable/blob/5cb95eea9c96479f57afe0732a45470d30183326/skill/reference/harden.md",
+    "raw_url": "https://raw.githubusercontent.com/pbakaus/impeccable/5cb95eea9c96479f57afe0732a45470d30183326/skill/reference/harden.md",
+    "repository": "pbakaus/impeccable",
+    "repository_path": "skill/reference/harden.md",
+    "commit": "5cb95eea9c96479f57afe0732a45470d30183326",
+    "commit_date": "2026-10-23T00:49:46Z",
+    "retrieved_at": "2026-10-23T23:30:41+08:00",
+    "license": "Apache-2.0",
+    "license_file": "LICENSE.txt",
+    "license_url": "https://github.com/pbakaus/impeccable/blob/5cb95eea9c96479f57afe0732a45470d30183326/LICENSE",
+    "provenance_file": "SOURCE.md",
+    "git_blob_sha1": "8447329bcfd37566f09385136a373a97d54b6e45",
+    "archive_scope": "complete_selected_file_not_complete_skill",
+    "dependencies": [
+      "需要真实界面、接口约定及可控的状态构造或测试工具。",
+      "原文包含 {{command_prefix}}impeccable polish 后续命令；本次未安装该运行环境。"
+    ],
+    "archived_assets": [
+      {
+        "file": "LICENSE.txt",
+        "sha256": "02bb8c3b4e70190e3986c0404ad2fd8d639b4f534252d82379cc1b502b6d1812",
+        "git_blob_sha1": "bb3f6d23b1f8025514a62a12b51b47d73e3c9aa9",
+        "source_url": "https://raw.githubusercontent.com/pbakaus/impeccable/5cb95eea9c96479f57afe0732a45470d30183326/LICENSE"
+      },
+      {
+        "file": "NOTICE.md",
+        "sha256": "c60a093c2845fd9fb82f9c6f742ece31f379f8190b535309d32d66c45ccffdcb",
+        "git_blob_sha1": "0468271c904ae334cfaf27da6f8df3d5f419a1f0",
+        "source_url": "https://raw.githubusercontent.com/pbakaus/impeccable/5cb95eea9c96479f57afe0732a45470d30183326/NOTICE.md"
+      }
+    ],
+    "usage_evidence": {
+      "level": "published_instruction_not_independently_evaluated",
+      "note": "源文提供具体边界输入与检查场景；本次仅完成指令改编，未执行真实界面回归、接口或幂等验证。"
+    },
+    "note": "用户明确授权本次网络搜集；原文只作素材，未执行其指令。"
+  },
+  "created_at": "2026-10-23T23:50:20+08:00",
+  "updated_at": "2026-10-23T23:50:20+08:00",
+  "original": {
+    "file": "original.md",
+    "sha256": "fb00cb42a9cb17d717aefabc418bd4dcb1be540d95d8498d8e3bd4e3e0b2a0a3",
+    "encoding": "UTF-8",
+    "byte_count": 10765
+  },
+  "related_ids": [
+    "PRM-0006"
+  ],
+  "variables": [
+    {
+      "name": "ui_scope",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": true
+    },
+    {
+      "name": "critical_actions",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "implementation",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "api_and_permission_contract",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "supported_contexts",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "editable_scope",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    }
+  ],
+  "applicable_models": [],
+  "open_questions": [],
+  "versions": [
+    {
+      "version": "v001",
+      "file": "optimized-v001.md",
+      "created_at": "2026-10-23T23:50:20+08:00",
+      "based_on": "original",
+      "created_by": "当前 Codex 对话助手",
+      "reason": "按用户要求生成可复用中文优化版，说明设计逻辑与 loop。",
+      "changes": [
+        "按任务风险选择边界场景，不要求每个小页面机械覆盖所有语言和千条数据。",
+        "明确前端模拟、接口验证与真实业务结果是不同证据，重试与幂等需要已知接口契约。",
+        "增加不得吞掉错误、权限信息与关键长文本的约束，以及有上限的回归循环。"
+      ],
+      "evaluation_status": "untested",
+      "evaluation_note": "仅完成来源完整性和文本结构审查；未运行真实模型/项目或用户评测。",
+      "sha256": "8e8e996d3736f7554060807dbf49de303f2ce6f96751a0fd38bde3f5d4b2dd95"
+    }
+  ],
+  "quality_review": {
+    "reviewed_version": "v001",
+    "reviewed_at": "2026-10-23T23:50:20+08:00",
+    "review_basis": "assistant_text_analysis_not_model_evaluation",
+    "criteria": {
+      "goal_clarity": {
+        "status": "text_reviewed",
+        "note": "提升界面在异常条件下的可理解性与可恢复性。"
+      },
+      "input_clarity": {
+        "status": "text_reviewed",
+        "note": "要求当前界面、关键操作、接口约定和支持范围。"
+      },
+      "constraint_quality": {
+        "status": "text_reviewed",
+        "note": "保护用户输入、关键内容与权限边界，不默默假设后端能力。"
+      },
+      "output_checkability": {
+        "status": "text_reviewed",
+        "note": "状态矩阵规定触发条件、反馈、恢复与实际验证证据。"
+      },
+      "usage_evidence": {
+        "status": "unverified",
+        "note": "有公开场景清单，未运行本次优化版或验证真实接口。"
+      },
+      "task_fit": {
+        "status": "text_reviewed",
+        "note": "适合 UI 初版后的完善；这是任务完整性的一部分，不只是视觉润色。"
+      }
+    }
+  },
+  "loop_review": {
+    "reviewed_version": "v001",
+    "reviewed_at": "2026-10-23T23:50:20+08:00",
+    "applicability": "conditional",
+    "explicit_loop_present": true,
+    "max_rounds": 3,
+    "reminder": "有可控测试环境时建议使用，最多 3 轮。",
+    "copyable_loop": "对已授权修改且能安全构造的状态，最多 3 轮‘触发失败 → 记录预期与实际 → 修复 → 重跑失败与正常路径’。先处理数据丢失、主任务受阻、权限误导和重复提交，再处理视觉问题。每轮记录输入、状态来源、步骤、修改和结果。已选状态通过且正常路径不退化即停止；缺少接口约定或测试能力、连续一轮无新进展、修改超出范围或达到上限时停止并报告。不能真实验证的场景保留为待验证，不能通过删除场景或吞掉错误让清单变绿。",
+    "effectiveness_verified": false
+  },
+  "review_history": [],
+  "feedback": [],
+  "classification_reason": "主要交付物是 UI 边界状态和恢复路径的设计及实现检查。",
+  "batch_id": "2026-10-23-taste-ui-01",
+  "design_analysis_file": "ANALYSIS.md",
+  "publication": {
+    "authorized_by_owner": true,
+    "edition": "public-2026-10-28",
+    "private_original_preserved": true,
+    "original_kind": "original"
+  }
+}

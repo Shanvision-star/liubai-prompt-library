@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "id": "PRM-0012",
+  "title": "AI Design Skills：landing-page-design 资源来源",
+  "summary": "",
+  "category_id": "ui_design",
+  "classification_status": "classified",
+  "tags": [
+    "资源来源",
+    "AI Design Skills",
+    "landing-page-design",
+    "落地页设计"
+  ],
+  "source": {
+    "type": "manual_submission",
+    "url": null,
+    "note": null,
+    "verification_status": "user_provided_unverified",
+    "provenance_file": "SOURCE.md"
+  },
+  "created_at": "2026-10-26T00:34:29+08:00",
+  "updated_at": "2026-10-26T00:34:29+08:00",
+  "original": {
+    "file": "original.md",
+    "sha256": "41528e6794fc0e334aaf3e7684790fc343061578b7ee3711c4ca803f72e4bbf7",
+    "encoding": "UTF-8",
+    "byte_count": 1328
+  },
+  "related_ids": [],
+  "variables": [],
+  "applicable_models": [],
+  "open_questions": [],
+  "versions": [
+    {
+      "version": "v001",
+      "file": "optimized-v001.md",
+      "created_at": "2026-10-26T00:34:29+08:00",
+      "created_by": "用户提交保存",
+      "based_on": "original",
+      "reason": "保存原文副本，尚未进行优化",
+      "optimization_status": "not_optimized",
+      "evaluation_status": "untested",
+      "sha256": "41528e6794fc0e334aaf3e7684790fc343061578b7ee3711c4ca803f72e4bbf7"
+    }
+  ],
+  "optimization_status": "not_optimized",
+  "evaluation_status": "untested",
+  "loop_review": {
+    "reviewed_version": "v001",
+    "applicability": "unreviewed",
+    "reminder": "尚未分析是否需要 Loop。",
+    "effectiveness_verified": false
+  },
+  "quality_review": {
+    "reviewed_version": null,
+    "review_basis": "not_reviewed",
+    "criteria": {}
+  },
+  "review_history": [],
+  "feedback": [],
+  "publication": {
+    "authorized_by_owner": true,
+    "edition": "public-2026-10-28",
+    "private_original_preserved": true,
+    "original_kind": "original"
+  }
+}

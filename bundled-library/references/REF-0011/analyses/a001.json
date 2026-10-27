@@ -1,0 +1,120 @@
+{
+  "author": "Codex 资料整理（非原作者）",
+  "use_cases": "已准备首帧、末帧或已有视频，需要明确中间发生的动作，或把既有动作自然续下去。适合短分镜衔接和产品演示的状态变化。",
+  "not_for": "不是单纯“更详细”文本扩写；前后帧若人物数量、机位或光线冲突，提示词无法保证补救。不能将示例的8秒/7秒与具体SDK字段当成所有模型通用参数，也不能把轮询完成误当成成片质量通过。",
+  "structure": [
+    {
+      "part": "目标",
+      "observation": "通过首尾帧插值或已有视频延长控制时间上的衔接。",
+      "evidence": "原文第 10 行；last_frame=types.Image.from_file"
+    },
+    {
+      "part": "上下文",
+      "observation": "该摘录来自官方SDK notebook，包含具体模型条件与示例代码，未执行。",
+      "evidence": "原文第 5 行；client.models.generate_videos"
+    },
+    {
+      "part": "输入",
+      "observation": "插值使用首末图；续镜使用video_gcs，不同输入各自承担边界信息。",
+      "evidence": "原文第 63 行；video_gcs ="
+    },
+    {
+      "part": "约束",
+      "observation": "示例指定时长、比例、生成数等；属于该工作流参数而非提示词普遍法则。",
+      "evidence": "原文第 14 行；duration_seconds=8"
+    },
+    {
+      "part": "步骤",
+      "observation": "发请求→轮询完成→查看结果。轮询是任务状态，不是创作质量Loop。",
+      "evidence": "原文第 20 行；while not operation.done:"
+    },
+    {
+      "part": "输出",
+      "observation": "生成的视频bytes或Cloud Storage结果地址。",
+      "evidence": "原文第 26 行；show_video(operation.result.generated_videos"
+    },
+    {
+      "part": "验收",
+      "observation": "示例仅调用show_video，没有给动作/接缝合格标准；改编补首末对应与衔接检查。",
+      "evidence": "原文第 26 行；show_video(operation.result.generated_videos"
+    },
+    {
+      "part": "Loop",
+      "observation": "源文轮询没有创作改写上限；改编最多2轮边界修正，禁止无限轮询式尝试。",
+      "evidence": "原文第 20 行；while not operation.done:"
+    }
+  ],
+  "key_sentences": [
+    {
+      "quote": "a hand reaches in and places a glass of milk next to the plate of cookies",
+      "location": "原文第 2 行",
+      "reason": "描述状态如何发生变化，而非重述两张图的全部静态外观。",
+      "without": "模型需要自行猜测主体如何进入和物体如何出现。"
+    },
+    {
+      "quote": "last_frame=types.Image.from_file(location=last_frame)",
+      "location": "原文第 10 行",
+      "reason": "把末帧作为真实条件输入，不仅在文字中说“最后变成那样”。",
+      "without": "只写结局文字，不能声称已经提供末帧约束。"
+    },
+    {
+      "quote": "a butterfly flies in and lands on the flower",
+      "location": "原文第 61 行",
+      "reason": "续镜提示词说明新出现的动作。",
+      "without": "容易重复原视频场景介绍，却没定义延长部分发生什么。"
+    }
+  ],
+  "design_reasoning": {
+    "author_stated": "官方notebook把frame interpolation与video extend分为不同输入方式，示例用首末帧和简短动作提示控制变化；续镜用既有视频及新动作。被摘录的源码确实调用生成、轮询和显示，但本次只读取文本，没有运行请求或观看示例输出。",
+    "inferred": "首帧和末帧给出状态边界，文字负责描述可发生的路径。续镜已有时间上下文，提示词应聚焦新增事件。把输入条件和文字职责分开，能避免把希望模型理解的内容误当成真正传入的约束。",
+    "evidence": "Google官方GitHub notebook与Apache-2.0许可证可核对，完整母文件按commit存档；这里明确节选cell 21、25、26、27（从0计数）。未认证Google Cloud、未调用付费API、未生成视频。"
+  },
+  "template": "请为 {{shot_name}} 制定视频衔接提示词，模式为 {{mode:首尾帧插值/已有视频续镜}}。\n输入素材 {{first_last_frames_or_video}}；已确认的故事事实与动作 {{story_constraints}}；期望结束状态 {{end_state}}；目标模型与版本 {{model_version}}；目标时长 {{duration}}。\n先检查素材能否读取，并说明实际提供了哪些条件。首尾帧模式：比较主体数量、身份、机位、光线和物体位置，列出不可变化的锚点与需要发生的变化。续镜模式：查看原片结尾的动作方向、主体位置、镜头速度和声画状态；没有看原片时只给待填模板。\n写一条物理上可理解的动作路径，描述变化的先后与镜头关系，不增加无关情节。若首尾状态差异过大，说明需要中间镜头或重选边界，不用更多形容词掩盖冲突。\n分别交付：可复制生成词、首末/续接锚点、需要传入的实际素材、参数待核对清单。模型能力与参数按当前官方实现核实；不要把示例时长、音频能力或SDK字段直接复制到别的平台。\n默认只做规划。获得生成授权与预算后，验收开头承接、结尾到达、动作方向、物体出现消失与接缝；有音轨再单独听接缝。最多2轮，每轮只修一个已观察到的边界问题，保留前版。目标通过即停；需要换素材、出现新叙事、预算到限或无法观察样片时停止。轮询结束只表示任务返回，不能等同成片合格。",
+  "example": {
+    "task": "为历史讲解中的地图动画接两个状态，避免军队标记瞬间跳位。",
+    "prompt": "使用我给的地图首尾图规划一段衔接：首帧队伍标记在河西，末帧在已确认渡口东岸。保持同一地图、标记数量与朝向，描述沿指定渡口路径移动。若两图地形或标记数量不同先列冲突。给生成词与首尾检查表，不发视频生成请求。",
+    "changes": "把示例“放牛奶”迁移到用户历史地图素材，保留“状态边界+动作路径”结构，史实路径来自用户而非模型补全。",
+    "status": "illustrative"
+  },
+  "counterexample": {
+    "before": "相同首尾地图与时长：队伍标记从河西移动到东岸。",
+    "after": "相同首尾地图与时长：队伍标记沿指定渡口路径从河西移动到东岸。",
+    "changed_variable": "只增加路径约束，首尾状态、标记数量与时长不变。",
+    "expected_effect": "后者减少中间路径的任意性，可按渡口检查；是否真正遵循仍需看片，不能仅凭文字确认。",
+    "status": "illustrative"
+  },
+  "loop": {
+    "applicability": "conditional",
+    "max_rounds": 2,
+    "text": "素材规划不自动生成视频。有授权和实际样片时最多2轮：固定首尾素材或原片、模型与时长，检查开头承接、末尾到达、运动方向和物体连续性；一次只改一个已观察到的路径或镜头变量。达标即停，需要换素材、预算到限或无新证据即停。API轮询完成不算质量通过，有音轨还需单独听接缝。"
+  },
+  "quality_review": {
+    "goal_clarity": "围绕两种明确时间条件：插值与延长。",
+    "input_clarity": "示例通过image/last_frame或video传递素材，不能用文字假装已传入。",
+    "constraint_quality": "参数和模型绑定明确；改编保留当前版本核验要求，避免跨平台照抄。",
+    "output_checkability": "源码没有成片验收；改编补首尾对应、方向与接缝标准。",
+    "usage_evidence": "官方SDK示例提供执行路径，本库未运行或看到生成结果。",
+    "task_fit": "适合用户分镜衔接和地图演示，需先有一致素材。"
+  },
+  "maturity": {
+    "status": "published_official_method",
+    "reason": "Google官方SDK示例，输入输出和执行路径可追溯；示例可运行性与当前服务授权仍待实际核验。"
+  },
+  "fit": {
+    "status": "selected",
+    "reason": "已准备首帧、末帧或已有视频，需要明确中间发生的动作，或把既有动作自然续下去。适合短分镜衔接和产品演示的状态变化。"
+  },
+  "evidence": {
+    "status": "source_verified_effect_untested",
+    "reason": "Google官方GitHub notebook与Apache-2.0许可证可核对，完整母文件按commit存档；这里明确节选cell 21、25、26、27（从0计数）。未认证Google Cloud、未调用付费API、未生成视频。"
+  },
+  "adaptation_changes": [
+    "将SDK示例提炼成素材边界与动作路径方法。",
+    "补充连续性、首尾对应与声画分开验收。",
+    "区分任务轮询与创作Loop，不触发付费生成。"
+  ],
+  "evaluation_status": "untested",
+  "version": "a001",
+  "snapshot_id": "s001",
+  "created_at": "2026-10-25T13:47:42+08:00"
+}

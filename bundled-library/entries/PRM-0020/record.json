@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "id": "PRM-0020",
+  "title": "[awesome-opus5-5-videos · UI动效] 30秒光标驱动状态形变",
+  "summary": "",
+  "category_id": "custom_c0b0109d9439",
+  "classification_status": "classified",
+  "tags": [
+    "awesome-opus5-5-videos · UI动效",
+    "UI动效",
+    "@diamai_",
+    "未测试",
+    "diamai-157697"
+  ],
+  "source": {
+    "type": "manual_submission",
+    "url": "https://github.com/yihui-dev/awesome-opus5-5-videos/blob/92aee2f586ac0715cb3cbcb6384834f98a33383d/prompts/diamai-157697.md",
+    "note": "独立来源组：awesome-opus5-5-videos · UI动效\n仓库：yihui-dev/awesome-opus5-5-videos\n作者（仓库标注）：@diamai_\n作者页面：https://x.com/diamai_\n原帖：https://x.com/diamai_/status/2104195085508157697\nGitHub文件：prompts/diamai-157697.md\n固定版本：92aee2f586ac0715cb3cbcb6384834f98a33383d\n用途：点击和拖动先于每次状态切换，节拍分析、弹簧缓动与无切镜连续变形。\n内容完整性：完整短提示词；音乐路径为占位符，具体状态需提供。\n保存范围：逐字保存 videos.json 的 prompt，已与固定版本 Markdown 提示词代码块核对一致；未翻译、改写、补全或优化。中文标题与本说明为本次整理信息。\n验证状态：仅核验来源文本与入库；未测试、未执行提示词、未调用生成模型、未下载或镜像原视频。tech_tags 是仓库复刻标签，不作为原作者技术证据。\n许可：仓库 MIT；原帖署名按仓库保留。音乐、产品素材与视频不在本次复制范围。\n许可来源：https://github.com/yihui-dev/awesome-opus5-5-videos/blob/92aee2f586ac0715cb3cbcb6384834f98a33383d/LICENSE\n\n\nMIT License\n\nCopyright (c) 2026 yihui-dev\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+    "verification_status": "user_provided_unverified",
+    "provenance_file": "SOURCE.md"
+  },
+  "created_at": "2026-10-26T23:26:11+08:00",
+  "updated_at": "2026-10-26T23:26:11+08:00",
+  "original": {
+    "file": "original.md",
+    "sha256": "75724c09816a05619782aa6992b52846d98c579ce6ca8de2801400dfff6c10b9",
+    "encoding": "UTF-8",
+    "byte_count": 571
+  },
+  "related_ids": [],
+  "variables": [],
+  "applicable_models": [],
+  "open_questions": [],
+  "versions": [
+    {
+      "version": "v001",
+      "file": "optimized-v001.md",
+      "created_at": "2026-10-26T23:26:11+08:00",
+      "created_by": "用户提交保存",
+      "based_on": "original",
+      "reason": "保存原文副本，尚未进行优化",
+      "optimization_status": "not_optimized",
+      "evaluation_status": "untested",
+      "sha256": "75724c09816a05619782aa6992b52846d98c579ce6ca8de2801400dfff6c10b9"
+    }
+  ],
+  "optimization_status": "not_optimized",
+  "evaluation_status": "untested",
+  "loop_review": {
+    "reviewed_version": "v001",
+    "applicability": "unreviewed",
+    "reminder": "尚未分析是否需要 Loop。",
+    "effectiveness_verified": false
+  },
+  "quality_review": {
+    "reviewed_version": null,
+    "review_basis": "not_reviewed",
+    "criteria": {}
+  },
+  "review_history": [],
+  "feedback": [],
+  "publication": {
+    "authorized_by_owner": true,
+    "edition": "public-2026-10-28",
+    "private_original_preserved": true,
+    "original_kind": "original"
+  }
+}

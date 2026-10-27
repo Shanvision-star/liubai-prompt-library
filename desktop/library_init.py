@@ -6,9 +6,10 @@ import json
 import re
 
 from reference_store import ReferenceStore, ENTRY_ID, _json_bytes, _now
+from runtime_paths import resource_root
 
 
-DEFAULT_TAXONOMY = Path(__file__).resolve().parents[1] / "defaults" / "taxonomy.json"
+DEFAULT_TAXONOMY = resource_root() / "defaults" / "taxonomy.json"
 
 
 def read_json(path):

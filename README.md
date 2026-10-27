@@ -1,8 +1,8 @@
 # 留白 · 提示词素材库
 
-把散落在聊天和文件里的提示词，整理成自己的素材库。保留原文、分类、来源和独立版本，随时搜索、复制、复用。简约白、中性灰和磨砂玻璃界面。
+不只收藏提示词，也读懂它为什么这样写。留白内置 **222 条素材、13 份参考拆解**，汇集中文汉化、可复用版本、设计思路与来源，帮助你学习并直接调用；也可以继续保存自己的提示词。简约白、中性灰和磨砂玻璃界面。
 
-**Local-first prompt library · Python standard library · REST API + MCP · MIT**
+**Chinese prompt collection & design breakdowns · Windows installer · Local-first · REST API + MCP**
 
 [下载最新版](https://github.com/Shanvision-star/liubai-prompt-library/releases/latest) · [使用指南](docs/USER-GUIDE.md) · [连接 Codex](docs/INTEGRATIONS.md) · [反馈问题](https://github.com/Shanvision-star/liubai-prompt-library/issues)
 
@@ -10,7 +10,17 @@
 
 ## 开始使用
 
-需要 **Python 3.11+**，无需 Node、数据库或模型 API 密钥。下载 ZIP 并解压，或者用 Git：
+### Windows：下载安装即可使用
+
+下载 [Windows 安装包](https://github.com/Shanvision-star/liubai-prompt-library/releases/latest) 中的 `Liubai-Setup-0.5.0-windows-x64.exe`，运行安装向导，然后从开始菜单打开“留白”。**不需要安装 Python、Node 或数据库，也不需要模型 API 密钥。** 支持 Windows 10/11 x64。
+
+首次启动会校验并准备内置素材，显示准备窗口；随后打开应用。可浏览“中文复用版”、设计逻辑、Loop 和来源，复制后用于自己的工具。198 条视频汉化或原创整理已提取为独立中文复用版本，效果仍待实测。
+
+个人数据位于 `%LOCALAPPDATA%\Liubai\library`，程序位于 `%LOCALAPPDATA%\Programs\Liubai`。升级或卸载保留个人数据；需要完全停止服务时，使用开始菜单的“关闭留白”。安装包目前未配置发行者代码签名。
+
+### macOS / Linux / 源码使用
+
+源码运行需要 **Python 3.11+**，无其他运行依赖：
 
 ```sh
 git clone https://github.com/Shanvision-star/liubai-prompt-library.git
@@ -18,7 +28,7 @@ cd liubai-prompt-library
 python -X utf8 start.py
 ```
 
-启动后自动打开浏览器。macOS / Linux 若没有 `python` 命令，使用 `python3 -X utf8 start.py`。首次启动创建空库和 13 个分类；点击“保存第一条素材”，或导入 `.md` / `.txt` 文件，确认后保存。可以先试试[示例提示词](examples/)。
+启动后自动打开浏览器。macOS / Linux 可使用 `python3 -X utf8 start.py`。默认首次运行会安装公开素材集；已有素材保持不变。也可以导入 `.md` / `.txt` 文件继续积累自己的素材。
 
 Windows 也可双击 `Open-Desktop.cmd`，优先使用 Edge / Chrome 独立窗口，无可用应用窗口浏览器时使用默认浏览器。这个入口的服务在后台运行；完全停止可执行：
 
@@ -32,7 +42,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\desktop\Stop-Desktop.p
 python -X utf8 start.py --data-root /absolute/path/to/my-library --port 8767
 ```
 
-路径有空格时用引号括起来。“使用与数据”显示当前实际位置。服务仅监听本机回环地址；项目提供源码发行包，需要本机 Python，不是免安装的原生程序。
+路径有空格时用引号括起来。指定新数据目录时，加 `--with-collection` 可安装公开素材，不加则建立空库。“使用与数据”显示当前实际位置。服务仅监听本机回环地址。
 
 ## 保存与分类
 
@@ -65,7 +75,7 @@ python -X utf8 start.py --data-root /absolute/path/to/my-library --port 8767
 
 支持GitHub搜索与文件链接导入、收藏、关注、原文优先阅读、拆解卡、版本差异和采用预览。上游变化进入新的快照与待分析队列，个人版本不会被静默覆盖。
 
-公开发行版从空库开始，不捆绑开发者个人素材或第三方提示词全文。导入材料时核对许可与具体使用条件，许可未知的候选只保留链接和元数据。分析者可记录结构、关键句作用、通用模板、改写示例、反例与有停止条件的Loop。
+公开发行版内置库主人授权的整理成果，详见[素材集范围与许可](bundled-library/README.md)。已核对许可的 GitHub 来源保留原文与署名；Prompt Motion 来源只公开整理者的原创复用方案、拆解和链接，不分发许可未明确的站点原文及逐句译文。导入新来源时仍需核对许可和具体使用条件。
 
 增量检查与调度支持见 [参考库维护说明](docs/REFERENCE-UPDATES.md)。**独立安装默认没有已注册的调度器**；登记调度编号不等于创建定时任务。实际分析能力不可用时保持“待分析”，不使用固定文案模拟AI分析。
 
@@ -82,6 +92,8 @@ desktop/.runtime/       本机令牌、收藏、日志和浏览器状态
 ```
 
 以上个人数据和运行文件默认被`.gitignore`排除。代码不自动上传素材、不配置云同步；GitHub搜索和来源检查会请求GitHub，日常本地浏览与保存不调用模型。若将数据目录另放在其他Git仓库，请自行保持相应忽略规则。
+
+`bundled-library/` 是经明确授权、脱敏及许可范围整理的公开副本，与上述本机工作目录分开。个人会话编号、本机路径、授权令牌和调度记录不发布。后续新增素材不会被自动上传。
 
 ## 备份与升级
 

@@ -1,0 +1,122 @@
+{
+  "id": "REF-0013",
+  "title": "落地页设计：目标、证据与分段构建",
+  "summary": "可借鉴目标、证据与页面结构的组织方法；原型样例、强制视觉规则及泛化到所有UI的要求需审慎改编。",
+  "category_id": "ui_design",
+  "tags": [
+    "落地页",
+    "证据与主张",
+    "页面结构",
+    "转化文案",
+    "事实边界"
+  ],
+  "material_type": "skill",
+  "selection_status": "observing",
+  "quality_review": {
+    "goal_clarity": "营销落地页的提供物/受众/主动作明确；Scope扩张到全部Web UI过宽，改编先分场景。",
+    "input_clarity": "A1列出受众、流量、异议、证明与约束；缺信息时的合理假设不能替代事实和证据。",
+    "constraint_quality": "分段迭代与用户优先有价值；逼真虚构内容、固定结构与风格值、B7/B11的scroll表述张力使原版不宜直接采用。",
+    "output_checkability": "提纲、文案、证据映射和修改区域可核查；高转化、节省时间和性能提升没有本库实测支持。",
+    "usage_evidence": "有固定提交的完整技能指令和MIT许可；未取得可复现的本项目转化、用户或性能对照。",
+    "task_fit": "部分适合留白项目介绍的信息结构；需删除虚构证明和强制动效等要求，作为待观察方法候选，不默认采用。"
+  },
+  "related_ids": [
+    "PRM-0004",
+    "PRM-0006",
+    "PRM-0011"
+  ],
+  "favorite": false,
+  "followed": false,
+  "source": {
+    "repository": "elayadesign/ai-design-skills",
+    "path": "skills/landing-page-design/SKILL.md",
+    "commit": "38bbe5765600b9178b5395a823c9f6c8d2b8e730",
+    "tracked_ref": "main",
+    "url": "https://github.com/elayadesign/ai-design-skills/blob/38bbe5765600b9178b5395a823c9f6c8d2b8e730/skills/landing-page-design/SKILL.md",
+    "retrieved_at": "2026-10-26T09:02:48+08:00",
+    "license": "MIT",
+    "license_status": "allowed",
+    "license_evidence": "已实际核对该固定提交的完整SKILL.md与根目录MIT许可证，文件未声明不同许可；配套技能与第三方字体/图标只记录依赖，未安装或下载。",
+    "tracking_full_sha256": "3aae79f3d33ea293491fe6251f9fee56ee0cbb7aa66d41b3f29cfc662e4bbdd6",
+    "repository_metadata": {
+      "stars": 5605,
+      "archived": false,
+      "pushed_at": "2026-10-26T00:14:05Z",
+      "default_branch": "main"
+    },
+    "archived_content": "complete_file",
+    "license_file_url": "https://github.com/elayadesign/ai-design-skills/blob/38bbe5765600b9178b5395a823c9f6c8d2b8e730/LICENSE",
+    "license_text": "MIT License\n\nCopyright (c) 2026 Elaya\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+    "author": "Elaya / elayadesign",
+    "license_file": "references/assets/5f9af6ce7083838497676a8dfa651ad8e2559fdabd4586afc73587beec476b0e.license.txt",
+    "license_sha256": "5f9af6ce7083838497676a8dfa651ad8e2559fdabd4586afc73587beec476b0e",
+    "usage_restrictions": "按MIT复制改编须保留版权与许可。原版的逼真样例不能冒充事实证据；字体、图标和外部素材另核许可。原版强制风格与营销结构不自动成为本库规则，改编效果未实测。",
+    "applicable_models": [],
+    "dependencies": [
+      "redesign-existing-projects配套技能仅作为原文链接记录，未收录或安装。",
+      "原文含Tailwind与Framer Motion示例；当前静态页面不因此新增构建或运行依赖。",
+      "字体和图标资源的使用条件需独立核对；本次只归档文字指令。"
+    ]
+  },
+  "created_at": "2026-10-26T00:33:22+08:00",
+  "snapshots": [
+    {
+      "id": "s001",
+      "commit": "38bbe5765600b9178b5395a823c9f6c8d2b8e730",
+      "sha256": "3aae79f3d33ea293491fe6251f9fee56ee0cbb7aa66d41b3f29cfc662e4bbdd6",
+      "byte_count": 16528,
+      "created_at": "2026-10-26T00:33:22+08:00",
+      "source_url": "https://github.com/elayadesign/ai-design-skills/blob/38bbe5765600b9178b5395a823c9f6c8d2b8e730/skills/landing-page-design/SKILL.md",
+      "source": {
+        "repository": "elayadesign/ai-design-skills",
+        "path": "skills/landing-page-design/SKILL.md",
+        "commit": "38bbe5765600b9178b5395a823c9f6c8d2b8e730",
+        "tracked_ref": "main",
+        "url": "https://github.com/elayadesign/ai-design-skills/blob/38bbe5765600b9178b5395a823c9f6c8d2b8e730/skills/landing-page-design/SKILL.md",
+        "retrieved_at": "2026-10-26T00:33:22+08:00",
+        "license": "MIT",
+        "license_status": "allowed",
+        "license_evidence": "已实际核对该固定提交的完整SKILL.md与根目录MIT许可证，文件未声明不同许可；配套技能与第三方字体/图标只记录依赖，未安装或下载。",
+        "tracking_full_sha256": "3aae79f3d33ea293491fe6251f9fee56ee0cbb7aa66d41b3f29cfc662e4bbdd6",
+        "repository_metadata": {
+          "stars": 4735,
+          "archived": false,
+          "pushed_at": "2026-10-25T11:26:23Z",
+          "default_branch": "main"
+        },
+        "archived_content": "complete_file",
+        "license_file_url": "https://github.com/elayadesign/ai-design-skills/blob/38bbe5765600b9178b5395a823c9f6c8d2b8e730/LICENSE",
+        "license_text": "MIT License\n\nCopyright (c) 2026 Elaya\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "author": "Elaya / elayadesign",
+        "license_file": "references/assets/5f9af6ce7083838497676a8dfa651ad8e2559fdabd4586afc73587beec476b0e.license.txt",
+        "license_sha256": "5f9af6ce7083838497676a8dfa651ad8e2559fdabd4586afc73587beec476b0e",
+        "usage_restrictions": "按MIT复制改编须保留版权与许可。原版的逼真样例不能冒充事实证据；字体、图标和外部素材另核许可。原版强制风格与营销结构不自动成为本库规则，改编效果未实测。",
+        "applicable_models": [],
+        "dependencies": [
+          "redesign-existing-projects配套技能仅作为原文链接记录，未收录或安装。",
+          "原文含Tailwind与Framer Motion示例；当前静态页面不因此新增构建或运行依赖。",
+          "字体和图标资源的使用条件需独立核对；本次只归档文字指令。"
+        ]
+      },
+      "original_file": "snapshots/s001/original.md",
+      "license_status": "allowed",
+      "original_unavailable_reason": null,
+      "license_reviewed_at": "2026-10-26T09:02:48+08:00"
+    }
+  ],
+  "analyses": [
+    {
+      "version": "a001",
+      "snapshot_id": "s001",
+      "file": "analyses/a001.json",
+      "sha256": "7875a03a897389e94fdb7c5013ffaf757e3c5da91e0ad6821bee2f98efe437d0",
+      "created_at": "2026-10-26T09:09:41+08:00"
+    }
+  ],
+  "adoptions": [],
+  "current_snapshot_id": "s001",
+  "content_sha256": "3aae79f3d33ea293491fe6251f9fee56ee0cbb7aa66d41b3f29cfc662e4bbdd6",
+  "analysis_status": "ready",
+  "evaluation_status": "untested",
+  "updated_at": "2026-10-26T09:09:41+08:00"
+}

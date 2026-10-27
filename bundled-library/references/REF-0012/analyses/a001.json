@@ -1,0 +1,120 @@
+{
+  "author": "Codex 资料整理（非原作者）",
+  "use_cases": "使用确认的角色、产品或场景图构成新镜头，希望更清楚地控制“谁、拿什么、在哪里、做什么”。适合品牌视频、系列历史角色和产品展示。",
+  "not_for": "参考图输入不等于逐帧身份保证，写“保持一致”也不能替代真实附件。此功能和首尾帧插值承担不同约束；不能把每张参考都当作第一帧。不同版本能接受的图片数量/角色可能不同。",
+  "structure": [
+    {
+      "part": "目标",
+      "observation": "用参考资产生成包含指定人物、产品和场景的新视频。",
+      "evidence": "原文第 9 行；reference_images=["
+    },
+    {
+      "part": "上下文",
+      "observation": "与首尾帧约束不同，这里提供的是asset参考，不声明其是视频第一帧。",
+      "evidence": "原文第 12 行；reference_type=\"asset\""
+    },
+    {
+      "part": "输入",
+      "observation": "人物图、场景图、产品图分别由Image加载并放入reference_images。",
+      "evidence": "原文第 10 行；types.VideoGenerationReferenceImage"
+    },
+    {
+      "part": "约束",
+      "observation": "输入数量和比例等为该版本示例设置；作者示例声称产品一致性，本库尚未验证。",
+      "evidence": "原文第 70 行；This will demonstrate how Veo maintains product consistency"
+    },
+    {
+      "part": "步骤",
+      "observation": "为图分角色、编写交互动作、组装请求并查看输出。",
+      "evidence": "原文第 72 行；a person walks in carrying a vase full of flowers"
+    },
+    {
+      "part": "输出",
+      "observation": "将参考角色带入新动作的视频。",
+      "evidence": "原文第 34 行；show_video(operation.result.generated_videos"
+    },
+    {
+      "part": "验收",
+      "observation": "原示例未给逐帧身份误差阈值；改编以可见身份特征、产品结构和场景锚点检查。",
+      "evidence": "原文第 68 行；Product reference image"
+    },
+    {
+      "part": "Loop",
+      "observation": "原文只演示不同输入组合及任务轮询；改编在实际样片下最多3轮单变量修正。",
+      "evidence": "原文第 28 行；while not operation.done:"
+    }
+  ],
+  "key_sentences": [
+    {
+      "quote": "reference_type=\"asset\"",
+      "location": "原文第 12 行",
+      "reason": "素材以asset类型实际传入，而非只有文本中提及。",
+      "without": "看似给了参考要求，却没有为模型提供视觉资产。"
+    },
+    {
+      "quote": "a wide shot of a woman wheeling a blue suitcase through a flower field",
+      "location": "原文第 105 行",
+      "reason": "一句话把人物、道具、场景和动作组成关系。",
+      "without": "多个参考可能只被列出来，彼此如何互动不清楚。"
+    },
+    {
+      "quote": "a product, a subject, and a scene",
+      "location": "原文第 103 行",
+      "reason": "明确不同参考图的职责。",
+      "without": "多个图像可能竞争同一角色，主体身份与背景混淆。"
+    }
+  ],
+  "design_reasoning": {
+    "author_stated": "官方notebook分别示范两个主体、单一场景、单一产品，以及产品+人物+场景的三参考输入，使用asset类型，并用短提示词描述它们之间的动作。原文称示例展示产品一致性，这是作者说明，不是本库测得的性能。",
+    "inferred": "把每个参考分配职责，相当于减少模型需要自由猜测的维度；文字负责把资产连接成事件。身份锚点检查让“一致”从一句愿望变成可观察项目，同时允许动作和机位变化。",
+    "evidence": "Google官方Apache-2.0 notebook已按固定commit归档并提取cell 23、24、29、30、35、36、39（从0计数）。这批素材只读取代码和解释，不下载人物图片或运行生成；未经用户项目一致性评测。"
+  },
+  "template": "请为 {{video_task}} 编写多参考图视频提示词。素材清单 {{reference_images}}；每图预期角色 {{roles:人物/产品/场景}}；动作 {{action}}；目标模型与版本 {{model_version}}；镜头时长 {{duration}}。\n先确认每张图能读取、用途已确定，且实际工具支持对应参考模式。输出资产映射：图编号→承担的角色→必须保留的可见特征→允许改变的部分。不要把asset参考自动称为首帧，也不要只在文字里写“见图”却声称已经传给生成器。\n用一句主动作串起谁、拿什么、在哪里、怎样互动；再补必要镜头和光线，避免各张图争夺同一身份。不为完整故事新增未提供人物、品牌标识或产品功能。关键事实以用户资料为准；看不清的文字和细节列为未知。\n交付①可复制镜头词；②实际要附带的参考及角色映射；③开中末帧检查清单。关注脸/服饰、产品轮廓/部件、场景锚点和物体数量，不把“风格一致”当成全部身份一致。模型输入上限、分辨率、音频和时长必须按当前接口核对。\n没有授权不运行生成。有已授权样片后最多3轮，固定素材、模型和时长，每轮只改一个关系/镜头变量，保存原版与失败帧。主要锚点和动作通过即停；参考互相冲突、需要换图、无改善或预算到限时停止说明。不得承诺提示词能保证每帧一致。",
+  "example": {
+    "task": "用真实口红产品图和已授权模特图制作一段产品展示镜头。",
+    "prompt": "参考A是已授权模特，参考B是真实口红，参考C是白色梳妆台。模特拿起B，在C前轻转展示外壳；固定模特服饰、口红外壳形状和标识位置，镜头中近景缓慢推进。先检查三图用途与工具支持，再给可复制生成词、附件映射和身份检查表，不直接生成。",
+    "changes": "将官方多资产演示迁移到用户美妆内容，指定每图职责并把产品真实性作为保留约束。",
+    "status": "illustrative"
+  },
+  "counterexample": {
+    "before": "相同三张参考图与动作：参考A、B、C都作为一般风格参考。",
+    "after": "相同三张参考图与动作：参考A固定模特，B固定口红产品，C固定场景。",
+    "changed_variable": "只改变图像角色分配是否明确，素材和动作不变。",
+    "expected_effect": "明确角色可能减少人物/产品/背景混用，也使失败能归因到某类锚点；实际收益要用同条件样片比较。",
+    "status": "illustrative"
+  },
+  "loop": {
+    "applicability": "conditional",
+    "max_rounds": 3,
+    "text": "文字阶段一次检查参考图角色与动作关系。有生成授权和样片后最多3轮；固定图片、版本、时长和可控参数，记录开中末帧的人物、服饰、产品结构、数量及场景锚点。一次只改一个交互或镜头变量，达标即停；图像冲突、需要更换素材、无改善或预算到限时停止。保留失败帧，不声称仅凭提示词保证身份。"
+  },
+  "quality_review": {
+    "goal_clarity": "目标明确为多资产的新动作和关系。",
+    "input_clarity": "参考图类型和实际API输入可见，改编进一步定义每张图职责。",
+    "constraint_quality": "资产条件与语言任务分工清楚；不把示例输入上限当跨平台规则。",
+    "output_checkability": "改编将一致性拆为人物、产品和场景锚点，源示例本身未提供评测标准。",
+    "usage_evidence": "官方工作流与作者说明可核对；本库未运行或测一致性。",
+    "task_fit": "适合美妆产品和历史角色系列内容，但需要可用且被授权的参考图。"
+  },
+  "maturity": {
+    "status": "published_official_method",
+    "reason": "Google官方参考图SDK示例，有三类素材与多输入变体；仅证明方法出处和结构，不证明所有身份都可稳定保持。"
+  },
+  "fit": {
+    "status": "selected",
+    "reason": "使用确认的角色、产品或场景图构成新镜头，希望更清楚地控制“谁、拿什么、在哪里、做什么”。适合品牌视频、系列历史角色和产品展示。"
+  },
+  "evidence": {
+    "status": "source_verified_effect_untested",
+    "reason": "Google官方Apache-2.0 notebook已按固定commit归档并提取cell 23、24、29、30、35、36、39（从0计数）。这批素材只读取代码和解释，不下载人物图片或运行生成；未经用户项目一致性评测。"
+  },
+  "adaptation_changes": [
+    "把三个示例类型总结为资产角色映射。",
+    "补充实际附件传入与文字提及的区别。",
+    "新增身份锚点验收和3轮上限；未触发图像下载或生成。"
+  ],
+  "evaluation_status": "untested",
+  "version": "a001",
+  "snapshot_id": "s001",
+  "created_at": "2026-10-25T13:47:42+08:00"
+}

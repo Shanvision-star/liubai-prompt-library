@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "id": "PRM-0007",
+  "title": "设计规范提取：把现有界面变成可复用规则",
+  "summary": "从截图、样式或设计文件提取颜色、字体、间距和组件规则，区分观察、测量、推断与建议。",
+  "category_id": "ui_design",
+  "classification_status": "classified",
+  "tags": [
+    "设计系统",
+    "规范提取",
+    "语义令牌",
+    "证据",
+    "设计文档"
+  ],
+  "source": {
+    "type": "public_repository",
+    "url": "https://github.com/google-labs-code/stitch-skills/blob/0337446dadde6f8c94210444e2aa9d546126480f/plugins/stitch-utilities/skills/design-md/SKILL.md",
+    "raw_url": "https://raw.githubusercontent.com/google-labs-code/stitch-skills/0337446dadde6f8c94210444e2aa9d546126480f/plugins/stitch-utilities/skills/design-md/SKILL.md",
+    "repository": "google-labs-code/stitch-skills",
+    "repository_path": "plugins/stitch-utilities/skills/design-md/SKILL.md",
+    "commit": "0337446dadde6f8c94210444e2aa9d546126480f",
+    "commit_date": "2026-08-17T20:20:22Z",
+    "retrieved_at": "2026-10-23T23:30:43+08:00",
+    "license": "Apache-2.0",
+    "license_file": "LICENSE.txt",
+    "license_url": "https://github.com/google-labs-code/stitch-skills/blob/0337446dadde6f8c94210444e2aa9d546126480f/LICENSE",
+    "provenance_file": "SOURCE.md",
+    "git_blob_sha1": "c29a0feb9c06c2fb48dc9114988382e06b1f9d9b",
+    "archive_scope": "complete_selected_file_not_complete_skill",
+    "dependencies": [
+      "原版依赖 Stitch MCP、项目标识、屏幕列表与截图/HTML 下载能力。",
+      "原文还引用 Stitch 的提示设计说明；本次未接入 Stitch 或下载任何用户设计项目。"
+    ],
+    "archived_assets": [
+      {
+        "file": "LICENSE.txt",
+        "sha256": "b4133a55232c0996713349891dc55469d46a16ec027c033c9e4108b2149abb42",
+        "git_blob_sha1": "b31ddffd7a087dcdf4d780019f9b6b8c6db7f7b1",
+        "source_url": "https://raw.githubusercontent.com/google-labs-code/stitch-skills/0337446dadde6f8c94210444e2aa9d546126480f/LICENSE"
+      }
+    ],
+    "usage_evidence": {
+      "level": "published_instruction_not_independently_evaluated",
+      "note": "Google Labs 公开仓库提供设计文档提取流程；本次未连接 Stitch 或验证提取结果能复现原设计。"
+    },
+    "note": "用户明确授权本次网络搜集；原文只作素材，未执行其指令。"
+  },
+  "created_at": "2026-10-23T23:50:20+08:00",
+  "updated_at": "2026-10-23T23:50:20+08:00",
+  "original": {
+    "file": "original.md",
+    "sha256": "eb15f44646528f3a087ce023329ae699c1b6e803662af68338e1eb1c0406b59b",
+    "encoding": "UTF-8",
+    "byte_count": 7654
+  },
+  "related_ids": [],
+  "variables": [
+    {
+      "name": "design_sources",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": true
+    },
+    {
+      "name": "product_or_project",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "authoritative_sources",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "screens_and_components",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    },
+    {
+      "name": "output_format_or_path",
+      "description": "对应优化版输入位置；具体含义和缺失处理见正文。",
+      "required": false
+    }
+  ],
+  "applicable_models": [],
+  "open_questions": [],
+  "versions": [
+    {
+      "version": "v001",
+      "file": "optimized-v001.md",
+      "created_at": "2026-10-23T23:50:20+08:00",
+      "based_on": "original",
+      "created_by": "当前 Codex 对话助手",
+      "reason": "按用户要求生成可复用中文优化版，说明设计逻辑与 loop。",
+      "changes": [
+        "移除 Stitch 工具和字段调用依赖，接受可取得的截图、DOM/CSS、设计文件或已有规范。",
+        "为每个值增加来源位置、证据类型和置信范围，截图无法确认的字体/色值不得写成精确事实。",
+        "区分现状提取与建议规范，保留不一致项，增加两轮抽样核对上限。"
+      ],
+      "evaluation_status": "untested",
+      "evaluation_note": "仅完成来源完整性和文本结构审查；未运行真实模型/项目或用户评测。",
+      "sha256": "0eb422785345871de2429f754a865d07b8a4554f7b7048df6e9f69c655b02a5f"
+    }
+  ],
+  "quality_review": {
+    "reviewed_version": "v001",
+    "reviewed_at": "2026-10-23T23:50:20+08:00",
+    "review_basis": "assistant_text_analysis_not_model_evaluation",
+    "criteria": {
+      "goal_clarity": {
+        "status": "text_reviewed",
+        "note": "生成可溯源且可复用的设计规范。"
+      },
+      "input_clarity": {
+        "status": "text_reviewed",
+        "note": "接受多种来源并记录可用程度；至少需要一种实际设计材料。"
+      },
+      "constraint_quality": {
+        "status": "text_reviewed",
+        "note": "测量与推断分开，不覆盖现有规则或假定截图等于完整系统。"
+      },
+      "output_checkability": {
+        "status": "text_reviewed",
+        "note": "令牌与组件规则含具体来源，使用代表性组件回查。"
+      },
+      "usage_evidence": {
+        "status": "unverified",
+        "note": "有官方公开流程；本次没有真实设计提取与复现验证。"
+      },
+      "task_fit": {
+        "status": "text_reviewed",
+        "note": "适合把参考审美沉淀成可执行规范，尤其适合多页面保持一致。"
+      }
+    }
+  },
+  "loop_review": {
+    "reviewed_version": "v001",
+    "reviewed_at": "2026-10-23T23:50:20+08:00",
+    "applicability": "conditional",
+    "explicit_loop_present": true,
+    "max_rounds": 2,
+    "reminder": "复杂规范可做最多 2 轮抽样核对；缺材料时停止。",
+    "copyable_loop": "初稿后可做最多 2 轮‘提取 → 抽样核对 → 修正规则’。优先选择 2 个不同页面或 2 类组件，检查规范能否解释其颜色角色、字体层级、间距及例外；仅有一个组件时说明覆盖不足。每轮只修正有新证据的规则并保存冲突。抽样匹配且未决项已明确即停止；材料不足、同一冲突没有新依据或达到上限时停止，不通过猜测补齐。没有实际渲染复现时不得声称设计系统已复现原界面。",
+    "effectiveness_verified": false
+  },
+  "review_history": [],
+  "feedback": [],
+  "classification_reason": "主要交付物是可供 UI 复用的设计系统文档，而非风格评价。",
+  "batch_id": "2026-10-23-taste-ui-01",
+  "design_analysis_file": "ANALYSIS.md",
+  "publication": {
+    "authorized_by_owner": true,
+    "edition": "public-2026-10-28",
+    "private_original_preserved": true,
+    "original_kind": "original"
+  }
+}

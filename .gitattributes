@@ -3,3 +3,5 @@
 *.cmd text eol=crlf
 *.png binary
 *.ico binary
+# 素材是带哈希的归档内容；不改写原有换行或 Markdown 空格。
+/bundled-library/** -text -whitespace

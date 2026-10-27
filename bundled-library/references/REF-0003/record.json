@@ -1,0 +1,159 @@
+{
+  "id": "REF-0003",
+  "title": "视觉方向：从真实内容长出独特风格",
+  "summary": "从主体、受众、事实和已有素材推导不同视觉方向，再用同内容样张比较和选择。",
+  "category_id": "taste",
+  "tags": [
+    "艺术指导",
+    "风格选择",
+    "参考分析",
+    "品牌",
+    "视觉方向"
+  ],
+  "material_type": "skill",
+  "selection_status": "selected",
+  "quality_review": {
+    "goal_clarity": "为一个具体主体选定可解释的视觉方向。",
+    "input_clarity": "要求事实、受众、目标、素材、品牌和参考偏好；不足时不伪造特有事实。",
+    "constraint_quality": "用目标和品牌替代‘一律禁止某类元素’，限制为有材料支撑的选择。",
+    "output_checkability": "三方向共用内容并产出同一关键区域样张，便于比较。",
+    "usage_evidence": "作者有研究与测试陈述，但本次未独立复现；中文改编版未测。",
+    "task_fit": "适合建立个人 Taste 的选择依据，并将判断迁移到不同项目。"
+  },
+  "related_ids": [
+    "PRM-0004",
+    "PRM-0011"
+  ],
+  "favorite": false,
+  "followed": false,
+  "source": {
+    "repository": "Leonxlnx/taste-skill",
+    "path": "skills/taste-skill/SKILL.md",
+    "commit": "12af471f627f866411b4bd785b19646d3672784c",
+    "url": "https://github.com/Leonxlnx/taste-skill/blob/12af471f627f866411b4bd785b19646d3672784c/skills/taste-skill/SKILL.md",
+    "tracked_ref": "main",
+    "author": "Leonxlnx",
+    "license": "MIT",
+    "license_status": "allowed",
+    "license_file_url": "https://github.com/Leonxlnx/taste-skill/blob/12af471f627f866411b4bd785b19646d3672784c/LICENSE",
+    "retrieved_at": "2026-10-27T09:03:10+08:00",
+    "archive_scope": "full_file",
+    "git_blob_sha1": "433d92105c76671250013e0312d82cb413f552bc",
+    "dependencies": [
+      "原版依赖 scripts/draw.mjs、inspect.mjs 等脚本，以及 references/ 和 library/ 的方向、字体、配色、照片等资源。",
+      "原文说明相关脚本需要 Node 22+ 与 Chrome/Edge/Chromium；应用屏幕另依赖 references/app-screens.md。",
+      "本次保存完整 SKILL.md 及许可证，没有复制或安装完整技能、运行脚本、取得其参考库图片。"
+    ],
+    "usage_restrictions": "保留来源与对应许可证；中文适配已标记修改。许可只说明素材使用条件，不证明提示词效果。",
+    "linked_prompt": "PRM-0004",
+    "tracking_full_sha256": "3435ed963b15a1b6447746ec8844ab2cd38d8d2e8ead3451937f42df01e408c4",
+    "archived_content": "complete_file",
+    "license_file": "references/assets/4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df.license.txt",
+    "license_text": "MIT License\n\nCopyright (c) 2026 Leonxlnx\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+    "license_evidence": "已核对新提交的许可文件，与已存许可逐字节一致",
+    "repository_metadata": {
+      "stars": 103000,
+      "archived": false,
+      "pushed_at": "2026-10-26T12:28:18Z",
+      "default_branch": "main"
+    },
+    "license_sha256": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df"
+  },
+  "created_at": "2026-10-25T13:47:40+08:00",
+  "snapshots": [
+    {
+      "id": "s001",
+      "commit": "6010f91a9935f1c167dfc500fb1a475681892e6b",
+      "sha256": "d955dae4ba8ab2d994f4bb06b4bf412a1d9875433a8597939c391f4bae91dd7a",
+      "byte_count": 38458,
+      "created_at": "2026-10-23T23:30:42+08:00",
+      "source_url": "https://github.com/Leonxlnx/taste-skill/blob/6010f91a9935f1c167dfc500fb1a475681892e6b/skills/taste-skill/SKILL.md",
+      "source": {
+        "repository": "Leonxlnx/taste-skill",
+        "path": "skills/taste-skill/SKILL.md",
+        "commit": "6010f91a9935f1c167dfc500fb1a475681892e6b",
+        "url": "https://github.com/Leonxlnx/taste-skill/blob/6010f91a9935f1c167dfc500fb1a475681892e6b/skills/taste-skill/SKILL.md",
+        "raw_url": "https://raw.githubusercontent.com/Leonxlnx/taste-skill/6010f91a9935f1c167dfc500fb1a475681892e6b/skills/taste-skill/SKILL.md",
+        "tracked_ref": "main",
+        "author": "Leonxlnx",
+        "license": "MIT",
+        "license_status": "allowed",
+        "license_file_url": "https://github.com/Leonxlnx/taste-skill/blob/6010f91a9935f1c167dfc500fb1a475681892e6b/LICENSE",
+        "retrieved_at": "2026-10-23T23:30:42+08:00",
+        "archive_scope": "full_file",
+        "sha256": "d955dae4ba8ab2d994f4bb06b4bf412a1d9875433a8597939c391f4bae91dd7a",
+        "git_blob_sha1": "433d92105c76671250013e0312d82cb413f552bc",
+        "dependencies": [
+          "原版依赖 scripts/draw.mjs、inspect.mjs 等脚本，以及 references/ 和 library/ 的方向、字体、配色、照片等资源。",
+          "原文说明相关脚本需要 Node 22+ 与 Chrome/Edge/Chromium；应用屏幕另依赖 references/app-screens.md。",
+          "本次保存完整 SKILL.md 及许可证，没有复制或安装完整技能、运行脚本、取得其参考库图片。"
+        ],
+        "usage_restrictions": "保留来源与对应许可证；中文适配已标记修改。许可只说明素材使用条件，不证明提示词效果。",
+        "linked_prompt": "PRM-0004",
+        "tracking_full_sha256": "d955dae4ba8ab2d994f4bb06b4bf412a1d9875433a8597939c391f4bae91dd7a",
+        "archived_content": "complete_file",
+        "license_file": "references/assets/4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df.license.txt",
+        "license_text": "MIT License\n\nCopyright (c) 2026 Leonxlnx\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+        "license_evidence": "本次对照固定提交的文件与适用许可证核验；完整许可证与必要声明已归档。具体使用限制见 usage_restrictions。"
+      },
+      "original_file": "snapshots/s001/original.md",
+      "license_status": "allowed",
+      "original_unavailable_reason": null
+    },
+    {
+      "id": "s002",
+      "commit": "12af471f627f866411b4bd785b19646d3672784c",
+      "sha256": "3435ed963b15a1b6447746ec8844ab2cd38d8d2e8ead3451937f42df01e408c4",
+      "byte_count": 39537,
+      "created_at": "2026-10-25T14:10:30+08:00",
+      "source_url": "https://github.com/Leonxlnx/taste-skill/blob/12af471f627f866411b4bd785b19646d3672784c/skills/taste-skill/SKILL.md",
+      "source": {
+        "repository": "Leonxlnx/taste-skill",
+        "path": "skills/taste-skill/SKILL.md",
+        "commit": "12af471f627f866411b4bd785b19646d3672784c",
+        "tracked_ref": "main",
+        "url": "https://github.com/Leonxlnx/taste-skill/blob/12af471f627f866411b4bd785b19646d3672784c/skills/taste-skill/SKILL.md",
+        "retrieved_at": "2026-10-25T14:10:30+08:00",
+        "license": "MIT",
+        "license_status": "allowed",
+        "license_evidence": "已核对新提交的许可文件，与已存许可逐字节一致",
+        "tracking_full_sha256": "3435ed963b15a1b6447746ec8844ab2cd38d8d2e8ead3451937f42df01e408c4",
+        "repository_metadata": {
+          "stars": 102105,
+          "archived": false,
+          "pushed_at": "2026-10-24T23:45:45Z",
+          "default_branch": "main"
+        },
+        "archived_content": "complete_file",
+        "license_file_url": "https://github.com/Leonxlnx/taste-skill/blob/12af471f627f866411b4bd785b19646d3672784c/LICENSE",
+        "license_text": "MIT License\n\nCopyright (c) 2026 Leonxlnx\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+      },
+      "original_file": "snapshots/s002/original.md",
+      "license_status": "allowed",
+      "original_unavailable_reason": null,
+      "license_reviewed_at": "2026-10-27T09:03:10+08:00"
+    }
+  ],
+  "analyses": [
+    {
+      "version": "a001",
+      "snapshot_id": "s001",
+      "file": "analyses/a001.json",
+      "sha256": "9050a03066b6baf77d55bbee3b9b39fb6714aa6042e0361927ba61460e76bc81",
+      "created_at": "2026-10-25T13:47:40+08:00"
+    },
+    {
+      "version": "a002",
+      "snapshot_id": "s002",
+      "file": "analyses/a002.json",
+      "sha256": "08d5ecd07f456f0aa4613704ea8529b9a9b1902634422e390839b06d011a4325",
+      "created_at": "2026-10-25T14:17:00+08:00"
+    }
+  ],
+  "adoptions": [],
+  "current_snapshot_id": "s002",
+  "content_sha256": "3435ed963b15a1b6447746ec8844ab2cd38d8d2e8ead3451937f42df01e408c4",
+  "analysis_status": "ready",
+  "evaluation_status": "untested",
+  "updated_at": "2026-10-25T14:17:00+08:00"
+}
