@@ -18,6 +18,7 @@ from library_init import ensure_library
 from integration_auth import integration_token
 from library_export import APP_VERSION, app_info, export_library
 from runtime_paths import resource_root
+from learning_store import teaching_card
 
 APP_ID = "prompt-library-desktop"
 WEB_ROOT = resource_root() / "desktop" / "web"
@@ -95,11 +96,15 @@ class Library:
         if loop is None:
             latest_loop = record.get("loop_review", {})
             loop = latest_loop if is_latest or latest_loop.get("reviewed_version") == selected_version else {}
+        original = content(record["original"]["file"])
+        teaching = teaching_card(entry_id, selected_version, original, optimized_md)
         return {
             "item": item, "record": record, "selected_version": selected_version,
-            "original": content(record["original"]["file"]),
+            "original": original,
             "optimized_markdown": optimized_md, "optimized": optimized_md if chosen.get("optimization_status") in {"not_optimized", "provided"} or chosen.get("reference_provenance") else prompt_body(optimized_md),
-            "analysis": content(analysis_file, "此历史版本未单独保存设计分析。" if not is_latest else ""),
+            "analysis": teaching["markdown"] or content(analysis_file),
+            "teaching_status": teaching["status"],
+            "teaching_revision": teaching.get("revision"),
             "source_markdown": content(source_file),
             "loop": loop,
         }

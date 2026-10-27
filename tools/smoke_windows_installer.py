@@ -51,7 +51,7 @@ def main():
             if process.poll() is not None:
                 raise AssertionError(f"程序提前退出 {process.returncode}；查看 {data / 'desktop/.runtime/server.log'}")
             try:
-                if get("/api/health")["version"] == "0.5.0":
+                if get("/api/health")["version"] == "0.6.0":
                     return process
             except OSError:
                 time.sleep(0.3)
@@ -62,6 +62,9 @@ def main():
     assert len(get("/api/references")["references"]) == 13
     prompt = get("/api/entries/PRM-0205")
     assert prompt["selected_version"] == "v002" and prompt["analysis"] and "{{主体或项目}}" in prompt["optimized"]
+    assert prompt["teaching_status"] == "ready" and "只改一个条件" in prompt["analysis"]
+    assert "逐步撤去提示" in get("/api/entries/PRM-0222")["analysis"]
+    report["teaching_resources"] = "version-bound teaching and learning route loaded from installed assets"
     report["bundled_collection"] = "222 prompts, 13 references, Chinese template and analysis readable"
     token = (data / "desktop/.runtime/api-token").read_text(encoding="utf-8").strip()
     original = "安装后保存的私人素材\r\n保留原文。\n"

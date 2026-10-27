@@ -2,17 +2,21 @@
 
 不只收藏提示词，也读懂它为什么这样写。留白内置 **222 条素材、13 份参考拆解**，汇集中文汉化、可复用版本、设计思路与来源，帮助你学习并直接调用；也可以继续保存自己的提示词。简约白、中性灰和磨砂玻璃界面。
 
+“设计逻辑”现有 **222 张教学卡**：结构阅读、具体设计推理、艺术取舍、单变量反例、迁移练习与有界 Loop。总索引是学习路线，带完整示例和逐步撤去提示的练习。教学是 AI 对已存内容的分析；来源没有说明的意图不会被编造成作者观点，实际生成与学习效果仍未实测。
+
 **Chinese prompt collection & design breakdowns · Windows installer · Local-first · REST API + MCP**
 
 [下载最新版](https://github.com/Shanvision-star/liubai-prompt-library/releases/latest) · [使用指南](docs/USER-GUIDE.md) · [连接 Codex](docs/INTEGRATIONS.md) · [反馈问题](https://github.com/Shanvision-star/liubai-prompt-library/issues)
 
 ![留白界面](docs/images/library.png)
 
+![逐条学习设计逻辑](docs/images/teaching-analysis.png)
+
 ## 开始使用
 
 ### Windows：下载安装即可使用
 
-下载 [Windows 安装包](https://github.com/Shanvision-star/liubai-prompt-library/releases/latest) 中的 `Liubai-Setup-0.5.0-windows-x64.exe`，运行安装向导，然后从开始菜单打开“留白”。**不需要安装 Python、Node 或数据库，也不需要模型 API 密钥。** 支持 Windows 10/11 x64。
+下载 [Windows 安装包](https://github.com/Shanvision-star/liubai-prompt-library/releases/latest) 中的 `Liubai-Setup-0.6.0-windows-x64.exe`，运行安装向导，然后从开始菜单打开“留白”。**不需要安装 Python、Node 或数据库，也不需要模型 API 密钥。** 支持 Windows 10/11 x64。
 
 首次启动会校验并准备内置素材，显示准备窗口；随后打开应用。可浏览“中文复用版”、设计逻辑、Loop 和来源，复制后用于自己的工具。198 条视频汉化或原创整理已提取为独立中文复用版本，效果仍待实测。
 

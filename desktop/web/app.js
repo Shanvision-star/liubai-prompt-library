@@ -23,7 +23,7 @@ const categoryIcon = id => ({taste:'taste',ui_design:'ui',development:'code'})[i
 const categoryName = id => state.categories.find(c=>c.id===id)?.name || '待分类';
 const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const dateLabel = value => {const date = new Date(value); return Number.isNaN(date.valueOf()) ? '日期未知' : date.toLocaleDateString('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'});};
-const safeURL = value => {try {const url = new URL(value); return ['http:','https:'].includes(url.protocol)?url.href:null;}catch{return null;}};
+const safeURL = value => {try {const url = new URL(value,location.origin); return ['http:','https:'].includes(url.protocol)&&(value.startsWith('http')||(/^\/\?entry=PRM-\d+/.test(value)&&url.origin===location.origin))?url.href:null;}catch{return null;}};
 
 async function api(path, options={}) {
   let response;
@@ -96,8 +96,8 @@ function returnToList() {
   (selected||$('search')).focus({preventScroll:true});
 }
 
-async function selectEntry(id, reveal=true, version=null) {
-  state.selected=id;state.detail=null;state.tab='optimized';const request=++state.request;
+async function selectEntry(id, reveal=true, version=null, tab='optimized') {
+  state.selected=id;state.detail=null;state.tab=tab;const request=++state.request;
   $('detail-pane').setAttribute('aria-busy','true');
   $('detail-pane').innerHTML='<div id="detail-loading" class="detail-message" tabindex="-1"><p role="status">正在读取素材…</p><button class="reference-button mobile-back" data-action="back">返回素材列表</button></div>';
   document.querySelectorAll('[data-entry]').forEach(node=>{node.classList.toggle('selected',node.dataset.entry===id);node.setAttribute('aria-pressed',String(node.dataset.entry===id));});
@@ -158,8 +158,8 @@ function renderDetail() {
     const caption=document.createElement('div');caption.className='content-caption';caption.innerHTML=`<span>${state.tab==='optimized'?(notOptimized?'原文副本 · 尚未优化':'可直接复制 · 填写变量后使用'):'完整原文 · 原始内容留存'}</span>${versionControl}`;
     const pre=document.createElement('pre');pre.className='prompt-text '+(state.tab==='original'?'original':'');pre.textContent=d[state.tab];content.append(caption,pre);
   }else if(state.tab==='analysis'){
-    const fallback='# 设计逻辑与改编说明\n\n'+(r.versions.at(-1)?.changes||[]).map(c=>'- '+c).join('\n')+'\n\n## 六项质量检查\n\n'+Object.entries(r.quality_review?.criteria||{}).map(([key,v])=>'**'+({goal_clarity:'目标',input_clarity:'输入',constraint_quality:'约束',output_checkability:'输出',usage_evidence:'使用证据',task_fit:'任务适配'}[key]||key)+'**：'+v.note).join('\n\n');
-    content.append(markdown(d.analysis||fallback));
+    if(d.analysis){content.append(markdown(d.analysis));}
+    else {const message=document.createElement('p');message.className='empty-detail';message.textContent=d.teaching_status==='version_mismatch'?'这份正文或版本已变化，教学拆解尚未更新。':d.teaching_status==='unavailable'?'教学文件暂时无法读取，原文和保存版仍可使用。':'这条素材还没有教学拆解。保存提示词不会自动生成分析。';content.append(message);}
   }else if(state.tab==='loop'){
     const loop=d.loop;content.innerHTML=`<div class="content-caption"><span>有边界的迭代</span><span class="version-pill">${loop.explicit_loop_present?'已写入优化版':'附加建议'}</span></div><div class="loop-facts"><div class="loop-fact"><small>使用方式</small><strong>${loop.applicability==='conditional'?'按任务条件启用':'查看适用条件'}</strong></div><div class="loop-fact"><small>迭代上限</small><strong>${loop.max_rounds?'最多 '+loop.max_rounds+' 轮':'以具体任务为准'}</strong></div></div>`;
     const reminder=document.createElement('p');reminder.className='loop-reminder';reminder.textContent=loop.reminder||'本条尚未记录 Loop 建议。';content.append(reminder);
@@ -196,7 +196,11 @@ async function toggleFavorite(button){
 async function loadLibrary(){
   const button=$('refresh-button');button.disabled=true;error('');
   try{const data=await api('/api/library');state.entries=data.entries;state.categories=data.categories;state.favorites=data.favorites;$('local-caption').textContent=`${data.entry_count} 条素材 · 已连接`;
-    const existing=state.selected;updateView();if(existing&&state.selected===existing)await selectEntry(existing,false);
+    const params=new URLSearchParams(location.search);
+    const linked=!state.selected&&state.entries.some(e=>e.id===params.get('entry'))?params.get('entry'):null;
+    const existing=state.selected||linked;const tab=linked&&tabs.some(t=>t[0]===params.get('tab'))?params.get('tab'):state.tab;
+    if(linked)state.selected=linked;
+    updateView();if(existing&&state.selected===existing)await selectEntry(existing,!!linked,null,tab);
   }catch(e){error(e.message+'。确认本机服务已启动，再点击刷新。');$('local-caption').textContent='连接异常 · 可重试';if(!state.entries.length){$('entry-list').textContent='暂时无法读取素材';$('detail-pane').innerHTML='<div class="empty-detail">连接恢复后，素材会重新显示。</div>';$('detail-pane').setAttribute('aria-busy','false');}}
   finally{button.disabled=false;}
 }
@@ -233,6 +237,16 @@ async function copyMcpConfig(){
 }
 
 document.addEventListener('click',event=>{
+  const learningLink=event.target.closest('#detail-content a');
+  if(learningLink&&!event.ctrlKey&&!event.metaKey&&!event.shiftKey){
+    const url=new URL(learningLink.href);const id=url.searchParams.get('entry');
+    if(url.origin===location.origin&&url.pathname==='/'&&id){
+      event.preventDefault();
+      if(!state.entries.some(e=>e.id===id))return toast('当前库没有这条素材');
+      state.category='all';state.view='all';state.query='';$('search').value='';state.selected=id;updateView();
+      return selectEntry(id,true,null,'analysis');
+    }
+  }
   const view=event.target.closest('[data-view]');if(view){window.ReferenceLibrary?.leave();state.view=view.dataset.view;state.category='all';if(state.view==='recent'){state.sort='recent';$('sort').value='recent';}document.querySelector('.workspace').classList.remove('show-detail');return updateView();}
   const category=event.target.closest('[data-category]');if(category){window.ReferenceLibrary?.leave();state.category=category.dataset.category;state.view='all';document.querySelector('.workspace').classList.remove('show-detail');return updateView();}
   const entry=event.target.closest('[data-entry]');if(entry)return selectEntry(entry.dataset.entry);
