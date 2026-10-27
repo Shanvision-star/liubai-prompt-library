@@ -9,6 +9,7 @@ import secrets
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from socketserver import TCPServer
 from urllib.parse import urlsplit, unquote, parse_qs
 
 from reference_service import ReferenceService
@@ -143,6 +144,11 @@ class LocalServer(ThreadingHTTPServer):
         self.prompts = PromptStore(library.root)
         self.api_token = integration_token(library.state_dir)
         super().__init__(address, RequestHandler)
+
+    def server_bind(self):
+        # 只服务回环地址，不依赖反向 DNS；macOS 离线或解析缓慢时也应立即启动。
+        TCPServer.server_bind(self)
+        self.server_name, self.server_port = self.server_address[:2]
 
 
 class RequestHandler(BaseHTTPRequestHandler):

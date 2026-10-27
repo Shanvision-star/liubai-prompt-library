@@ -116,6 +116,23 @@ def test_empty_library_is_valid(library):
     assert library.catalogue()["entry_count"] == 0
 
 
+def test_local_server_starts_without_reverse_dns(library, monkeypatch):
+    def unavailable_dns(*args):
+        raise AssertionError("本机服务启动不应等待反向 DNS")
+    monkeypatch.setattr("socket.getfqdn", unavailable_dns)
+    instance = server.LocalServer(("127.0.0.1", 0), library)
+    thread = threading.Thread(target=instance.serve_forever, daemon=True)
+    thread.start()
+    try:
+        status, body, _ = request(f"http://127.0.0.1:{instance.server_port}/api/health")
+        assert status == 200 and json.loads(body)["app"] == server.APP_ID
+        assert instance.server_name == "127.0.0.1"
+    finally:
+        instance.shutdown()
+        instance.server_close()
+        thread.join(timeout=2)
+
+
 def test_html_is_protected_by_content_security_policy(endpoint):
     status, body, headers = request(endpoint + "/")
     assert status == 200
