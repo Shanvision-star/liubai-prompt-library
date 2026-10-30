@@ -214,10 +214,11 @@ async function loadAppInfo(){
     $('library-location').textContent=appInfo.library_root;$('app-version').textContent=appInfo.version;
     $('mcp-config').value=appInfo.mcp_config||'';$('copy-mcp-config').disabled=!$('mcp-config').value;
     $('backup-download').disabled=appInfo.backup_url!=='/download/library-backup';
-  }catch(e){appInfo=null;$('library-location').textContent='暂不可用';$('mcp-config').value='';$('mcp-config').placeholder='配置读取失败，请重试';$('app-info-error').textContent='读取应用信息失败：'+e.message;$('app-info-error').hidden=false;$('app-info-retry').hidden=false;}
+    window.LiubaiGuide?.updateConnection(appInfo);
+  }catch(e){appInfo=null;window.LiubaiGuide?.updateConnection(null);$('library-location').textContent='暂不可用';$('mcp-config').value='';$('mcp-config').placeholder='配置读取失败，请重试';$('app-info-error').textContent='读取应用信息失败：'+e.message;$('app-info-error').hidden=false;$('app-info-retry').hidden=false;}
   finally{$('app-info-section').setAttribute('aria-busy','false');}
 }
-function openHelp(){if(!$('help-dialog').open)$('help-dialog').showModal();loadAppInfo();}
+function openHelp(section='start'){window.LiubaiGuide?.rememberOpener(document.activeElement);if(!$('help-dialog').open)$('help-dialog').showModal();window.LiubaiGuide?.select(typeof section==='string'?section:'start');loadAppInfo();}
 async function downloadBackup(){
   if(!appInfo||$('backup-download').disabled)return;
   const button=$('backup-download');button.disabled=true;$('app-info-error').hidden=true;
@@ -275,4 +276,4 @@ $('close-help').addEventListener('click',()=>$('help-dialog').close());
 $('app-info-retry').addEventListener('click',loadAppInfo);
 $('backup-download').addEventListener('click',downloadBackup);
 $('copy-mcp-config').addEventListener('click',copyMcpConfig);
-putIcons();loadLibrary();
+putIcons();loadLibrary().then(()=>{const guide=new URLSearchParams(location.search).get('guide');if(guide)openHelp(guide);});

@@ -60,9 +60,7 @@
     "encoding": "UTF-8",
     "byte_count": 11330
   },
-  "related_ids": [
-    "PRM-0006"
-  ],
+  "related_ids": [],
   "variables": [
     {
       "name": "web_page_or_component",
@@ -173,7 +171,7 @@
   "design_analysis_file": "ANALYSIS.md",
   "publication": {
     "authorized_by_owner": true,
-    "edition": "public-2026-10-28",
+    "edition": "public-2026.10.31-selected",
     "private_original_preserved": true,
     "original_kind": "original"
   }

@@ -5,10 +5,13 @@ root = Path(SPECPATH).parent
 assets = [(str(root / 'desktop/web'), 'desktop/web'), (str(root / 'defaults'), 'defaults')]
 # 只分发公开清单列出的资料，排除本地读取时产生的锁或其他运行状态。
 collection = json.loads((root / 'bundled-library/manifest.json').read_text(encoding='utf-8'))
-for name in ['manifest.json', 'README.md'] + [row['path'] for row in collection['files']]:
+for name in sorted({'manifest.json', 'README.md'} | {row['path'] for row in collection['files']}):
     source = root / 'bundled-library' / name
     assets.append((str(source), str(Path('bundled-library') / Path(name).parent)))
-assets.append((str(root / 'learning-library'), 'learning-library'))
+teaching = json.loads((root / 'learning-library/checksums.json').read_text(encoding='utf-8'))
+for name in ['checksums.json'] + [row['path'] for row in teaching['files']]:
+    source = root / 'learning-library' / name
+    assets.append((str(source), str(Path('learning-library') / Path(name).parent)))
 
 app = Analysis([str(root / 'desktop/windows_main.py')], pathex=[str(root / 'desktop')], datas=assets, hiddenimports=[], excludes=['pytest'])
 app_pyz = PYZ(app.pure)

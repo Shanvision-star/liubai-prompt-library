@@ -17,7 +17,7 @@ python -m venv .venv-build
 在没有日常留白安装记录的测试用户下运行：
 
 ```powershell
-python tools\smoke_windows_installer.py --installer dist\windows\release\Liubai-Setup-0.6.0-windows-x64.exe --workdir dist\installer-smoke
+python tools\smoke_windows_installer.py --installer dist\windows\release\Liubai-Setup-0.7.0-windows-x64.exe --workdir dist\installer-smoke
 ```
 
 验证真实安装、移除 Python 环境路径后的独立启动、中文模板与拆解、API 保存、独立 MCP 握手和保存、重复安装、卸载保留数据。测试只操作显式指定的新目录；若当前用户已有安装记录会停止，不接管日常安装。

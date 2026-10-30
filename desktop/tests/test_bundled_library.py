@@ -19,11 +19,13 @@ COLLECTION = Path(__file__).resolve().parents[2] / "bundled-library"
 
 
 def test_public_collection_is_readable_and_keeps_user_changes(tmp_path):
+    (tmp_path / "README.md").write_text("用户说明保留", encoding="utf-8")
     assert install_collection(tmp_path)
+    assert (tmp_path / "README.md").read_text(encoding="utf-8") == "用户说明保留"
     library = Library(tmp_path)
-    assert library.catalogue()["entry_count"] == 222
-    assert len(ReferenceStore(tmp_path).catalogue()["references"]) == 13
-    entry = library.entry("PRM-0205")
+    assert library.catalogue()["entry_count"] == 60
+    assert len(ReferenceStore(tmp_path).catalogue()["references"]) == 6
+    entry = library.entry("PRM-0218")
     assert entry["selected_version"] == "v002" and entry["analysis"]
     assert "非网站提示词原文" in entry["original"]
     assert "原语言短引" not in entry["original"]
@@ -44,7 +46,7 @@ def test_incomplete_library_is_never_seeded(tmp_path):
     assert original.read_text(encoding="utf-8") == "已有资料"
 
 
-@pytest.mark.parametrize("name", ["../escape.txt", "desktop/.runtime/api-token", "references/.operations/schedule.json"])
+@pytest.mark.parametrize("name", ["../escape.txt", "desktop/.runtime/api-token", "references/.operations/schedule.json", "references/assets/api-token", "references/assets/unverified.source.txt"])
 def test_collection_paths_cannot_install_runtime_or_escape(tmp_path, name):
     seed = tmp_path / "seed"
     seed.mkdir()

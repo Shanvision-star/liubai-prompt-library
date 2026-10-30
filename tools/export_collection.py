@@ -9,7 +9,7 @@ import re
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "desktop"))
-from library_init import render_index
+from library_init import DEFAULT_TAXONOMY, render_index, validate_taxonomy
 
 
 DROP_KEYS = {"thread_id", "message_selector", "source_path", "local_path", "last_attempt", "last_success", "last_check_status", "last_error", "seed_provenance_file"}
@@ -38,14 +38,65 @@ def section(text, heading):
     return matched.group(1).strip() if matched else ""
 
 
-def export(source, output):
+def selection_ids(entry_ids, reference_ids):
+    """必须同时给出两份清单；空参考列表也是显式选择。"""
+    if entry_ids is None or reference_ids is None:
+        raise ValueError("公开导出必须显式提供 entry_ids 和 reference_ids，禁止默认全库导出")
+    selected = []
+    for values, prefix in [(entry_ids, "PRM"), (reference_ids, "REF")]:
+        if (not isinstance(values, list)
+                or any(not isinstance(value, str) or not re.fullmatch(prefix + r"-\d{4}", value) for value in values)
+                or len(values) != len(set(values))):
+            raise ValueError("公开选择清单必须是无重复的有效编号列表")
+        selected.append(set(values))
+    if not any(selected):
+        raise ValueError("公开选择清单不能全部为空")
+    return selected
+
+
+def load_selection(path):
+    """读取 schema_version=1、entry_ids、reference_ids 的发布选择文件。"""
+    data = json.loads(Path(path).read_text(encoding="utf-8-sig"))
+    if not isinstance(data, dict) or data.get("schema_version") != 1:
+        raise ValueError("公开选择文件需要 schema_version=1")
+    selection_ids(data.get("entry_ids"), data.get("reference_ids"))
+    return data
+
+
+def selected_relations(value, allowed):
+    if isinstance(value, dict):
+        return {key: [item for item in item_value if item in allowed] if key == "related_ids"
+                else selected_relations(item_value, allowed)
+                for key, item_value in value.items()
+                if key != "linked_prompt" or item_value in allowed}
+    if isinstance(value, list):
+        return [selected_relations(item, allowed) for item in value]
+    return value
+
+
+def export(source, output, *, entry_ids=None, reference_ids=None):
+    selected_entries, selected_refs = selection_ids(entry_ids, reference_ids)
+    allowed = selected_entries | selected_refs
     source, output = Path(source).resolve(), Path(output).resolve()
     if output.exists():
         raise ValueError("输出目录已存在；请使用新的目录，不能覆盖既有发布副本")
     files = {}
     published_at = datetime.now(timezone(timedelta(hours=8))).isoformat(timespec="seconds")
     index = clean(json.loads((source / "index.json").read_text(encoding="utf-8-sig")))
-    taxonomy = json.loads((source / "taxonomy.json").read_text(encoding="utf-8-sig"))
+    known_entries = {item["id"] for item in index["entries"]}
+    known_refs = {folder.name for folder in (source / "references").glob("REF-*") if (folder / "record.json").is_file()}
+    if selected_entries - known_entries or selected_refs - known_refs:
+        raise ValueError("公开选择清单包含源库不存在的编号，未创建输出")
+    index["entries"] = [selected_relations(item, allowed) for item in index["entries"] if item["id"] in selected_entries]
+    index["entry_count"] = len(index["entries"])
+    taxonomy = validate_taxonomy(json.loads((source / "taxonomy.json").read_text(encoding="utf-8-sig")))
+    if not any(category["id"] == "uncategorized" for category in taxonomy["categories"]):
+        # 默认保存依赖该分类；源库可裁剪分类，但公开包必须保留这条运行契约。
+        defaults = validate_taxonomy(json.loads(DEFAULT_TAXONOMY.read_text(encoding="utf-8-sig")))
+        default_category = next((category for category in defaults["categories"] if category["id"] == "uncategorized"), None)
+        if default_category is None:
+            raise ValueError("应用默认分类模板缺少 uncategorized，停止公开导出")
+        taxonomy["categories"].append(deepcopy(default_category))
     def put(name, value):
         files[name] = value if isinstance(value, bytes) else value.encode("utf-8")
     def put_json(name, value):
@@ -54,7 +105,7 @@ def export(source, output):
     notices = []
     for item in index["entries"]:
         folder = source / "entries" / item["id"]
-        record = clean(json.loads((folder / "record.json").read_text(encoding="utf-8-sig")))
+        record = selected_relations(clean(json.loads((folder / "record.json").read_text(encoding="utf-8-sig"))), allowed)
         record["feedback"] = []
         original = (folder / "original.md").read_bytes().decode("utf-8")
         for path in sorted(folder.iterdir()):
@@ -116,9 +167,9 @@ def export(source, output):
         notices.append({"id": item["id"], "url": url or None, "license": record.get("source", {}).get("license") or ("MIT; see SOURCE.md" if "yihui-dev/awesome-opus5-5-videos" in url else "original curation only; upstream rights retained" if "prompt-motion.com" in url else "owner-authorized contribution")})
     refs = []
     for folder in sorted((source / "references").glob("REF-*")):
-        if not folder.is_dir():
+        if not folder.is_dir() or folder.name not in selected_refs:
             continue
-        record = clean(json.loads((folder / "record.json").read_text(encoding="utf-8-sig")))
+        record = selected_relations(clean(json.loads((folder / "record.json").read_text(encoding="utf-8-sig"))), allowed)
         if any(snap.get("license_status") != "allowed" for snap in record["snapshots"]):
             raise ValueError(f"{record['id']} 包含许可未核对快照，停止发布")
         for path in sorted(folder.rglob("*")):
@@ -150,5 +201,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--selection", type=Path, required=True,
+                        help="JSON: schema_version=1、entry_ids=[PRM编号]、reference_ids=[REF编号]；两份列表必须显式给出")
     args = parser.parse_args()
-    export(args.source, args.output)
+    chosen = load_selection(args.selection)
+    export(args.source, args.output, entry_ids=chosen["entry_ids"], reference_ids=chosen["reference_ids"])

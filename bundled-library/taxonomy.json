@@ -13,59 +13,14 @@
       "description": "网页与应用的界面布局、信息层级、交互、组件和设计系统"
     },
     {
-      "id": "llm_design",
-      "name": "大模型设计",
-      "description": "大模型选型、模型与应用架构、训练微调、推理和评测方案"
-    },
-    {
-      "id": "langchain_design",
-      "name": "LangChain 设计",
-      "description": "以 LangChain 或 LangGraph 为核心的工作流、工具调用、状态管理和检索编排设计"
-    },
-    {
       "id": "taste",
       "name": "审美 Taste",
       "description": "审美判断与训练、参考作品分析、风格辨析、质感评价和设计方案取舍"
     },
     {
-      "id": "product",
-      "name": "产品与需求",
-      "description": "需求澄清、产品设计、用户研究和方案规划"
-    },
-    {
-      "id": "business",
-      "name": "商务与销售",
-      "description": "客户沟通、商务方案、销售与合作推进"
-    },
-    {
-      "id": "writing",
-      "name": "内容与写作",
-      "description": "文章、文案、脚本、表达和文本改写"
-    },
-    {
       "id": "visual",
       "name": "视觉与视频",
       "description": "图像生成、视觉设计、分镜和视频制作"
-    },
-    {
-      "id": "learning",
-      "name": "学习与研究",
-      "description": "概念学习、文献研究、知识整理和教学"
-    },
-    {
-      "id": "productivity",
-      "name": "办公与效率",
-      "description": "会议、计划、表格、摘要和日常工作整理"
-    },
-    {
-      "id": "general",
-      "name": "通用与角色",
-      "description": "跨用途的通用助手规则或可复用角色设定"
-    },
-    {
-      "id": "uncategorized",
-      "name": "待分类",
-      "description": "用途信息不足，先保留原文并记录待确认项"
     },
     {
       "id": "custom_c0b0109d9439",
@@ -80,6 +35,11 @@
       "description": "",
       "custom": true,
       "created_at": "2026-10-27T11:38:58+08:00"
+    },
+    {
+      "id": "uncategorized",
+      "name": "待分类",
+      "description": "用途信息不足，先保留原文并记录待确认项"
     }
   ]
 }

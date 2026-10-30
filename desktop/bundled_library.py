@@ -2,6 +2,7 @@
 from hashlib import sha256
 from pathlib import Path, PurePosixPath
 import json
+import re
 
 from reference_store import ReferenceStore, _json_bytes
 from runtime_paths import resource_root
@@ -21,7 +22,9 @@ def install_collection(root, source=None):
         for row in manifest["files"]:
             name = row["path"]
             path = PurePosixPath(name)
-            allowed = name in {"index.json", "INDEX.md", "taxonomy.json", "references/index.json"} or (path.parts[0] in {"entries", "references"} and len(path.parts) > 2 and path.parts[1].startswith(("PRM-", "REF-")))
+            # 许可和来源附件按内容哈希命名；允许附件不等于允许整个运行状态目录。
+            asset = re.fullmatch(r"references/assets/[a-f0-9]{64}\.(?:license\.txt|source\.txt|notice\.md)", name)
+            allowed = name in {"index.json", "INDEX.md", "README.md", "taxonomy.json", "references/index.json"} or bool(asset) or (len(path.parts) > 2 and path.parts[0] in {"entries", "references"} and path.parts[1].startswith(("PRM-", "REF-")))
             if not allowed or ".." in path.parts or path.is_absolute() or "\\" in name:
                 raise ValueError("内置素材清单含不允许的路径")
             candidate = source / name
@@ -30,7 +33,9 @@ def install_collection(root, source=None):
             data = candidate.read_bytes()
             if sha256(data).hexdigest() != row["sha256"]:
                 raise ValueError(f"内置素材校验失败：{name}")
-            changes[name] = data
+            # 公开说明参与校验，但不覆盖源码或用户目录已有的说明文件。
+            if name != "README.md":
+                changes[name] = data
         if not {"index.json", "taxonomy.json"}.issubset(changes):
             raise ValueError("内置素材缺少索引或分类")
         changes["installed-collection.json"] = _json_bytes({"version": manifest["version"], "entry_count": manifest["entry_count"], "reference_count": manifest["reference_count"]})

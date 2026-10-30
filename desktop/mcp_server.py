@@ -6,7 +6,7 @@ from pathlib import Path
 import sys
 
 from library_init import ensure_library
-from prompt_store import PromptStore
+from prompt_store import PromptStore, VersionConflictError
 from reference_store import ReferenceStore
 from server import Library
 
@@ -36,6 +36,26 @@ SAVE_SCHEMA = object_schema({
 SAVE_SCHEMA["not"] = {"required": ["category_id", "category_name"]}
 UPDATE_SCHEMA = object_schema({"entry_id": {"type": "string", "pattern": "^PRM-[0-9]{4,}$"}, **CATEGORY_PROPERTIES}, ("entry_id",))
 UPDATE_SCHEMA["not"] = {"required": ["category_id", "category_name"]}
+ENTRY_PROPERTY = {"type": "string", "pattern": "^PRM-[0-9]{4,}$"}
+VERSION_PROPERTY = {"type": "string", "pattern": "^v[0-9]{3,}$"}
+HASH_PROPERTY = {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"}
+VERSION_SCHEMA = object_schema({
+    "entry_id": ENTRY_PROPERTY,
+    "optimized": {"type": "string", "minLength": 1, "maxLength": MAX_PROMPT_BYTES},
+    "reason": {"type": "string", "minLength": 1, "maxLength": 2000},
+    "expected_version": {**VERSION_PROPERTY, "description": "回读时的最新版本，用于防止并发编辑覆盖。"},
+    "based_on_version": {**VERSION_PROPERTY, "description": "所基于的已有版本；省略时使用 expected_version。"},
+}, ("entry_id", "optimized", "reason", "expected_version"))
+ANALYSIS_SCHEMA = object_schema({
+    "entry_id": ENTRY_PROPERTY, "version": VERSION_PROPERTY,
+    "original_sha256": HASH_PROPERTY, "optimized_sha256": HASH_PROPERTY,
+    "analysis_markdown": {"type": "string", "minLength": 1, "maxLength": MAX_PROMPT_BYTES},
+}, ("entry_id", "version", "original_sha256", "optimized_sha256", "analysis_markdown"))
+SOURCE_NOTE_SCHEMA = object_schema({
+    "entry_id": ENTRY_PROPERTY,
+    "source_url": {"type": "string", "maxLength": 2048},
+    "source_note": {"type": "string", "minLength": 1, "maxLength": 4000},
+}, ("entry_id", "source_note"))
 
 
 def tool(name, title, description, schema, readonly):
@@ -60,6 +80,9 @@ TOOLS = [
         "version": {"type": "string", "pattern": "^v[0-9]{3,}$"},
     }, ("entry_id",)), True),
     tool("liubai_update_classification", "修改素材分类", "用户明确要求时修改已有素材的分类或标签；不改原文和版本，分类名称可复用或创建。", UPDATE_SCHEMA, False),
+    tool("liubai_add_version", "追加提示词版本", "用户授权后将改编追加为新版本，原文和旧版本保留。先读取最新版本并传 expected_version；同文幂等，效果为 untested。", VERSION_SCHEMA, False),
+    tool("liubai_save_analysis", "保存版本绑定的设计拆解", "保存用户或其AI客户端提供的分析。先读取指定版本及 original_sha256/optimized_sha256，双哈希匹配才追加拆解；不调用模型，不验证实际效果。", ANALYSIS_SCHEMA, False),
+    tool("liubai_add_source_note", "追加来源补充", "用户授权后追加来源链接或说明；保留原固定来源、原文和版本，不把补充说明当成已核实事实。", SOURCE_NOTE_SCHEMA, False),
 ]
 TOOLS_BY_NAME = {row["name"]: row for row in TOOLS}
 
@@ -136,6 +159,10 @@ class MCPServer:
                 value = {"categories": self.store.categories()}
             elif name == "liubai_save_prompt":
                 value = self.store.save_prompt(arguments)
+            elif name in {"liubai_add_version", "liubai_save_analysis", "liubai_add_source_note"}:
+                payload = {key: value for key, value in arguments.items() if key != "entry_id"}
+                handler = {"liubai_add_version": self.store.append_version, "liubai_save_analysis": self.store.save_analysis, "liubai_add_source_note": self.store.add_source_note}[name]
+                value = handler(arguments["entry_id"], payload)
             elif name == "liubai_update_classification":
                 updates = {key: value for key, value in arguments.items() if key != "entry_id"}
                 if not updates:
@@ -162,6 +189,8 @@ class MCPServer:
                         offset, limit = arguments.get("offset", 0), arguments.get("limit", 20)
                         value = {"entries": matches[offset:offset+limit], "total": len(matches), "offset": offset, "limit": limit}
             return self.result(value)
+        except VersionConflictError as error:
+            return self.result({"error": str(error), "current_version": error.current_version}, True)
         except (ValueError, KeyError, OSError, TimeoutError) as error:
             return self.result({"error": str(error)}, True)
 
