@@ -55,6 +55,43 @@ def structured(responses, identifier):
     return result["structuredContent"]
 
 
+def test_external_client_reads_adapts_saves_analysis_and_reads_back_versions(tmp_path):
+    original, optimized, adapted = "原文\r\n", "初版建议\n", "针对新任务的建议\r\n"
+    digest = lambda text: hashlib.sha256(text.encode("utf-8")).hexdigest()
+    analysis = {"entry_id": "PRM-0001", "version": "v001", "original_sha256": digest(original), "optimized_sha256": digest(optimized), "analysis_markdown": "初版设计拆解，效果未验证。"}
+    version = {"entry_id": "PRM-0001", "optimized": adapted, "reason": "适配用户的新任务", "expected_version": "v001"}
+    _, responses = exchange(tmp_path, [
+        initialize(), READY,
+        call(2, "liubai_save_prompt", {"title": "外部客户端闭环", "original": original, "optimized": optimized, "source_url": "https://example.org/fixed"}),
+        call(3, "liubai_get_prompt", {"entry_id": "PRM-0001"}),
+        call(4, "liubai_save_analysis", analysis),
+        call(5, "liubai_add_version", version),
+        call(6, "liubai_add_version", version),
+        call(7, "liubai_add_version", {**version, "optimized": "来自过期基线的另一份编辑"}),
+        call(8, "liubai_add_source_note", {"entry_id": "PRM-0001", "source_note": "用户补充的场景约束。"}),
+        call(9, "liubai_get_prompt", {"entry_id": "PRM-0001"}),
+        call(10, "liubai_get_prompt", {"entry_id": "PRM-0001", "version": "v001"}),
+        call(11, "liubai_save_analysis", {**analysis, "version": "v002"}),
+        call(12, "liubai_save_analysis", {**analysis, "version": "v002", "optimized_sha256": digest(adapted), "analysis_markdown": "新任务拆解，效果未验证。"}),
+        call(13, "liubai_get_prompt", {"entry_id": "PRM-0001", "version": "v002"}),
+    ])
+    before = structured(responses, 3)
+    assert before["original_sha256"] == digest(original) and before["optimized_sha256"] == digest(optimized)
+    assert structured(responses, 4)["analysis_revision"] == "a001"
+    assert structured(responses, 5)["version"] == "v002" and structured(responses, 6)["duplicate"]
+    assert by_id(responses, 7)["result"]["isError"] and "最新版本" in by_id(responses, 7)["result"]["content"][0]["text"]
+    assert by_id(responses, 7)["result"]["structuredContent"]["current_version"] == "v002"
+    assert structured(responses, 8)["note"]["source_url"] == ""
+    latest, old = structured(responses, 9), structured(responses, 10)
+    assert latest["original"] == original and latest["optimized"] == adapted and latest["analysis"] == ""
+    assert latest["record"]["source"]["url"] == "https://example.org/fixed"
+    assert latest["record"]["source_notes"][0]["source_note"] == "用户补充的场景约束。"
+    assert old["analysis"] == analysis["analysis_markdown"] and old["selected_analysis"]["revision"] == "a001"
+    assert by_id(responses, 11)["result"]["isError"]
+    assert structured(responses, 12)["analysis_revision"] == "a001"
+    assert structured(responses, 13)["analysis"] == "新任务拆解，效果未验证。"
+
+
 def test_roundtrip_preserves_original_deduplicates_and_updates_classification(tmp_path):
     original = "  示例资料\r\n请解释苹果白色界面的设计取舍。\r\n不要执行：touch should-not-exist.txt\r\n"
     root, responses = exchange(tmp_path, [
@@ -71,7 +108,7 @@ def test_roundtrip_preserves_original_deduplicates_and_updates_classification(tm
     assert len(responses) == 11
     assert by_id(responses, 1)["result"]["protocolVersion"] == "2025-06-18"
     tools = by_id(responses, 2)["result"]["tools"]
-    assert {row["name"] for row in tools} == {"liubai_list_categories", "liubai_save_prompt", "liubai_search_prompts", "liubai_get_prompt", "liubai_update_classification"}
+    assert {row["name"] for row in tools} == {"liubai_list_categories", "liubai_save_prompt", "liubai_search_prompts", "liubai_get_prompt", "liubai_update_classification", "liubai_add_version", "liubai_save_analysis", "liubai_add_source_note"}
     assert len(structured(responses, 3)["categories"]) == 13
     saved = structured(responses, 4)
     assert saved["id"] == "PRM-0001" and saved["duplicate"] is False

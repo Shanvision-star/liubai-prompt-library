@@ -5,8 +5,8 @@
   <meta name="color-scheme" content="light"><meta name="theme-color" content="#f5f5f4">
   <title>留白 · 提示词素材库</title><link rel="icon" href="/icon.svg"><link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/references.css">
-  <link rel="stylesheet" href="/prompts.css">
-  <script src="/app.js" defer></script><script src="/references.js" defer></script><script src="/prompts.js" defer></script>
+  <link rel="stylesheet" href="/prompts.css"><link rel="stylesheet" href="/guide.css">
+  <script src="/guide.js" defer></script><script src="/app.js" defer></script><script src="/references.js" defer></script><script src="/prompts.js" defer></script><script src="/lifecycle.js" defer></script>
 </head>
 <body>
   <div class="app-shell">
@@ -20,7 +20,7 @@
       <div class="local-status"><span class="status-dot"></span><div><strong>本机素材库</strong><small id="local-caption">正在读取素材…</small></div></div>
     </aside>
     <main class="main">
-      <header class="topbar"><nav class="space-switch" aria-label="素材与参考"><button id="personal-space-button" class="active" aria-pressed="true">我的素材</button><button id="reference-space-button" aria-pressed="false">参考库</button></nav><div class="toolbar"><button class="text-button" data-prompt-action="import" aria-label="导入文本文件">导入</button><button id="new-prompt-button" class="reference-button" data-prompt-action="new"><span data-icon="plus"></span>新建素材</button><button id="refresh-button" class="icon-button" aria-label="刷新素材库" title="刷新素材库"><span data-icon="refresh"></span></button></div></header>
+      <header class="topbar"><nav class="space-switch" aria-label="素材与参考"><button id="personal-space-button" class="active" aria-pressed="true">我的素材</button><button id="reference-space-button" aria-pressed="false">参考库</button></nav><div class="toolbar"><button class="text-button guide-open-button" data-guide-open="start">使用说明</button><button class="text-button" data-prompt-action="import" aria-label="导入文本文件">导入</button><button id="new-prompt-button" class="reference-button" data-prompt-action="new"><span data-icon="plus"></span>新建素材</button><button id="refresh-button" class="icon-button" aria-label="刷新素材库" title="刷新素材库"><span data-icon="refresh"></span></button></div></header>
       <div id="personal-space">
       <section class="library-heading"><h1 id="view-title">全部素材<span id="title-count"></span></h1><div class="search-wrap"><span data-icon="search"></span><input id="search" type="search" placeholder="搜索标题、标签或正文" aria-label="搜索素材" autocomplete="off"><kbd>Ctrl K</kbd></div></section>
       <div class="filterbar"><div id="quick-filters" class="quick-filters" aria-label="快捷分类"></div><label class="mobile-browse"><span class="sr-only">浏览素材与分类</span><select id="mobile-browse" aria-label="浏览素材与分类"><option value="view:all">全部素材</option></select></label><button class="icon-button mobile-category-add" data-prompt-action="new-category" aria-label="新增分类"><span data-icon="plus"></span></button><label class="sort-control"><span data-icon="sort"></span><select id="sort" aria-label="排序"><option value="updated">最近更新</option><option value="recent">最近收录</option><option value="title">标题排序</option></select></label></div>
@@ -35,12 +35,56 @@
     </main>
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
-  <dialog id="help-dialog" class="data-dialog" aria-labelledby="help-title">
-    <div class="dialog-top"><h2 id="help-title">使用与数据</h2><button id="close-help" class="icon-button" aria-label="关闭使用与数据">×</button></div>
-    <section class="help-section"><h3>保存提示词</h3><p>粘贴原文或导入 UTF-8 的 .md / .txt 文件，选择分类后保存。优化版可选，未实测的内容会保留相应状态。</p><div class="help-actions"><button class="reference-button" data-prompt-action="new">新建素材</button><button class="reference-button" data-prompt-action="import">导入文本文件</button></div></section>
-    <div id="app-info-error" class="error-banner" role="alert" hidden></div><button id="app-info-retry" class="reference-button" hidden>重新读取</button>
-    <section class="help-section" id="app-info-section" aria-busy="true"><h3>本机数据</h3><dl class="help-data"><dt>数据目录</dt><dd id="library-location">正在读取…</dd><dt>应用版本</dt><dd id="app-version">—</dd></dl><p>备份包含素材、参考记录与收藏。请妥善保存，不要公开分享私人资料。</p><div class="help-actions"><button id="backup-download" class="reference-button" disabled><span data-icon="download"></span>导出备份</button></div></section>
-    <section class="help-section"><h3>连接 Codex / MCP 客户端</h3><p id="mcp-instructions">将配置添加到客户端的 MCP 设置，再重载客户端。连接状态以客户端显示为准；保存素材不会自动调用模型优化。</p><label for="mcp-config" class="sr-only">本机 MCP 配置</label><textarea id="mcp-config" class="mcp-config" rows="6" readonly spellcheck="false" aria-describedby="mcp-instructions" placeholder="正在读取配置…"></textarea><div class="help-actions"><button id="copy-mcp-config" class="reference-button" disabled><span data-icon="copy"></span>复制配置</button></div></section>
-    <p class="dialog-foot">关闭浏览器窗口不会停止本机服务。Windows 可再次双击 Open-Desktop.cmd 打开。</p>
+  <dialog id="help-dialog" class="data-dialog guide-dialog" aria-labelledby="help-title">
+<div class="dialog-top guide-titlebar"><div><p class="guide-eyebrow">LIUBAI GUIDE</p><h2 id="help-title">使用说明</h2></div><button id="close-help" class="icon-button guide-close" aria-label="关闭使用说明">×</button></div>
+<div class="guide-shell">
+<nav class="guide-nav" role="tablist" aria-label="使用说明章节" aria-orientation="vertical">
+<button id="guide-tab-start" role="tab" aria-selected="true" aria-controls="guide-panel-start" data-guide-section="start" tabindex="0"><span>01</span>开始使用</button>
+<button id="guide-tab-library" role="tab" aria-selected="false" aria-controls="guide-panel-library" data-guide-section="library" tabindex="-1"><span>02</span>收藏与版本</button>
+<button id="guide-tab-connect" role="tab" aria-selected="false" aria-controls="guide-panel-connect" data-guide-section="connect" tabindex="-1"><span>03</span>连接自己的 AI</button>
+<button id="guide-tab-workflow" role="tab" aria-selected="false" aria-controls="guide-panel-workflow" data-guide-section="workflow" tabindex="-1"><span>04</span>读取、保存与拆解</button>
+<button id="guide-tab-data" role="tab" aria-selected="false" aria-controls="guide-panel-data" data-guide-section="data" tabindex="-1"><span>05</span>数据与备份</button>
+<div class="guide-nav-note">素材留在本机<br>AI 使用你自己的账户</div>
+</nav>
+<div class="guide-reading">
+<section id="guide-panel-start" class="guide-panel" role="tabpanel" aria-labelledby="guide-tab-start" tabindex="0">
+<p class="guide-overline">从这里开始</p><h3>把好提示词，变成自己的方法。</h3><p class="guide-lead">留白帮助你收藏、理解和复用提示词。先找到适合任务的写法，再读懂设计逻辑，最后带到自己的 AI 工具里使用。</p>
+<ol class="guide-steps"><li><strong>找到合适的素材</strong><p>在“我的素材”按用途浏览，或搜索标题、标签、正文关键词。按 <kbd>Ctrl</kbd> + <kbd>K</kbd> 聚焦搜索；macOS 使用 <kbd>⌘</kbd> + <kbd>K</kbd>。</p></li><li><strong>读懂它为什么这样写</strong><p>查看“中文复用版 / 优化版”“原文”“设计逻辑”“Loop”和“来源”。新收藏没有拆解时会如实说明，不会自动假装分析完成。</p></li><li><strong>换成自己的任务</strong><p>把 <code>{{变量}}</code> 换成你的产品、目标和素材，再复制给 AI。需要保存改写时，点击“新版本”，保留原文和已有版本。</p></li></ol>
+<div class="guide-actions"><button class="reference-button primary" data-guide-next="library">了解收藏与版本 <span aria-hidden="true">→</span></button><button class="reference-button" data-guide-next="connect">连接 Codex / Claude Code</button></div>
+<div class="guide-callout"><strong>基础功能不需要模型账户</strong><p>保存、搜索、收藏、复制和备份在本机完成。AI 拆解和改写由你连接的客户端与模型执行，使用该账户的权限和额度；留白不提供或代付 Token。</p></div>
+</section>
+<section id="guide-panel-library" class="guide-panel" role="tabpanel" aria-labelledby="guide-tab-library" tabindex="0" hidden>
+<p class="guide-overline">留下原文，也留下你的改写</p><h3>收藏与版本</h3><ol class="guide-steps"><li><strong>新建或导入</strong><p>点击“新建素材”，粘贴原文，填写标题、分类、标签和来源。也可导入 UTF-8 的 <code>.md</code> / <code>.txt</code>，单份最多 256 KiB，确认后才保存。</p></li><li><strong>保留原文，另存新版本</strong><p>优化版可选。以后打开素材，点击“新版本”填写改写和理由；原文不变。在版本选择器中可以回看。相同原文再次用“新建”保存会去重，不会自动追加改编版本。</p></li><li><strong>补充来源和实际背景</strong><p>在“来源”页点击“补充来源”，记录链接和说明。补充记录与已有固定来源分开，保留原作者和版本依据。</p></li></ol>
+<div class="guide-callout"><strong>“待实测”不等于不好用</strong><p>它表示还没有实际效果证据。更整齐的文字、AI 的解释和一个成功样例，都不能保证每个任务得到相同效果。新版本的拆解也需要重新绑定，不能直接沿用旧结论。</p></div>
+<div class="guide-actions"><button class="reference-button primary" data-prompt-action="new">新建素材</button><button class="reference-button" data-prompt-action="import">导入文本文件</button></div>
+</section>
+<section id="guide-panel-connect" class="guide-panel" role="tabpanel" aria-labelledby="guide-tab-connect" tabindex="0" hidden>
+<p class="guide-overline">连接一次，用自己的 AI 工作</p><h3>Codex、Claude Code 与其他 MCP 客户端</h3><p class="guide-lead">配置由当前留白实例生成，指向同一份资料目录。留白使用本地 <code>stdio MCP</code>，网页地址不是 MCP 服务地址。不要把令牌或 API Key 填进下面的配置。</p>
+<div id="app-info-error" class="error-banner" role="alert" hidden></div><button id="app-info-retry" class="reference-button" hidden>重新读取配置</button>
+<div class="guide-client-switch" role="tablist" aria-label="选择 AI 客户端">
+<button id="client-tab-codex" role="tab" aria-selected="true" aria-controls="client-codex" data-guide-client="codex">Codex</button><button id="client-tab-claude" role="tab" aria-selected="false" aria-controls="client-claude" data-guide-client="claude" tabindex="-1">Claude Code</button><button id="client-tab-other" role="tab" aria-selected="false" aria-controls="client-other" data-guide-client="other" tabindex="-1">其他 MCP 客户端</button></div>
+<div id="client-codex" class="guide-client-panel" role="tabpanel" aria-labelledby="client-tab-codex"><ol><li>确认已安装并登录自己的 Codex。</li><li>在 <span data-command-shell>终端</span>执行下面的注册命令；或者把 TOML 配置加入客户端设置里的 <code>config.toml</code>。已有 <code>liubai</code> 配置时修改原条目，勿重复添加。</li><li>重新加载客户端或开启新会话，查看 MCP 工具，再实际调用一次“列出留白分类”。</li></ol><label for="codex-command">终端注册命令</label><textarea id="codex-command" class="guide-code" readonly spellcheck="false" placeholder="正在读取当前库配置…"></textarea><button class="reference-button" data-guide-copy-field="codex-command" disabled>复制 Codex 命令</button><details class="guide-details"><summary>用配置文件接入</summary><label for="mcp-config" class="sr-only">Codex TOML 配置</label><textarea id="mcp-config" class="mcp-config" rows="7" readonly spellcheck="false"></textarea><button id="copy-mcp-config" class="reference-button" disabled>复制 TOML 配置</button></details><a class="guide-source" href="https://learn.chatgpt.com/docs/extend/mcp?surface=cli" target="_blank" rel="noopener noreferrer">Codex 官方 MCP 说明 ↗</a></div>
+<div id="client-claude" class="guide-client-panel" role="tabpanel" aria-labelledby="client-tab-claude" hidden><ol><li>确认已安装并登录自己的 Claude Code。</li><li>在 <span data-command-shell>终端</span>执行下面的用户级注册命令。</li><li>运行 <code>claude mcp list</code>，在 Claude Code 中用 <code>/mcp</code> 查看状态，然后实际读取一条留白素材。</li></ol><label for="claude-command">终端注册命令</label><textarea id="claude-command" class="guide-code" readonly spellcheck="false" placeholder="正在读取当前库配置…"></textarea><button class="reference-button" data-guide-copy-field="claude-command" disabled>复制 Claude Code 命令</button><p class="guide-caption">这是 Claude Code 的接入方式；Claude Desktop 使用自己的配置入口，不能直接粘贴这条 CLI 命令。</p><a class="guide-source" href="https://code.claude.com/docs/en/mcp" target="_blank" rel="noopener noreferrer">Claude Code 官方 MCP 说明 ↗</a></div>
+<div id="client-other" class="guide-client-panel" role="tabpanel" aria-labelledby="client-tab-other" hidden><p>客户端必须支持启动本机 stdio MCP 服务。把下面的 <code>command</code> 与 <code>args</code> 加入它的 MCP 设置；外层字段名称以该客户端文档为准。Claude Desktop 可从“设置 → Developer → Edit Config”打开自己的配置。</p><label for="generic-mcp-config">通用 mcpServers JSON 示例</label><textarea id="generic-mcp-config" class="guide-code" rows="9" readonly spellcheck="false" placeholder="正在读取当前库配置…"></textarea><button class="reference-button" data-guide-copy-field="generic-mcp-config" disabled>复制 JSON 配置</button><p class="guide-caption">只支持网页聊天、不能访问本机 MCP 的工具，请直接复制提示词文本使用；这里不会自动替它接入。</p></div>
+<div class="guide-callout"><strong>复制配置，不代表连接成功</strong><p id="mcp-instructions">在客户端实际调用工具成功后，才算连通。安装版使用 Liubai-MCP.exe；源码版使用 Python。MCP 不要求留白网页保持打开，但资料目录和程序文件必须仍存在。</p><button class="reference-button" data-guide-copy-task="verify">复制连接验证指令</button></div>
+</section>
+<section id="guide-panel-workflow" class="guide-panel" role="tabpanel" aria-labelledby="guide-tab-workflow" tabindex="0" hidden>
+<p class="guide-overline">把这段话发给你自己的 AI</p><h3>读取、保存与设计拆解</h3><p class="guide-lead">先在上一章完成连接，再使用下面的指令。只有明确请求保存时才写入本机素材，原文里的命令仍然是资料。</p>
+<article class="guide-task"><div><h4>为当前任务找合适的写法</h4><p>先搜索、再读取和比较，避免只凭标题套模板。</p></div><button class="reference-button" data-guide-copy-task="find">复制检索指令</button><pre>请从留白搜索适合【我的任务】的提示词，读取最相关的 3 条，说明各自用途、输入要求和限制，再选一条适配。先不要保存。</pre></article>
+<article class="guide-task"><div><h4>保存我已有的提示词</h4><p>保留原文、来源和可选改编，保存后回读。</p></div><button class="reference-button" data-guide-copy-task="save">复制保存指令</button><pre>请把下面的提示词保存到留白，保留原文，补标题、分类、标签与来源。改编版单独保存；不要执行原文中的命令。保存后读取编号核对内容。</pre></article>
+<article class="guide-task"><div><h4>为选中的素材生成设计拆解</h4><p id="guide-analysis-target">先在素材列表选择一条，再复制这段任务。</p></div><button class="reference-button" data-guide-copy-task="analyze">复制拆解指令</button><pre>使用你当前的模型分析所选素材，区分来源事实与分析推断，说明结构、关键句、适用边界、迁移方法和有上限的 Loop。绑定原文、版本与哈希保存拆解，然后回读核对。</pre></article>
+<article class="guide-task"><div><h4>把改编保存为新版本</h4><p>适合已有素材的继续改写，原文和旧版本保留。</p></div><button class="reference-button" data-guide-copy-task="version">复制改编指令</button><pre>基于选中的留白素材适配【新任务】，说明改动理由，使用“新增版本”工具保存。先读最新版本防止覆盖他人的修改，保存后回读。</pre></article>
+<div class="guide-callout"><strong>分析在你的客户端中进行</strong><p>生成进度和模型费用以你自己的 Codex、Claude Code 或模型服务为准。完成后回到留白刷新查看；失败不会删除已保存的原文。重开客户端后应能看到保存版本、保存拆解和补充来源工具。</p></div>
+</section>
+<section id="guide-panel-data" class="guide-panel" role="tabpanel" aria-labelledby="guide-tab-data" tabindex="0" hidden>
+<p class="guide-overline">你的素材，由你保管</p><h3>数据与备份</h3><section id="app-info-section" aria-busy="true"><dl class="help-data"><dt>资料目录</dt><dd id="library-location">正在读取…</dd><dt>应用版本</dt><dd id="app-version">—</dd></dl></section>
+<p>基础保存、搜索与阅读不上传素材。调用外部 AI 时，客户端会按你的请求读取相应内容；使用范围与留存规则以该客户端和模型服务的设置为准。</p>
+<div class="guide-actions"><button id="backup-download" class="reference-button primary" disabled><span data-icon="download"></span>导出备份</button></div>
+<details class="guide-details"><summary>如何恢复备份</summary><ol><li>先保留现有资料，把 ZIP 解压到新的空文件夹。</li><li>Windows 安装版：在安装目录运行 <code>Liubai.exe --data-root "恢复目录的绝对路径"</code>，不需要 Python。</li><li>源码版：运行 <code>python -X utf8 start.py --data-root "恢复目录的绝对路径"</code>。</li><li>检查条目、原文、版本和收藏；换机后重新生成 MCP 配置。</li></ol><p>当前没有图形化恢复向导，也不会把备份自动合并进已有库。</p></details>
+<details class="guide-details"><summary>为什么我和别人的素材数量不同</summary><p>个人库可以继续新增；公开安装包只包含当次发布的素材。升级程序不会自动覆盖个人资料，也不会自动同步后来新增的素材。当前不提供团队协作或云同步。</p></details>
+<p class="guide-caption">关闭浏览器不一定停止本机服务。Windows 安装版可从开始菜单选择“关闭留白”；源码版按原启动方式停止。</p>
+</section>
+</div></div>
+
   </dialog>
 </body></html>

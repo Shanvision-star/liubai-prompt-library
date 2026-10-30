@@ -5,6 +5,7 @@ from io import BytesIO
 from pathlib import Path
 import json
 import os
+import shlex
 import stat
 import sys
 import zipfile
@@ -13,7 +14,7 @@ from reference_store import ReferenceStore, ENTRY_ID, REF_ID, _now
 from runtime_paths import bundled_mcp
 
 
-APP_VERSION = "0.6.0"
+APP_VERSION = "0.7.0"
 MAX_BACKUP_BYTES = 256 * 1024 * 1024
 MAX_BACKUP_FILES = 10000
 
@@ -34,9 +35,19 @@ def app_info(library):
         "args = " + json.dumps(args, ensure_ascii=False),
         "startup_timeout_sec = 15", "tool_timeout_sec = 60", "enabled = true", "",
     ])
+    # 命令面向当前系统的终端；逐个引用参数，避免目录中的空格或特殊字符变成命令。
+    shell_quote = (lambda value: "'" + str(value).replace("'", "''") + "'") if os.name == "nt" else shlex.quote
+    launch = " ".join(shell_quote(value) for value in [str(python), *args])
+    client_config = {"mcpServers": {"liubai": {"command": str(python), "args": args}}}
     return {"version": APP_VERSION, "library_root": str(library.root),
             "python_executable": str(python), "mcp_server": str(mcp),
-            "mcp_config": config, "backup_url": "/download/library-backup"}
+            "mcp_config": config, "backup_url": "/download/library-backup",
+            "mcp_connection": {"transport": "stdio", "command": str(python), "args": args},
+            "client_commands": {"codex": "codex mcp add liubai -- " + launch,
+                                "claude_code": "claude mcp add --transport stdio --scope user liubai -- " + launch},
+            "mcp_json_config": json.dumps(client_config, ensure_ascii=False, indent=2),
+            "command_shell": "PowerShell" if os.name == "nt" else "终端",
+            "runtime_mode": "installed" if getattr(sys, "frozen", False) else "source"}
 
 
 def export_library(library):
@@ -89,6 +100,12 @@ def export_library(library):
                 for folder in sorted(parent.iterdir()):
                     if pattern.fullmatch(folder.name):
                         yield from collect(folder)
+            private_teaching = root / "private-learning-library"
+            if private_teaching.exists():
+                yield from collect(private_teaching)
+            reference_assets = root / "references/assets"
+            if reference_assets.exists():
+                yield from collect(reference_assets)
         for path in data_paths():
             info = check_path(path)
             if not stat.S_ISREG(info.st_mode):
@@ -101,7 +118,8 @@ def export_library(library):
         archive.writestr("backup-manifest.json", json.dumps(manifest, ensure_ascii=False, indent=2).encode("utf-8"))
         archive.writestr("RESTORE.txt", (
             "留白资料备份\n\n将 ZIP 解压到新的空目录，再使用新程序的 --data-root 指向该目录。\n"
-            "例如：python -X utf8 start.py --data-root /path/to/restored-library\n"
+            "Windows 安装版：在安装目录运行 Liubai.exe --data-root \"恢复后的目录绝对路径\"，无需 Python。\n"
+            "源码版：python -X utf8 start.py --data-root /path/to/restored-library\n"
             "请先检查条目、原文和历史版本，再决定是否继续使用恢复后的目录；不要覆盖现有库。\n"
             "包含个人素材、参考快照/分析、分类、索引与收藏。备份可能含私人内容，请自行妥善保存。\n"
             "不含 API 令牌、Codex 配置、网络缓存、程序、执行日志或调度注册；恢复后调度需重新配置。\n"

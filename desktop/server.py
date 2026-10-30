@@ -7,13 +7,14 @@ import mimetypes
 import re
 import secrets
 import threading
+from hashlib import sha256
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from socketserver import TCPServer
 from urllib.parse import urlsplit, unquote, parse_qs
 
 from reference_service import ReferenceService
-from prompt_store import PromptStore
+from prompt_store import PromptStore, VersionConflictError
 from library_init import ensure_library
 from integration_auth import integration_token
 from library_export import APP_VERSION, app_info, export_library
@@ -97,12 +98,39 @@ class Library:
             latest_loop = record.get("loop_review", {})
             loop = latest_loop if is_latest or latest_loop.get("reviewed_version") == selected_version else {}
         original = content(record["original"]["file"])
-        teaching = teaching_card(entry_id, selected_version, original, optimized_md)
+        private_teaching = self.root / "private-learning-library"
+        teaching_root = private_teaching if (private_teaching / "manifest.json").is_file() else None
+        teaching = teaching_card(entry_id, selected_version, original, optimized_md, teaching_root)
+        original_sha = sha256(self.contained_path(str((folder / record["original"]["file"]).relative_to(self.root))).read_bytes()).hexdigest()
+        optimized_path = folder / chosen["file"] if chosen else self.contained_path(item["optimized_file"])
+        optimized_sha = sha256(self.contained_path(str(optimized_path.relative_to(self.root))).read_bytes()).hexdigest()
+        analysis = "" if chosen.get("analysis_revisions") else teaching["markdown"] or content(analysis_file)
+        analysis_status = "ready" if analysis else teaching["status"]
+        analysis_origin = ("private" if teaching_root else "bundled") if teaching["markdown"] else "stored" if analysis else None
+        selected_analysis = None
+        if chosen.get("analysis_revisions"):
+            # 外部拆解按双正文哈希绑定；正文变动或文件损坏时不能沿用旧解释。
+            analysis, analysis_origin, analysis_status = "", "external_client", "unavailable"
+            selected_analysis = next((row for row in chosen["analysis_revisions"] if row["revision"] == chosen.get("analysis_revision")), None)
+            if selected_analysis:
+                if selected_analysis.get("original_sha256") != original_sha or selected_analysis.get("optimized_sha256") != optimized_sha:
+                    analysis_status = "version_mismatch"
+                else:
+                    try:
+                        path = self.contained_path(str((folder / selected_analysis["file"]).relative_to(self.root)))
+                        data = path.read_bytes()
+                        if sha256(data).hexdigest() == selected_analysis["sha256"]:
+                            analysis, analysis_status = data.decode("utf-8"), "ready"
+                    except (OSError, ValueError, UnicodeError):
+                        pass
+            teaching = {"status": analysis_status, "revision": chosen.get("analysis_revision")}
         return {
             "item": item, "record": record, "selected_version": selected_version,
             "original": original,
             "optimized_markdown": optimized_md, "optimized": optimized_md if chosen.get("optimization_status") in {"not_optimized", "provided"} or chosen.get("reference_provenance") else prompt_body(optimized_md),
-            "analysis": teaching["markdown"] or content(analysis_file),
+            "original_sha256": original_sha, "optimized_sha256": optimized_sha,
+            "analysis": analysis, "analysis_status": analysis_status, "analysis_origin": analysis_origin,
+            "selected_analysis": selected_analysis,
             "teaching_status": teaching["status"],
             "teaching_revision": teaching.get("revision"),
             "source_markdown": content(source_file),
@@ -233,7 +261,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                     relative = str(Path(item["record_file"]).parent / chosen["file"])
                 data = self.server.library.contained_path(relative).read_bytes()
                 return self.reply(200, data, "text/markdown; charset=utf-8", f"{entry_id}-{variant}{'-'+version if version and variant=='optimized' else ''}.md")
-            static = {"/": "index.html", "/app.js": "app.js", "/style.css": "style.css", "/icon.svg": "icon.svg", "/references.js": "references.js", "/references.css": "references.css", "/prompts.js": "prompts.js", "/prompts.css": "prompts.css"}
+            static = {"/": "index.html", "/app.js": "app.js", "/style.css": "style.css", "/icon.svg": "icon.svg", "/references.js": "references.js", "/references.css": "references.css", "/prompts.js": "prompts.js", "/prompts.css": "prompts.css", "/guide.js": "guide.js", "/guide.css": "guide.css", "/lifecycle.js": "lifecycle.js"}
             if path in static:
                 file = WEB_ROOT / static[path]
                 mime = {".js": "text/javascript", ".css": "text/css", ".html": "text/html", ".svg": "image/svg+xml"}.get(file.suffix, mimetypes.guess_type(file.name)[0])
@@ -251,7 +279,10 @@ class RequestHandler(BaseHTTPRequestHandler):
         origin = self.headers.get("Origin")
         allowed_origins = {f"http://127.0.0.1:{self.server.server_port}", f"http://localhost:{self.server.server_port}"}
         metadata_route = re.fullmatch(r"/api/entries/(PRM-\d{4,})/metadata", self.path)
-        integration_route = self.path in {"/api/prompts", "/api/categories", "/api/application/quit"} or bool(metadata_route)
+        version_route = re.fullmatch(r"/api/entries/(PRM-\d{4,})/versions", self.path)
+        analysis_route = re.fullmatch(r"/api/entries/(PRM-\d{4,})/analysis", self.path)
+        source_note_route = re.fullmatch(r"/api/entries/(PRM-\d{4,})/source-notes", self.path)
+        integration_route = self.path in {"/api/prompts", "/api/categories", "/api/application/quit"} or any((metadata_route, version_route, analysis_route, source_note_route))
         browser_allowed = origin in allowed_origins and self.headers.get("X-Prompt-Library") == "1"
         authorization = self.headers.get("Authorization", "")
         supplied_token = authorization.removeprefix("Bearer ")
@@ -283,6 +314,12 @@ class RequestHandler(BaseHTTPRequestHandler):
                 result = self.server.prompts.create_category(body.get("name"), body.get("description", ""))
             elif metadata_route:
                 result = self.server.prompts.update_metadata(metadata_route[1], body)
+            elif version_route:
+                result = self.server.prompts.append_version(version_route[1], body)
+            elif analysis_route:
+                result = self.server.prompts.save_analysis(analysis_route[1], body)
+            elif source_note_route:
+                result = self.server.prompts.add_source_note(source_note_route[1], body)
             elif self.path == "/api/favorites":
                 if not isinstance(body.get("id"), str):
                     raise ValueError("素材编号缺失")
@@ -304,6 +341,8 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.reply(200, result)
         except KeyError:
             self.reply(404, {"error": "找不到这条素材"})
+        except VersionConflictError as error:
+            self.reply(409, {"error": str(error), "current_version": error.current_version})
         except (ValueError, UnicodeError) as error:
             self.reply(400, {"error": str(error)})
         except (OSError, TimeoutError):

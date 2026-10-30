@@ -27,8 +27,7 @@
     "byte_count": 423
   },
   "related_ids": [
-    "PRM-0003",
-    "PRM-0006"
+    "PRM-0003"
   ],
   "variables": [
     {
@@ -85,7 +84,7 @@
       },
       "task_fit": {
         "status": "conditional",
-        "note": "适合已有界面的文案清理，可与 PRM-0003 设计减法、PRM-0006 UI 构建一起使用。"
+        "note": "适合已有界面的文案清理，可与 PRM-0003 设计减法一起使用。"
       }
     }
   },
@@ -105,7 +104,7 @@
   "design_analysis_file": "ANALYSIS.md",
   "publication": {
     "authorized_by_owner": true,
-    "edition": "public-2026-10-28",
+    "edition": "public-2026.10.31-selected",
     "private_original_preserved": true,
     "original_kind": "original"
   }

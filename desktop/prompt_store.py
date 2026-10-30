@@ -14,6 +14,17 @@ from reference_store import ReferenceStore, ENTRY_ID, _json_bytes, _now
 MAX_PROMPT_BYTES = 256 * 1024
 SAVE_FIELDS = {"title", "original", "category_id", "category_name", "tags", "optimized", "source_url", "source_note"}
 METADATA_FIELDS = {"title", "category_id", "category_name", "tags"}
+VERSION_FIELDS = {"optimized", "reason", "expected_version", "based_on_version"}
+ANALYSIS_FIELDS = {"version", "original_sha256", "optimized_sha256", "analysis_markdown"}
+SOURCE_NOTE_FIELDS = {"source_url", "source_note"}
+
+
+class VersionConflictError(ValueError):
+    """编辑基线已过期；调用者必须重新读取，不能静默覆盖另一位编辑者。"""
+
+    def __init__(self, current_version):
+        self.current_version = current_version
+        super().__init__(f"素材已有最新版本 {current_version}，请重新读取后再保存新版本")
 
 
 def _text(value, label, maximum, required=False):
@@ -48,6 +59,21 @@ def _tags(values):
             result.append(text)
             keys.add(text.casefold())
     return result
+
+
+def _version_id(value):
+    if not isinstance(value, str) or not re.fullmatch(r"v\d{3,}", value):
+        raise ValueError("版本编号需为 v001 格式")
+    return value
+
+
+def _source_url(value):
+    value = _text(value, "来源链接", 2048)
+    if value:
+        parsed = urlsplit(value)
+        if parsed.scheme not in {"http", "https"} or not parsed.netloc or parsed.username or parsed.password:
+            raise ValueError("来源链接需为不含账号凭据的 http 或 https 网址")
+    return value
 
 
 class PromptStore:
@@ -139,11 +165,7 @@ class PromptStore:
         optimization_status = "provided" if isinstance(provided, str) and provided.strip() else "not_optimized"
         optimized = _original_bytes(provided, "优化版") if optimization_status == "provided" else original
         tags = _tags(body.get("tags", []))
-        source_url = _text(body.get("source_url", ""), "来源链接", 2048)
-        if source_url:
-            parsed = urlsplit(source_url)
-            if parsed.scheme not in {"http", "https"} or not parsed.netloc or parsed.username or parsed.password:
-                raise ValueError("来源链接需为不含账号凭据的 http 或 https 网址")
+        source_url = _source_url(body.get("source_url", ""))
         source_note = _text(body.get("source_note", ""), "来源说明", 4000)
         with self._store._locked():
             taxonomy = self._taxonomy()
@@ -201,6 +223,135 @@ class PromptStore:
             changes["index.json"] = _json_bytes(index)
             self._store._transaction(changes)
             return {"id": entry_id, "version": "v001", "duplicate": False, "item": deepcopy(item)}
+
+    def _entry_changes(self, item, record, files=None):
+        # 调用者已持有共享文件锁，正文、元数据与两个索引一次提交。
+        timestamp = _now()
+        item["updated_at"] = record["updated_at"] = timestamp
+        index = self._store._personal_index()
+        index["entries"] = [item if row["id"] == item["id"] else row for row in index["entries"]]
+        index.update(entry_count=len(index["entries"]), updated_at=timestamp)
+        return {**(files or {}), item["record_file"]: _json_bytes(record),
+                "index.json": _json_bytes(index), "INDEX.md": render_index(index, self._taxonomy())}
+
+    def _version_content(self, item, record, identifier):
+        version = next((v for v in record.get("versions", []) if v["version"] == _version_id(identifier)), None)
+        if version is None:
+            raise KeyError("找不到这个优化版本")
+        folder = Path(item["record_file"]).parent
+        original = self._store._path(str(folder / record["original"]["file"])).read_bytes()
+        optimized = self._store._path(str(folder / version["file"])).read_bytes()
+        if sha256(original).hexdigest() != record["original"]["sha256"]:
+            raise ValueError("原文校验不一致，请先核对资料文件")
+        if version.get("sha256") and sha256(optimized).hexdigest() != version["sha256"]:
+            raise ValueError("版本正文校验不一致，请先核对资料文件")
+        return version, original, optimized
+
+    def append_version(self, entry_id, body):
+        self._validate_body(body, VERSION_FIELDS, ("optimized", "reason", "expected_version"))
+        optimized = _original_bytes(body["optimized"], "新版本正文")
+        reason = _text(body["reason"], "改写说明", 2000, required=True).strip()
+        expected = _version_id(body["expected_version"])
+        based_on = _version_id(body["based_on_version"]) if "based_on_version" in body else expected
+        digest = sha256(optimized).hexdigest()
+        with self._store._locked():
+            item, record = self._store._personal(entry_id)
+            self._version_content(item, record, based_on)
+            for old in record["versions"]:
+                _, _, old_body = self._version_content(item, record, old["version"])
+                if sha256(old_body).hexdigest() == digest:
+                    return {"id": entry_id, "version": old["version"], "duplicate": True, "item": deepcopy(item)}
+            latest = item["latest_version"]
+            if expected != latest:
+                raise VersionConflictError(latest)
+            previous = next(v for v in record["versions"] if v["version"] == latest)
+            if record.get("design_analysis_file"):
+                previous.setdefault("analysis_file", record["design_analysis_file"])
+            if record.get("source", {}).get("provenance_file"):
+                previous.setdefault("source_file", record["source"]["provenance_file"])
+            for field in ("loop_review", "quality_review"):
+                old_review = record.get(field, {})
+                if old_review.get("reviewed_version") == latest:
+                    previous.setdefault(field, deepcopy(old_review))
+            folder = Path(item["record_file"]).parent
+            serial = max(int(v["version"][1:]) for v in record["versions"]) + 1
+            while self._store._path(str(folder / f"optimized-v{serial:03d}.md")).exists():
+                serial += 1
+            identifier, filename = f"v{serial:03d}", f"optimized-v{serial:03d}.md"
+            timestamp = _now()
+            version = {"version": identifier, "file": filename, "created_at": timestamp,
+                       "created_by": "用户或外部客户端提供", "based_on": based_on, "based_on_version": based_on,
+                       "reason": reason, "optimization_status": "provided", "evaluation_status": "untested", "sha256": digest}
+            record["versions"].append(version)
+            record.pop("design_analysis_file", None)
+            record["optimization_status"] = "provided"
+            record["evaluation_status"] = "untested"
+            record["quality_review"] = {"reviewed_version": None, "review_basis": "not_reviewed", "criteria": {}}
+            record["loop_review"] = {"reviewed_version": identifier, "applicability": "unreviewed",
+                                     "reminder": "新版本尚未分析是否需要 Loop。", "effectiveness_verified": False}
+            item.update(latest_version=identifier, optimized_file=(folder / filename).as_posix(),
+                        optimization_status="provided", evaluation_status="untested")
+            item.pop("analysis_file", None)
+            self._store._transaction(self._entry_changes(item, record, {(folder / filename).as_posix(): optimized}))
+            return {"id": entry_id, "version": identifier, "duplicate": False, "item": deepcopy(item)}
+
+    def save_analysis(self, entry_id, body):
+        self._validate_body(body, ANALYSIS_FIELDS, tuple(ANALYSIS_FIELDS))
+        identifier = _version_id(body["version"])
+        payload = _original_bytes(body["analysis_markdown"], "设计拆解")
+        hashes = {}
+        for field in ("original_sha256", "optimized_sha256"):
+            value = body[field]
+            if not isinstance(value, str) or not re.fullmatch(r"[a-fA-F0-9]{64}", value):
+                raise ValueError("拆解绑定哈希需为完整 SHA-256")
+            hashes[field] = value.lower()
+        digest = sha256(payload).hexdigest()
+        with self._store._locked():
+            item, record = self._store._personal(entry_id)
+            version, original, optimized = self._version_content(item, record, identifier)
+            if hashes != {"original_sha256": sha256(original).hexdigest(), "optimized_sha256": sha256(optimized).hexdigest()}:
+                raise ValueError("拆解绑定哈希与当前原文或所选版本不一致，请重新读取后分析")
+            folder = Path(item["record_file"]).parent
+            revisions = version.setdefault("analysis_revisions", [])
+            for old in revisions:
+                path = self._store._path(str(folder / old["file"]))
+                if old["sha256"] == digest and path.exists() and sha256(path.read_bytes()).hexdigest() == digest:
+                    return {"id": entry_id, "version": identifier, "analysis_revision": old["revision"],
+                            "current_analysis_revision": version.get("analysis_revision"), "duplicate": True}
+            if version.get("analysis_file") and not revisions:
+                version["prior_analysis_file"] = version["analysis_file"]
+            elif identifier == item["latest_version"] and record.get("design_analysis_file") and not revisions:
+                version["prior_analysis_file"] = record["design_analysis_file"]
+            serial = max([int(r["revision"][1:]) for r in revisions] + [0]) + 1
+            filename = f"analysis-{identifier}-a{serial:03d}.md"
+            while self._store._path(str(folder / filename)).exists():
+                serial += 1
+                filename = f"analysis-{identifier}-a{serial:03d}.md"
+            revision = {"revision": f"a{serial:03d}", "file": filename, "sha256": digest, **hashes,
+                        "created_at": _now(), "created_by": "用户的外部AI客户端或手工提供", "evaluation_status": "untested"}
+            revisions.append(revision)
+            version.update(analysis_revision=revision["revision"], analysis_file=filename)
+            if identifier == item["latest_version"]:
+                record["design_analysis_file"] = filename
+                item["analysis_file"] = (folder / filename).as_posix()
+            self._store._transaction(self._entry_changes(item, record, {(folder / filename).as_posix(): payload}))
+            return {"id": entry_id, "version": identifier, "analysis_revision": revision["revision"],
+                    "current_analysis_revision": revision["revision"], "duplicate": False}
+
+    def add_source_note(self, entry_id, body):
+        self._validate_body(body, SOURCE_NOTE_FIELDS, ("source_note",))
+        url = _source_url(body.get("source_url", ""))
+        note = _text(body["source_note"], "来源补充", 4000, required=True).strip()
+        with self._store._locked():
+            item, record = self._store._personal(entry_id)
+            notes = record.setdefault("source_notes", [])
+            for existing in notes:
+                if existing["source_url"] == url and existing["source_note"] == note:
+                    return {"id": entry_id, "source_note_id": existing["id"], "duplicate": True, "note": deepcopy(existing)}
+            addition = {"id": f"SN-{len(notes)+1:04d}", "source_url": url, "source_note": note, "created_at": _now()}
+            notes.append(addition)
+            self._store._transaction(self._entry_changes(item, record))
+            return {"id": entry_id, "source_note_id": addition["id"], "duplicate": False, "note": deepcopy(addition)}
 
     def update_metadata(self, entry_id, body):
         self._validate_body(body, METADATA_FIELDS)

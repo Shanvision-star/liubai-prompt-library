@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "留白 · 本机素材保存与分类 API",
-    "version": "1.0.0",
-    "description": "描述个人素材的保存、分类和读取路由；参考库路由不属于本文件范围。服务仅监听loopback，所有请求验证Host。脚本写入使用Bearer且不带Origin；浏览器写入必须同源Origin并带X-Prompt-Library:1。外部Origin即使带有效令牌也拒绝。"
+    "version": "1.1.0",
+    "description": "描述个人素材的保存、分类和读取路由；参考库路由不属于本文件范围。服务仅监听loopback，所有请求验证Host。脚本写入使用Bearer且不带Origin；浏览器写入必须同源Origin并带X-Prompt-Library:1。外部Origin即使带有效令牌也拒绝。 包含版本追加、版本哈希绑定的设计拆解与来源补充；不负责调用模型。"
   },
   "servers": [
     {
@@ -591,6 +591,46 @@
                     },
                     "backup_url": {
                       "type": "string"
+                    },
+                    "mcp_connection": {
+                      "type": "object",
+                      "properties": {
+                        "transport": {
+                          "const": "stdio"
+                        },
+                        "command": {
+                          "type": "string"
+                        },
+                        "args": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "client_commands": {
+                      "type": "object",
+                      "properties": {
+                        "codex": {
+                          "type": "string"
+                        },
+                        "claude_code": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "mcp_json_config": {
+                      "type": "string"
+                    },
+                    "command_shell": {
+                      "type": "string"
+                    },
+                    "runtime_mode": {
+                      "enum": [
+                        "installed",
+                        "source"
+                      ]
                     }
                   }
                 }
@@ -647,6 +687,147 @@
           },
           "403": {
             "description": "需要同源标记或本机Bearer令牌"
+          }
+        }
+      }
+    },
+    "/api/entries/{entry_id}/versions": {
+      "post": {
+        "operationId": "AddVersion",
+        "summary": "追加改编版本",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entry_id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^PRM-[0-9]{4,}$"
+            }
+          }
+        ],
+        "security": [
+          {
+            "localBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddVersionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "保存或幂等返回；包含 id、duplicate 及版本/来源记录/分析修订编号"
+          },
+          "400": {
+            "description": "参数、长度或内容哈希不匹配"
+          },
+          "403": {
+            "description": "来源或授权无效"
+          },
+          "404": {
+            "description": "素材不存在"
+          },
+          "409": {
+            "description": "最新版本冲突，返回 error 和 current_version"
+          }
+        }
+      }
+    },
+    "/api/entries/{entry_id}/analysis": {
+      "post": {
+        "operationId": "SaveAnalysis",
+        "summary": "保存版本绑定的设计拆解",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entry_id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^PRM-[0-9]{4,}$"
+            }
+          }
+        ],
+        "security": [
+          {
+            "localBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveAnalysisRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "保存或幂等返回；包含 id、duplicate 及版本/来源记录/分析修订编号"
+          },
+          "400": {
+            "description": "参数、长度或内容哈希不匹配"
+          },
+          "403": {
+            "description": "来源或授权无效"
+          },
+          "404": {
+            "description": "素材不存在"
+          }
+        }
+      }
+    },
+    "/api/entries/{entry_id}/source-notes": {
+      "post": {
+        "operationId": "AddSourceNote",
+        "summary": "追加来源说明",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entry_id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^PRM-[0-9]{4,}$"
+            }
+          }
+        ],
+        "security": [
+          {
+            "localBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddSourceNoteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "保存或幂等返回；包含 id、duplicate 及版本/来源记录/分析修订编号"
+          },
+          "400": {
+            "description": "参数、长度或内容哈希不匹配"
+          },
+          "403": {
+            "description": "来源或授权无效"
+          },
+          "404": {
+            "description": "素材不存在"
           }
         }
       }
@@ -972,6 +1153,24 @@
           },
           "loop": {
             "type": "object"
+          },
+          "original_sha256": {
+            "type": "string"
+          },
+          "optimized_sha256": {
+            "type": "string"
+          },
+          "analysis_status": {
+            "type": "string"
+          },
+          "analysis_origin": {
+            "type": "string"
+          },
+          "selected_analysis": {
+            "type": [
+              "object",
+              "null"
+            ]
           }
         }
       },
@@ -1048,6 +1247,87 @@
             }
           }
         }
+      },
+      "AddVersionRequest": {
+        "type": "object",
+        "properties": {
+          "optimized": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 262144
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "expected_version": {
+            "type": "string",
+            "pattern": "^v[0-9]{3,}$",
+            "description": "回读时的最新版本，用于防止并发编辑覆盖。"
+          },
+          "based_on_version": {
+            "type": "string",
+            "pattern": "^v[0-9]{3,}$",
+            "description": "所基于的已有版本；省略时使用 expected_version。"
+          }
+        },
+        "required": [
+          "optimized",
+          "reason",
+          "expected_version"
+        ],
+        "additionalProperties": false,
+        "description": "正文按 UTF-8 最多 256 KiB；字符串 maxLength 不替代字节上限。"
+      },
+      "SaveAnalysisRequest": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "pattern": "^v[0-9]{3,}$"
+          },
+          "original_sha256": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          },
+          "optimized_sha256": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          },
+          "analysis_markdown": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 262144
+          }
+        },
+        "required": [
+          "version",
+          "original_sha256",
+          "optimized_sha256",
+          "analysis_markdown"
+        ],
+        "additionalProperties": false,
+        "description": "正文按 UTF-8 最多 256 KiB；字符串 maxLength 不替代字节上限。"
+      },
+      "AddSourceNoteRequest": {
+        "type": "object",
+        "properties": {
+          "source_url": {
+            "type": "string",
+            "maxLength": 2048
+          },
+          "source_note": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          }
+        },
+        "required": [
+          "source_note"
+        ],
+        "additionalProperties": false,
+        "description": "正文按 UTF-8 最多 256 KiB；字符串 maxLength 不替代字节上限。"
       }
     }
   }

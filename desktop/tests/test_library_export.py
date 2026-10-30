@@ -34,6 +34,12 @@ def test_backup_roundtrip_keeps_bytes_versions_references_and_favorites(tmp_path
     operations.mkdir()
     (operations / "schedule.json").write_text('{"enabled":true,"automation_id":"private"}', encoding="utf-8")
     (library.root / "README.md").write_text("not-a-backup-file", encoding="utf-8")
+    private_lesson = library.root / "private-learning-library" / "lesson.md"
+    private_lesson.parent.mkdir()
+    private_lesson.write_text("本机保留的教学资料", encoding="utf-8")
+    license_asset = library.root / "references/assets/license.txt"
+    license_asset.parent.mkdir()
+    license_asset.write_text("保留参考许可附件", encoding="utf-8")
     before = {p: sha256(p.read_bytes()).hexdigest() for p in library.root.rglob("*") if p.is_file()}
     payload = export_library(library)
     with zipfile.ZipFile(BytesIO(payload)) as archive:
@@ -48,6 +54,8 @@ def test_backup_roundtrip_keeps_bytes_versions_references_and_favorites(tmp_path
     assert restored.entry(saved["id"])["original"] == raw
     assert restored.entry(saved["id"])["optimized"] == "建议版"
     assert restored.favorites() == [saved["id"]]
+    assert (restored_root / "private-learning-library" / "lesson.md").read_text(encoding="utf-8") == "本机保留的教学资料"
+    assert (restored_root / "references/assets/license.txt").read_text(encoding="utf-8") == "保留参考许可附件"
     assert len(ReferenceStore(restored_root).detail(ref["id"])["snapshots"]) == 2
     assert ReferenceStore(restored_root).detail(ref["id"], "s001")["analysis"]["template"] == analysis()["template"]
     assert {p: sha256(p.read_bytes()).hexdigest() for p in before} == before
@@ -97,6 +105,27 @@ def test_generated_mcp_config_points_to_running_library(tmp_path):
     result = subprocess.run([config["command"], *config["args"]], input="\n".join(json.dumps(m) for m in messages) + "\n", capture_output=True, text=True, encoding="utf-8", timeout=15)
     assert result.returncode == 0
     assert json.loads(result.stdout)["result"]["serverInfo"]["name"] == "liubai-prompt-library"
+
+
+def test_client_instructions_share_the_exact_running_library(tmp_path):
+    library = Library(tmp_path / "用户的资料 ' draft")
+    info = app_info(library)
+    toml_server = tomllib.loads(info["mcp_config"])["mcp_servers"]["liubai"]
+    json_server = json.loads(info["mcp_json_config"])["mcpServers"]["liubai"]
+    assert json_server == {"command": toml_server["command"], "args": toml_server["args"]}
+    assert info["mcp_connection"]["args"][-1] == str(library.root)
+    assert info["client_commands"]["codex"].startswith("codex mcp add liubai -- ")
+    assert info["client_commands"]["claude_code"].startswith("claude mcp add --transport stdio --scope user liubai -- ")
+    assert info["mcp_connection"]["transport"] == "stdio"
+    assert "api-token" not in json.dumps(info)
+
+
+def test_backup_instructions_include_installed_executable(tmp_path):
+    payload = export_library(Library(tmp_path / "library"))
+    with zipfile.ZipFile(BytesIO(payload)) as archive:
+        instructions = archive.read("RESTORE.txt").decode("utf-8")
+    assert 'Liubai.exe --data-root' in instructions
+    assert 'python -X utf8 start.py' in instructions
 
 
 def test_export_http_is_downloadable_and_rejects_cross_site(api):
