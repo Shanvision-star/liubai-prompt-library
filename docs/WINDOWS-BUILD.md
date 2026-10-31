@@ -26,4 +26,10 @@ python tools\smoke_windows_installer.py --installer dist\windows\release\Liubai-
 
 ## 更新素材
 
-`tools/export_collection.py --source <已获授权的库> --output <新的公开目录>` 生成独立副本；不会覆盖现有输出目录。工具只处理本次已审核的素材格式，不是对任意来源的自动版权判断。发布前复核来源许可、脱敏清单、原文/译文/整理稿范围以及生成的清单哈希。任何用户新增的私人素材都不会自动进入构建。
+`python tools/export_collection.py --source <已获授权的库> --output <新的公开目录> --selection public-selection.json` 生成独立副本；不会覆盖现有输出目录。工具只处理本次已审核的素材格式，不是对任意来源的自动版权判断。发布前复核来源许可、脱敏清单、原文/译文/整理稿范围以及生成的清单哈希。任何用户新增的私人素材都不会自动进入构建。构建入口会先运行只读公开清单校验，失败即停止打包。
+
+## 0.7.0 安装检查
+
+安装脚本按应用版本和当前清单核验，保留正常开始菜单入口；检查实际安装后的说明页资源、中文复用版、全部教学资源哈希、8 个 MCP 工具及版本/来源/分析写入。`--keep-running` 可在重装后保留服务，继续对安装版做浏览器操作验证，完成后须停止测试实例并卸载。
+
+2026-10-31 已在 [GitHub Windows runner](https://github.com/Shanvision-star/liubai-prompt-library/actions/runs/41159699957) 完成构建、安装、独立启动、重装和卸载，在本机 Windows 11 完成正常应用入口、桌面/390px 说明页和新功能检查。二者均不等于所有 Windows 10/11 设备或 5 位真实用户验收。安装包 SHA-256 见 Release 的 `SHA256SUMS.txt`，核验摘要见 `INSTALLATION-CHECKS.json`。

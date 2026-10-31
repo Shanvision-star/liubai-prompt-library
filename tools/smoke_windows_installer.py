@@ -41,8 +41,12 @@ def main():
     def command(argv, **kwargs):
         return subprocess.run([str(x) for x in argv], env=env, creationflags=flags, check=True, timeout=180, **kwargs)
     def install():
-        command([args.installer.resolve(), "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/NOICONS", "/GROUP=Liubai QA", f"/DIR={installation}", f"/LOG={work / 'install.log'}"])
+        command([args.installer.resolve(), "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/GROUP=Liubai QA", f"/DIR={installation}", f"/LOG={work / 'install.log'}"])
     install()
+    with winreg.OpenKey(winreg.HKEY_CURRENT_USER, key) as installed_key:
+        menu_group = winreg.QueryValueEx(installed_key, "Inno Setup: Icon Group")[0]
+    menu = Path(os.environ["APPDATA"]) / "Microsoft/Windows/Start Menu/Programs" / menu_group
+    assert (menu / "留白.lnk").is_file() and (menu / "关闭留白.lnk").is_file()
     exe = installation / "Liubai.exe"
     with socket.socket() as sock:
         sock.bind(("127.0.0.1", 0))
@@ -65,6 +69,8 @@ def main():
         raise AssertionError("独立程序启动超时")
     process = launch()
     report = {"installer_sha256": sha256(args.installer.read_bytes()).hexdigest(), "python_removed_from_environment": True, "port": port, "installation": str(installation), "data_root": str(data), "process_id": process.pid}
+    report["start_menu_shortcuts"] = True
+    report["start_menu_group"] = menu_group
     assert get("/api/library")["entry_count"] == expected_entries
     assert len(get("/api/references")["references"]) == expected_references
     prompt = get("/api/entries/PRM-0218")
@@ -130,8 +136,28 @@ def main():
     assert len(tools) == 8 and {"liubai_add_version", "liubai_save_analysis", "liubai_add_source_note"}.issubset(tools)
     detail = replies[4]["result"]["structuredContent"]
     assert detail["original"] == original and detail["selected_version"] == "v002"
+    mcp_id = replies[2]["result"]["structuredContent"]["id"]
+    def mcp_calls(calls):
+        requests = messages[:2] + [{"jsonrpc": "2.0", "id": number, "method": "tools/call", "params": {"name": name, "arguments": body}} for number, name, body in calls]
+        result = command([config["command"], *config["args"]], input=("\n".join(json.dumps(row, ensure_ascii=False) for row in requests) + "\n").encode(), capture_output=True)
+        rows = {row["id"]: row for line in result.stdout.decode("utf-8").splitlines() if (row := json.loads(line)).get("id")}
+        for number, _, _ in calls:
+            assert not rows[number].get("error") and not rows[number]["result"].get("isError"), rows[number]
+        return {number: rows[number]["result"]["structuredContent"] for number, _, _ in calls}
+    rows = mcp_calls([
+        (5, "liubai_add_version", {"entry_id": mcp_id, "optimized": "MCP 追加改编", "reason": "安装验证", "expected_version": "v001"}),
+        (6, "liubai_add_source_note", {"entry_id": mcp_id, "source_note": "由安装后的 MCP 追加"}),
+        (7, "liubai_get_prompt", {"entry_id": mcp_id, "version": "v002"}),
+    ])
+    assert rows[5]["version"] == "v002" and rows[7]["record"]["source_notes"]
+    read = rows[7]
+    rows = mcp_calls([
+        (8, "liubai_save_analysis", {"entry_id": mcp_id, "version": "v002", "original_sha256": read["original_sha256"], "optimized_sha256": read["optimized_sha256"], "analysis_markdown": "# MCP 安装拆解\n\n合成验证，不调用模型。"}),
+        (9, "liubai_get_prompt", {"entry_id": mcp_id, "version": "v002"}),
+    ])
+    assert "MCP 安装拆解" in rows[9]["analysis"]
     assert get("/api/library")["entry_count"] == expected_entries + 2
-    report["mcp"] = "installed executable initialized, discovered all 8 tools, saved and read the selected version"
+    report["mcp"] = "installed executable discovered 8 tools; save/read/version/source/analysis calls and readback passed"
     before = {str(p.relative_to(data)): sha256(p.read_bytes()).hexdigest() for p in (data / "entries").rglob("*") if p.is_file()}
     command([exe, "--data-root", data, "--stop", "--no-browser"])
     process.wait(timeout=15)

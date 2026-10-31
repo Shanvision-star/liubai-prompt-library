@@ -2,9 +2,9 @@
 
 留白是一款本地提示词收藏、学习与复用工具。把提示词保存下来，按用途检索，读懂设计逻辑，再复制或交给自己的 Codex、Claude Code 使用。原文、改编版本、来源和分析分别保存，让每一次复用都可追溯。界面沿用简约白、中性灰和磨砂玻璃风格。
 
-当前源码候选内置 **60 条素材、6 份参考、60 张教学卡**，筛除了商业与营销素材。教学包括结构、设计取舍、单变量反例、迁移练习与有界 Loop；属于分析解释，生成与学习效果仍待实测。新收藏可通过自己的 AI 生成拆解并回写；留白不提供模型额度。
+当前版内置 **60 条素材、6 份参考、60 张教学卡**，筛除了商业与营销素材。教学包括结构、设计取舍、单变量反例、迁移练习与有界 Loop；属于分析解释，生成与学习效果仍待实测。新收藏可通过自己的 AI 生成拆解并回写；留白不提供模型额度。
 
-本分支为 **0.7.0 候选**；已有 Windows 0.6.0 安装包不包含本次新增功能。新版本尚未完成干净 Windows 10/11 环境与 5 位目标用户的验收。
+**Windows 0.7.0** 安装包包含新的使用说明与全部 8 个 MCP 工具。已在 GitHub Windows runner 和本机 Windows 11 实际安装，核验说明页、新版本、来源补充、分析回写及数据保留。尚未完成独立干净 Windows 10/11 虚拟机与 5 位目标用户验收，详见 [验证记录](docs/VALIDATION.md)。
 
 **Chinese prompt collection & design breakdowns · Windows installer · Local-first · REST API + MCP**
 
@@ -20,7 +20,7 @@
 
 ### Windows：下载安装即可使用
 
-下载 [Windows 安装包](https://github.com/Shanvision-star/liubai-prompt-library/releases/latest) 中的 `Liubai-Setup-0.6.0-windows-x64.exe`，运行安装向导，然后从开始菜单打开“留白”。**不需要安装 Python、Node 或数据库，也不需要模型 API 密钥。** 支持 Windows 10/11 x64。
+下载 [Windows 安装包](https://github.com/Shanvision-star/liubai-prompt-library/releases/latest) 中的 `Liubai-Setup-0.7.0-windows-x64.exe`，运行安装向导，然后从开始菜单打开“留白”。**不需要安装 Python、Node 或数据库，也不需要模型 API 密钥。** 目标系统为 Windows 10/11 x64。
 
 首次启动会校验并准备该安装包附带的素材，显示准备窗口；随后打开应用。可浏览复用版、设计逻辑、Loop 和来源，复制后用于自己的工具。素材数量以安装包版本为准，已有库不会自动替换为新版公开集。
 
