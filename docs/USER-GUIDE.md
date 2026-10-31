@@ -2,7 +2,7 @@
 
 留白用于在本机收藏、学习和复用提示词。浏览、搜索、保存、复制和备份不需要模型；需要改编或设计拆解时，使用你自己的 Codex、Claude Code 或其他模型账号。团队协作、云同步为后续范围。
 
-本文对应 0.7.0 源码候选。已发布的 0.6.0 Windows 安装包没有本文新增的说明页、通用版本追加与分析回写入口。
+本文对应 0.7.0 Windows 安装版与源码版。使用旧版时，先备份并关闭留白，再安装新版，即可使用新的说明页、通用版本追加与分析回写入口。
 
 ## 页面里的使用说明
 
@@ -20,7 +20,7 @@
 
 Windows 安装版从 [Releases](https://github.com/Shanvision-star/liubai-prompt-library/releases/latest) 下载安装程序，无需系统 Python。程序在 `%LOCALAPPDATA%\Programs\Liubai`，资料在 `%LOCALAPPDATA%\Liubai\library`。首次准备素材显示进度。关闭浏览器窗口后服务仍可能运行，开始菜单“关闭留白”可停止服务。
 
-源码需要 Python 3.11+，在项目根目录运行 `python -X utf8 start.py`（其他系统可用 `python3`）。首次导入该源码附带的公开集；当前候选为 60 条素材、6 份参考。已有库不会被覆盖，也不会自动补入新版公开集。源码默认资料位于项目根目录；独立目录用：
+源码需要 Python 3.11+，在项目根目录运行 `python -X utf8 start.py`（其他系统可用 `python3`）。首次导入该源码附带的公开集；当前公开集为 60 条素材、6 份参考。已有库不会被覆盖，也不会自动补入新版公开集。源码默认资料位于项目根目录；独立目录用：
 
 ```sh
 python -X utf8 start.py --data-root "/absolute/path/to/my-library" --port 8767

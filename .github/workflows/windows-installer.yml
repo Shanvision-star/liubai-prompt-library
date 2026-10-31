@@ -34,3 +34,7 @@ jobs:
         with:
           name: liubai-windows-installer
           path: dist/windows/release/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: liubai-installer-checks
+          path: ${{ runner.temp }}/liubai-smoke/report.json

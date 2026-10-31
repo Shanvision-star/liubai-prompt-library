@@ -22,6 +22,8 @@ def main():
     args = parser.parse_args()
     if sys.platform != "win32":
         raise SystemExit("Windows 安装包必须在 Windows 上构建")
+    # 打包入口先核验公开清单，避免合法构建工具把残留私人素材一起分发。
+    subprocess.run([sys.executable, "-X", "utf8", str(ROOT / "tools/validate_public_collection.py")], cwd=ROOT, check=True)
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=True)
     if not args.skip_freeze:
