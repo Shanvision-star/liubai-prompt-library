@@ -107,10 +107,17 @@ def test_public_collection_has_real_cards_and_guide_links_resolve(public_library
     for item in library.index_entries():
         entry = library.entry(item["id"])
         assert entry["teaching_status"] == "ready", item["id"]
-        assert len(entry["analysis"]) > 1000
-        assert "Loop" in entry["analysis"]
-        assert "只改一个条件" in entry["analysis"]
-        assert "参考思路" in entry["analysis"]
+        if manifest["entries"][item["id"]].get("method") == "motion-reference":
+            assert entry["reading_pair"]["translation_status"] == "ready", item["id"]
+            assert entry["record"]["source"]["license"] == "MIT"
+            for section in ("设计取舍", "实现思路", "建议检查点"):
+                assert f"## {section}" in entry["analysis"], item["id"]
+            assert entry["record"]["source"]["url"] in entry["analysis"]
+        else:
+            assert len(entry["analysis"]) > 1000
+            assert "Loop" in entry["analysis"]
+            assert "只改一个条件" in entry["analysis"]
+            assert "参考思路" in entry["analysis"]
     guide = (root / "learning-library/learning-route.md").read_text(encoding="utf-8")
     import re
     for linked in re.findall(r"entry=(PRM-\d+)", guide):

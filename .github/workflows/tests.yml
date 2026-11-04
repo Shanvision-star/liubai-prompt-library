@@ -24,7 +24,8 @@ jobs:
         with:
           node-version: '22'
       - run: python -m pip install -r requirements-dev.txt
-      - run: python -X utf8 -m pytest desktop/tests -q
+      - run: python -X utf8 -m pytest desktop/tests tests -q
+      - run: python -X utf8 tools/validate_public_collection.py
       - run: node --check desktop/web/app.js
       - run: node --check desktop/web/references.js
       - run: node --check desktop/web/prompts.js

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "id": "PRM-0308",
+  "title": "Motion Prompt #066｜面包屑导航 · Breadcrumbs",
+  "summary": "显示页面层级位置的链接路径",
+  "category_id": "motion_prompt_mit",
+  "classification_status": "classified",
+  "tags": [
+    "Motion Prompt",
+    "UI 组件",
+    "中英对照",
+    "MIT"
+  ],
+  "source": {
+    "type": "licensed_upstream",
+    "repository": "showheyohtaki/motion-prompt",
+    "url": "https://github.com/showheyohtaki/motion-prompt/blob/7819d3879eb7d5a1475c11c001bedffb5cab64af/api/v1/en/p/066.txt",
+    "commit": "7819d3879eb7d5a1475c11c001bedffb5cab64af",
+    "license": "MIT",
+    "license_status": "allowed",
+    "provenance_file": "SOURCE.md",
+    "notice_file": "LICENSE.txt",
+    "note": "Shohei Ohtaki 原文；中文译文和拆解由留白整理，效果未实测。"
+  },
+  "created_at": "2026-11-04T09:00:00+08:00",
+  "updated_at": "2026-11-04T09:00:00+08:00",
+  "original": {
+    "file": "original.md",
+    "sha256": "8eee5f4e68678f5b2836266a322bb13c49e6e07fa4d7026b5e8bdbe1a20ed6e6",
+    "byte_count": 1457,
+    "encoding": "UTF-8"
+  },
+  "translation": {
+    "file": "translation-zh.md",
+    "status": "ready",
+    "language": "zh-Hans",
+    "source_sha256": "8eee5f4e68678f5b2836266a322bb13c49e6e07fa4d7026b5e8bdbe1a20ed6e6",
+    "sha256": "35daef59f755b44b57f7ce02fe78c8ea473dad21469d7707a73418521c1b3ffa"
+  },
+  "related_ids": [],
+  "variables": [],
+  "applicable_models": [],
+  "open_questions": [],
+  "versions": [
+    {
+      "version": "v001",
+      "file": "optimized-v001.md",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "based_on": "original",
+      "reason": "保存来源原文副本，未改写",
+      "optimization_status": "not_optimized",
+      "evaluation_status": "untested",
+      "sha256": "8eee5f4e68678f5b2836266a322bb13c49e6e07fa4d7026b5e8bdbe1a20ed6e6"
+    }
+  ],
+  "optimization_status": "not_optimized",
+  "evaluation_status": "untested",
+  "loop_review": {
+    "reviewed_version": "v001",
+    "applicability": "conditional",
+    "max_rounds": 2,
+    "reminder": "一次只改变一个动作参数。按拆解页的检查点对比；无改善时停止并记录差异。",
+    "effectiveness_verified": false
+  },
+  "feedback": [],
+  "publication": {
+    "authorized_by_owner": true,
+    "edition": "public-2026.11.04",
+    "original_kind": "licensed_upstream"
+  }
+}

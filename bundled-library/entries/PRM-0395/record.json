@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "id": "PRM-0395",
+  "title": "Motion Prompt #153｜3D 倾斜 · 3D tilt on hover",
+  "summary": "卡片随光标方向立体倾斜",
+  "category_id": "motion_prompt_mit",
+  "classification_status": "classified",
+  "tags": [
+    "Motion Prompt",
+    "落地页与网页效果（第 2 弹）",
+    "中英对照",
+    "MIT"
+  ],
+  "source": {
+    "type": "licensed_upstream",
+    "repository": "showheyohtaki/motion-prompt",
+    "url": "https://github.com/showheyohtaki/motion-prompt/blob/7819d3879eb7d5a1475c11c001bedffb5cab64af/api/v1/en/p/153.txt",
+    "commit": "7819d3879eb7d5a1475c11c001bedffb5cab64af",
+    "license": "MIT",
+    "license_status": "allowed",
+    "provenance_file": "SOURCE.md",
+    "notice_file": "LICENSE.txt",
+    "note": "Shohei Ohtaki 原文；中文译文和拆解由留白整理，效果未实测。"
+  },
+  "created_at": "2026-11-04T09:00:00+08:00",
+  "updated_at": "2026-11-04T09:00:00+08:00",
+  "original": {
+    "file": "original.md",
+    "sha256": "52169ba66f9ccd0d29a64d20b2495532dce87ef816441958a8f32c4daffc4703",
+    "byte_count": 1742,
+    "encoding": "UTF-8"
+  },
+  "translation": {
+    "file": "translation-zh.md",
+    "status": "ready",
+    "language": "zh-Hans",
+    "source_sha256": "52169ba66f9ccd0d29a64d20b2495532dce87ef816441958a8f32c4daffc4703",
+    "sha256": "6acc66f33fd75aac41a7c6e45257e6935ee3c621c0e370f0e7c89e03877dd103"
+  },
+  "related_ids": [],
+  "variables": [],
+  "applicable_models": [],
+  "open_questions": [],
+  "versions": [
+    {
+      "version": "v001",
+      "file": "optimized-v001.md",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "based_on": "original",
+      "reason": "保存来源原文副本，未改写",
+      "optimization_status": "not_optimized",
+      "evaluation_status": "untested",
+      "sha256": "52169ba66f9ccd0d29a64d20b2495532dce87ef816441958a8f32c4daffc4703"
+    }
+  ],
+  "optimization_status": "not_optimized",
+  "evaluation_status": "untested",
+  "loop_review": {
+    "reviewed_version": "v001",
+    "applicability": "conditional",
+    "max_rounds": 2,
+    "reminder": "一次只改变一个动作参数。按拆解页的检查点对比；无改善时停止并记录差异。",
+    "effectiveness_verified": false
+  },
+  "feedback": [],
+  "publication": {
+    "authorized_by_owner": true,
+    "edition": "public-2026.11.04",
+    "original_kind": "licensed_upstream"
+  }
+}

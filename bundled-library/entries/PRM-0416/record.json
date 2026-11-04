@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "id": "PRM-0416",
+  "title": "Motion Prompt #174｜背后跟拍 · Follow shot",
+  "summary": "跟在主体身后移动",
+  "category_id": "motion_prompt_mit",
+  "classification_status": "classified",
+  "tags": [
+    "Motion Prompt",
+    "镜头运动与转场（第 2 弹）",
+    "中英对照",
+    "MIT"
+  ],
+  "source": {
+    "type": "licensed_upstream",
+    "repository": "showheyohtaki/motion-prompt",
+    "url": "https://github.com/showheyohtaki/motion-prompt/blob/7819d3879eb7d5a1475c11c001bedffb5cab64af/api/v1/en/p/174.txt",
+    "commit": "7819d3879eb7d5a1475c11c001bedffb5cab64af",
+    "license": "MIT",
+    "license_status": "allowed",
+    "provenance_file": "SOURCE.md",
+    "notice_file": "LICENSE.txt",
+    "note": "Shohei Ohtaki 原文；中文译文和拆解由留白整理，效果未实测。"
+  },
+  "created_at": "2026-11-04T09:00:00+08:00",
+  "updated_at": "2026-11-04T09:00:00+08:00",
+  "original": {
+    "file": "original.md",
+    "sha256": "6a42d1e0cfcc1b4f8ddfc464a24aef485d8a99c3ffae6501f8e09500b5ff4128",
+    "byte_count": 1565,
+    "encoding": "UTF-8"
+  },
+  "translation": {
+    "file": "translation-zh.md",
+    "status": "ready",
+    "language": "zh-Hans",
+    "source_sha256": "6a42d1e0cfcc1b4f8ddfc464a24aef485d8a99c3ffae6501f8e09500b5ff4128",
+    "sha256": "d3677802c7ef447a93960c4283322427c4096f012dad6551885a895babe0ddc9"
+  },
+  "related_ids": [],
+  "variables": [],
+  "applicable_models": [],
+  "open_questions": [],
+  "versions": [
+    {
+      "version": "v001",
+      "file": "optimized-v001.md",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "based_on": "original",
+      "reason": "保存来源原文副本，未改写",
+      "optimization_status": "not_optimized",
+      "evaluation_status": "untested",
+      "sha256": "6a42d1e0cfcc1b4f8ddfc464a24aef485d8a99c3ffae6501f8e09500b5ff4128"
+    }
+  ],
+  "optimization_status": "not_optimized",
+  "evaluation_status": "untested",
+  "loop_review": {
+    "reviewed_version": "v001",
+    "applicability": "conditional",
+    "max_rounds": 2,
+    "reminder": "一次只改变一个动作参数。按拆解页的检查点对比；无改善时停止并记录差异。",
+    "effectiveness_verified": false
+  },
+  "feedback": [],
+  "publication": {
+    "authorized_by_owner": true,
+    "edition": "public-2026.11.04",
+    "original_kind": "licensed_upstream"
+  }
+}
