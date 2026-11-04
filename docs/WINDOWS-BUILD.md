@@ -20,7 +20,7 @@ python -m venv .venv-build
 python tools\smoke_windows_installer.py --installer dist\windows\release\Liubai-Setup-0.7.1-windows-x64.exe --workdir dist\installer-smoke
 ```
 
-验证真实安装、移除 Python 环境路径后的独立启动、中文模板与拆解、API 保存、独立 MCP 握手和保存、重复安装、卸载保留数据。测试只操作显式指定的新目录；若当前用户已有安装记录会停止，不接管日常安装。
+验证真实安装、移除 Python 环境路径后的独立启动、内置双语素材和拆解、语言选择持久化、API 保存、独立 MCP 调用、备份恢复、重复安装和卸载保留数据。测试先用英文安装，再用简体中文重装并核对两套开始菜单入口。恢复检查会把 ZIP 解压到独立目录，再由已安装的程序启动并读取原文、版本和收藏。若当前用户已有安装记录或同名开始菜单目录，测试会在安装前停止。
 
 该检查不能替代一台完全没有安装过 Python 的干净虚拟机验收。当前发行包未配置代码签名；不伪称已签名、通过 SmartScreen 或覆盖所有 Windows 设备。
 

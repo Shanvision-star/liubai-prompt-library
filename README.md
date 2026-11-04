@@ -1,12 +1,14 @@
 # 留白 · 提示词素材库
 
+**简体中文** | [English](README.en.md)
+
 留白是一款本地提示词收藏、学习与复用工具。把提示词保存下来，按用途检索，读懂设计逻辑，再复制或交给自己的 Codex、Claude Code 使用。原文、改编版本、来源和分析分别保存，让每一次复用都可追溯。界面沿用简约白、中性灰和磨砂玻璃风格。
 
 当前公开版内置 **252 条素材、6 份参考、252 张教学卡**。新增 [192 条 Motion Prompt 双语素材](docs/MOTION-PROMPT.md)，覆盖 UI 动效、镜头与构图等，可读英文原文、中文译文和逐条设计拆解。新收藏可通过自己的 AI 生成拆解并回写；留白不提供模型额度。
 
 **Windows 0.7.1** 延续 macOS 风格的磨砂玻璃布局，统一各分类的原文与译文阅读。主按钮只复制原提示词，来源可直接打开。程序支持 8 个 MCP 工具，安装包的核验范围见 [验证记录](docs/VALIDATION.md)。
 
-**Chinese prompt collection & design breakdowns · Windows installer · Local-first · REST API + MCP**
+**本地素材库 · Windows 安装包 · REST API + MCP**
 
 [下载最新版](https://github.com/Shanvision-star/liubai-prompt-library/releases/latest) · [使用指南](docs/USER-GUIDE.md) · [连接 Codex](docs/INTEGRATIONS.md) · [反馈问题](https://github.com/Shanvision-star/liubai-prompt-library/issues)
 
@@ -51,6 +53,12 @@ python -X utf8 start.py --data-root /absolute/path/to/my-library --port 8767
 ```
 
 路径有空格时用引号括起来。指定新数据目录时，加 `--with-collection` 可安装公开素材，不加则建立空库。“使用说明”显示当前实际位置。服务仅监听本机回环地址。
+
+### 中英文界面与反馈
+
+当前源码支持中文与英文。打开顶栏 **•••** 可选择 **中文**、**English** 或**自动**。手动选择保存在本机，语言选择无需查询 IP。英文界面优先显示与原文校验一致的英文内容。展开折叠区即可阅读另一种语言，原文和译文可分别复制。
+
+**反馈**也在 **•••** 菜单中。邮件会打开本机邮件应用，GitHub Issues 公开可见且可能需要登录。预编译安装包版本以 [GitHub Releases](https://github.com/Shanvision-star/liubai-prompt-library/releases/latest) 为准，可用上述源码方式体验当前双语改动。
 
 ## 保存与分类
 
@@ -118,13 +126,14 @@ desktop/.runtime/       本机令牌、收藏、日志和浏览器状态
 
 升级前可在“使用说明”点击“导出备份”。ZIP 包含个人原文与版本、分类、参考快照与分析、收藏和校验清单；不含令牌、浏览器档案、执行日志或机器调度注册。备份仍含私人素材，请妥善保管。
 
-恢复时解压到**新的空目录**，用 `--data-root` 指向它，检查素材后再继续使用，不要覆盖现有库。网页备份上限 256 MiB / 10000 文件。升级程序时先备份并停止旧服务，将新程序解压到另一目录，继续指向原来的资料目录。详见[备份与升级指南](docs/USER-GUIDE.md)。
+恢复时解压到**新的空目录**，按 ZIP 内的双语 `RESTORE.txt` 启动。Windows 安装版可在安装目录运行 `.\Liubai.exe --data-root "C:\path\to\restored-library"`。用恢复后的库核对原文、历史版本和收藏，再继续使用。网页备份上限 256 MiB / 10000 文件。详见[备份与升级指南](docs/USER-GUIDE.md)。
 
 ## 开发
 
 ```sh
 python -m pip install -r requirements-dev.txt
-python -X utf8 -m pytest desktop/tests -q
+python -X utf8 -m pytest desktop/tests tests -q
+node --test "desktop/tests/*.test.js"
 ```
 
 测试使用临时目录与模拟网络响应，不消耗模型API额度。前端为HTML/CSS/JavaScript，无构建步骤。详见 [开发说明](docs/DEVELOPMENT.md)。

@@ -3,7 +3,9 @@
 import argparse
 import json
 import logging
+import locale
 import mimetypes
+import os
 import re
 import secrets
 import threading
@@ -32,6 +34,29 @@ def read_json(path):
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
+def system_language():
+    """Windows 优先使用用户界面语言，避免把区域格式偏好当作界面语言。"""
+    if os.name == "nt":
+        import ctypes
+
+        language_id = ctypes.windll.kernel32.GetUserDefaultUILanguage()
+        return {0x04: "zh", 0x09: "en"}.get(language_id & 0x3FF, "")
+    return locale.getlocale()[0] or ""
+
+
+def read_public_english():
+    """读取内置英文辅助资料；损坏时不阻断个人资料。"""
+    path = WEB_ROOT / "public-en.json"
+    try:
+        result = read_json(path) if path.exists() else {}
+        if not isinstance(result, dict):
+            raise ValueError("英文资料格式异常")
+        return result
+    except (OSError, ValueError, UnicodeError):
+        logging.warning("英文资料不可用；继续显示原有素材", exc_info=True)
+        return {}
+
+
 def prompt_body(markdown):
     match = re.search(r"```(?:text|plaintext)?\s*\n(.*?)\n```", markdown, re.S)
     return match.group(1).strip() if match else markdown.strip()
@@ -46,6 +71,7 @@ class Library:
         self.state_dir = Path(state_dir or self.root / "desktop" / ".runtime").resolve()
         self.state_dir.mkdir(parents=True, exist_ok=True)
         self.favorite_path = self.state_dir / "favorites.json"
+        self.language_path = self.state_dir / "language.json"
         self.lock = threading.Lock()
 
     def contained_path(self, relative):
@@ -65,7 +91,7 @@ class Library:
             raise ValueError("收藏文件格式异常，请保留文件并检查")
         return stored
 
-    def entry(self, entry_id, version=None):
+    def entry(self, entry_id, version=None, curated=None):
         if not ENTRY_ID.fullmatch(entry_id):
             raise KeyError("素材编号无效")
         item = next((x for x in self.index_entries() if x["id"] == entry_id), None)
@@ -126,10 +152,18 @@ class Library:
                     except (OSError, ValueError, UnicodeError):
                         pass
             teaching = {"status": analysis_status, "revision": chosen.get("analysis_revision")}
+        english = reading_pair(folder, record, original, original_sha, target_language="en")
+        available = (curated if curated is not None else read_public_english()).get(entry_id)
+        if english["translation_status"] == "missing" and isinstance(available, dict):
+            text = available.get("translation")
+            if (available.get("original_sha256") == original_sha and isinstance(text, str) and text.strip()
+                    and sha256(text.encode("utf-8")).hexdigest() == available.get("translation_sha256")):
+                english.update(translation=text, translation_status="ready", notice="English translation; the primary copy action copies the original.")
         return {
             "item": item, "record": record, "selected_version": selected_version,
             "source_prompt": source_prompt(folder, record),
             "reading_pair": reading_pair(folder, record, original, original_sha),
+            "reading_pair_en": english,
             "original": original,
             "optimized_markdown": optimized_md, "optimized": optimized_md if chosen.get("optimization_status") in {"not_optimized", "provided"} or chosen.get("reference_provenance") else prompt_body(optimized_md),
             "original_sha256": original_sha, "optimized_sha256": optimized_sha,
@@ -141,17 +175,43 @@ class Library:
             "loop": loop,
         }
 
+    def english_catalogue(self, entry, curated=None):
+        """仅从已绑定哈希的英文上游原文提取名称和简介。"""
+        record = entry["record"]
+        source = record.get("source", {})
+        row = (curated or {}).get(entry["item"]["id"])
+        if (isinstance(row, dict) and row.get("original_sha256") == entry["original_sha256"]
+                and row.get("title_source_sha256") == sha256(entry["item"]["title"].encode("utf-8")).hexdigest()
+                and isinstance(row.get("title"), str) and isinstance(row.get("summary"), str)):
+            summary_hash = sha256(entry["item"].get("summary", "").encode("utf-8")).hexdigest()
+            return {"title": row["title"], "summary": row["summary"] if row.get("summary_source_sha256") == summary_hash else None, "original_language": row.get("original_language", "unknown")}
+        if (source.get("type") != "licensed_upstream"
+                or source.get("repository") != "showheyohtaki/motion-prompt"
+                or record.get("title") != entry["item"].get("title")
+                or "/api/v1/en/" not in source.get("url", "")
+                or record.get("original", {}).get("sha256") != entry["original_sha256"]):
+            return None
+        text = entry["original"]
+        title = re.search(r'^Please use "([^"\n]+)"', text, re.MULTILINE)
+        summary = re.search(r'^What it is:\s*([^\n]+)', text, re.MULTILINE)
+        if not title or not summary:
+            return None
+        return {"title": title.group(1).strip(), "summary": summary.group(1).strip() if record.get("summary", "") == entry["item"].get("summary", "") else None, "original_language": "en"}
+
     def catalogue(self):
         rows = []
+        curated = read_public_english()
         for item in self.index_entries():
-            entry = self.entry(item["id"])
+            entry = self.entry(item["id"], curated=curated)
             record = entry["record"]
             source = record.get("source", {})
             rows.append({
                 **item, "source_label": source.get("repository") or "我的原创素材",
+                "english_catalogue": self.english_catalogue(entry, curated),
                 "search_text": "\n".join([entry["original"], entry["optimized"], entry["analysis"],
                                            (entry.get("source_prompt") or {}).get("original", ""),
                                            entry["reading_pair"]["translation"],
+                                           entry["reading_pair_en"]["translation"],
                                            (entry.get("source_prompt") or {}).get("translation", "")]),
             })
         valid_ids = {e["id"] for e in rows}
@@ -161,6 +221,25 @@ class Library:
             "favorites": [f for f in self.favorites() if f in valid_ids],
             "entry_count": len(rows),
         }
+
+    def language_preference(self):
+        """读取设备语言选择，异常文件保留供检查。"""
+        if not self.language_path.exists():
+            return "auto"
+        value = read_json(self.language_path)
+        if not isinstance(value, dict) or value.get("language") not in ("auto", "zh", "en"):
+            raise ValueError("语言设置格式异常")
+        return value["language"]
+
+    def set_language_preference(self, language):
+        """原子保存语言偏好，不记录 IP 或素材。"""
+        if language not in ("auto", "zh", "en"):
+            raise ValueError("不支持的语言设置")
+        with self.lock:
+            temporary = self.language_path.with_suffix(".tmp")
+            temporary.write_text(json.dumps({"language": language}), encoding="utf-8")
+            temporary.replace(self.language_path)
+        return language
 
     def set_favorite(self, entry_id, favorite):
         self.entry(entry_id)
@@ -223,6 +302,10 @@ class RequestHandler(BaseHTTPRequestHandler):
         version = query.get("version", [None])[0]
         snapshot = query.get("snapshot", [None])[0]
         try:
+            if path == "/api/language-preference":
+                return self.reply(200, {"language": self.server.library.language_preference()})
+            if path == "/api/system-language":
+                return self.reply(200, {"language": system_language()})
             if path == "/api/health":
                 return self.reply(200, {"app": APP_ID, "library_root": str(self.server.library.root), "version": APP_VERSION})
             if path == "/api/app-info":
@@ -273,7 +356,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                     relative = str(Path(item["record_file"]).parent / chosen["file"])
                 data = self.server.library.contained_path(relative).read_bytes()
                 return self.reply(200, data, "text/markdown; charset=utf-8", f"{entry_id}-{variant}{'-'+version if version and variant=='optimized' else ''}.md")
-            static = {"/": "index.html", "/app.js": "app.js", "/style.css": "style.css", "/icon.svg": "icon.svg", "/references.js": "references.js", "/references.css": "references.css", "/prompts.js": "prompts.js", "/prompts.css": "prompts.css", "/guide.js": "guide.js", "/guide.css": "guide.css", "/lifecycle.js": "lifecycle.js"}
+            static = {"/": "index.html", "/app.js": "app.js", "/language-choice.js": "language-choice.js", "/i18n.js": "i18n.js", "/language-ui.js": "language-ui.js", "/feedback.js": "feedback.js", "/style.css": "style.css", "/icon.svg": "icon.svg", "/references.js": "references.js", "/references.css": "references.css", "/prompts.js": "prompts.js", "/prompts.css": "prompts.css", "/guide.js": "guide.js", "/guide.css": "guide.css", "/lifecycle.js": "lifecycle.js"}
             if path in static:
                 file = WEB_ROOT / static[path]
                 mime = {".js": "text/javascript", ".css": "text/css", ".html": "text/html", ".svg": "image/svg+xml"}.get(file.suffix, mimetypes.guess_type(file.name)[0])
@@ -301,7 +384,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         token_allowed = integration_route and origin is None and authorization.startswith("Bearer ") and secrets.compare_digest(supplied_token.encode("utf-8"), self.server.api_token.encode("utf-8"))
         if not self.valid_host() or not (browser_allowed or token_allowed):
             return self.reply(403, {"error": "请从本机素材库操作，或为本机API提供有效的Bearer令牌"})
-        routes = {"/api/favorites", "/api/references/flags", "/api/references/discover", "/api/references/import", "/api/references/adopt-preview", "/api/references/adopt", "/api/references/check", "/api/references/schedule"}
+        routes = {"/api/language-preference", "/api/favorites", "/api/references/flags", "/api/references/discover", "/api/references/import", "/api/references/adopt-preview", "/api/references/adopt", "/api/references/check", "/api/references/schedule"}
         if self.path not in routes and not integration_route:
             return self.reply(404, {"error": "未知操作"})
         try:
@@ -318,7 +401,11 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self.reply(200, {"stopping": True})
                 threading.Thread(target=self.server.shutdown, daemon=True).start()
                 return
-            if self.path == "/api/prompts":
+            if self.path == "/api/language-preference":
+                if set(body) != {"language"}:
+                    raise ValueError("语言设置只接受 language 字段")
+                result = {"language": self.server.library.set_language_preference(body["language"])}
+            elif self.path == "/api/prompts":
                 result = self.server.prompts.save_prompt(body)
             elif self.path == "/api/categories":
                 if set(body) - {"name", "description"}:
