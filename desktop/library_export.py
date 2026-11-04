@@ -124,5 +124,12 @@ def export_library(library):
             "包含个人素材、参考快照/分析、分类、索引与收藏。备份可能含私人内容，请自行妥善保存。\n"
             "不含 API 令牌、Codex 配置、网络缓存、程序、执行日志或调度注册；恢复后调度需重新配置。\n"
             "backup-manifest.json 记录各资料文件的 SHA-256，可用于校验完整性。\n"
+            "\nLiubai library backup\n\nExtract this ZIP to a new, empty directory and point Liubai to it with --data-root.\n"
+            "Windows installer: run Liubai.exe --data-root \"C:\\path\\to\\restored-library\" from the installation directory.\n"
+            "Source: python -X utf8 start.py --data-root /path/to/restored-library\n"
+            "Check the entries, originals and versions before using the restored library. Keep your existing library in its own directory.\n"
+            "This backup may contain private prompts, reference snapshots and analyses, categories, indexes and favorites. Store it securely.\n"
+            "It excludes API tokens, Codex configuration, network cache, program files, logs and scheduled jobs. Configure jobs again after restoring.\n"
+            "Use the SHA-256 values in backup-manifest.json to verify the extracted files.\n"
         ).encode("utf-8"))
     return output.getvalue()

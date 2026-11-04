@@ -1,6 +1,7 @@
-"""隔离验证安装包：清空 Python 环境路径，检查启动、素材、MCP、重复安装与卸载。"""
+"""隔离验证双语安装、素材、MCP、备份恢复、重复安装与卸载。"""
 import argparse
 from hashlib import sha256
+from io import BytesIO
 import json
 import os
 from pathlib import Path
@@ -8,7 +9,9 @@ import socket
 import subprocess
 import sys
 import time
+from urllib.error import HTTPError
 from urllib.request import Request, urlopen
+from zipfile import ZipFile
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "desktop"))
@@ -30,23 +33,30 @@ def main():
             raise SystemExit("当前用户已有留白安装记录；请换测试用户，不能覆盖日常安装")
     except FileNotFoundError:
         pass
+    menu_root = Path(os.environ["APPDATA"]) / "Microsoft/Windows/Start Menu/Programs"
+    # 禁用分组选择页的安装包会忽略 /GROUP，即使没有注册表记录也可能已有快捷方式。
+    if any((menu_root / name).exists() for name in ("Liubai", "留白")):
+        raise SystemExit("当前用户已有留白开始菜单目录；请换测试用户，保护日常快捷方式")
     work = args.workdir.resolve()
     work.mkdir(parents=True, exist_ok=False)
     installation, data = work / "installed", work / "用户 素材库"
     env = dict(os.environ)
     env["PATH"] = str(Path(os.environ["SystemRoot"]) / "System32")
+    # 卸载程序会以默认资料路径执行 --stop，测试中须与日常资料隔离。
+    env["LOCALAPPDATA"] = str(work / "local-appdata")
     for name in ("PYTHONHOME", "PYTHONPATH", "VIRTUAL_ENV"):
         env.pop(name, None)
     flags = subprocess.CREATE_NO_WINDOW
     def command(argv, **kwargs):
         return subprocess.run([str(x) for x in argv], env=env, creationflags=flags, check=True, timeout=180, **kwargs)
-    def install():
-        command([args.installer.resolve(), "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/GROUP=Liubai QA", f"/DIR={installation}", f"/LOG={work / 'install.log'}"])
-    install()
-    with winreg.OpenKey(winreg.HKEY_CURRENT_USER, key) as installed_key:
-        menu_group = winreg.QueryValueEx(installed_key, "Inno Setup: Icon Group")[0]
-    menu = Path(os.environ["APPDATA"]) / "Microsoft/Windows/Start Menu/Programs" / menu_group
-    assert (menu / "留白.lnk").is_file() and (menu / "关闭留白.lnk").is_file()
+    def install(language, shortcuts):
+        command([args.installer.resolve(), "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/NOCLOSEAPPLICATIONS", f"/LANG={language}", f"/DIR={installation}", f"/LOG={work / (language + '.log')}"])
+        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, key) as installed_key:
+            menu_group = winreg.QueryValueEx(installed_key, "Inno Setup: Icon Group")[0]
+        menu = menu_root / menu_group
+        assert all((menu / name).is_file() for name in shortcuts)
+        return menu_group
+    menu_group = install("english", ("Liubai.lnk", "Close Liubai.lnk"))
     exe = installation / "Liubai.exe"
     with socket.socket() as sock:
         sock.bind(("127.0.0.1", 0))
@@ -55,14 +65,15 @@ def main():
     def get(path):
         with urlopen(url + path, timeout=30) as response:
             return json.load(response)
-    def launch():
-        process = subprocess.Popen([str(exe), "--data-root", str(data), "--port", str(port), "--no-browser"], env=env, creationflags=flags)
+    def launch(library_root=data):
+        process = subprocess.Popen([str(exe), "--data-root", str(library_root), "--port", str(port), "--no-browser"], env=env, creationflags=flags)
         deadline = time.monotonic() + 180
         while time.monotonic() < deadline:
             if process.poll() is not None:
-                raise AssertionError(f"程序提前退出 {process.returncode}；查看 {data / 'desktop/.runtime/server.log'}")
+                raise AssertionError(f"程序提前退出 {process.returncode}；查看 {library_root / 'desktop/.runtime/server.log'}")
             try:
-                if get("/api/health")["version"] == APP_VERSION:
+                health = get("/api/health")
+                if health["version"] == APP_VERSION and Path(health["library_root"]) == library_root:
                     return process
             except OSError:
                 time.sleep(0.3)
@@ -71,6 +82,8 @@ def main():
     report = {"installer_sha256": sha256(args.installer.read_bytes()).hexdigest(), "python_removed_from_environment": True, "port": port, "installation": str(installation), "data_root": str(data), "process_id": process.pid}
     report["start_menu_shortcuts"] = True
     report["start_menu_group"] = menu_group
+    assert get("/api/language-preference") == {"language": "auto"}
+    assert isinstance(get("/api/system-language")["language"], str)
     assert get("/api/library")["entry_count"] == expected_entries
     assert len(get("/api/references")["references"]) == expected_references
     prompt = get("/api/entries/PRM-0218")
@@ -81,9 +94,11 @@ def main():
     assert pair["copyable"] and pair["translation_status"] == "ready"
     assert pair["original"] == motion["original"] and "Pop-in" in pair["original"] and "弹跳" in pair["translation"]
     assert motion["teaching_status"] == "ready" and "角标" in motion["analysis"]
+    english = get("/api/entries/PRM-0159")["reading_pair_en"]
+    assert english["translation_status"] == "ready" and "30-second video" in english["translation"]
     with urlopen(url + "/download/PRM-0243/original", timeout=30) as response:
         assert sha256(response.read()).hexdigest() == motion["record"]["original"]["sha256"]
-    report["bilingual_reading"] = "upstream original, matching Chinese translation, source and version-bound analysis"
+    report["bilingual_reading"] = "upstream original, matching Chinese and English translations, source and version-bound analysis"
     assets = installation / "_internal"
     assert "PRM-0218" in (assets / "learning-library/learning-route.md").read_text(encoding="utf-8")
     teaching = json.loads((assets / "learning-library/checksums.json").read_text(encoding="utf-8"))
@@ -96,7 +111,8 @@ def main():
         page = response.read().decode("utf-8")
     assert 'data-guide-open="start"' in page and 'id="guide-tab-connect"' in page
     assert 'id="guide-tab-workflow"' in page and "Claude Code" in page
-    for name in ("guide.js", "guide.css", "lifecycle.js"):
+    assert 'id="language-select"' in page and 'id="feedback-dialog"' in page
+    for name in ("guide.js", "guide.css", "lifecycle.js", "language-choice.js", "i18n.js", "language-ui.js", "feedback.js"):
         with urlopen(url + "/" + name, timeout=30) as response:
             assert response.status == 200 and response.read()
     report["usage_guide"] = "installed HTML, chapter controls and all help/lifecycle assets served"
@@ -107,11 +123,24 @@ def main():
         saved = json.load(response)
     assert get("/api/entries/" + saved["id"])["original"] == original
     report["saved_id"] = saved["id"]
-    def post(path, body):
-        req = Request(url + path, data=json.dumps(body, ensure_ascii=False).encode(), headers={"Content-Type": "application/json", "Authorization": "Bearer " + token})
+    def post(path, body, *, browser=False):
+        headers = {"Content-Type": "application/json"}
+        if browser:
+            headers.update({"Origin": url, "X-Prompt-Library": "1"})
+        else:
+            headers["Authorization"] = "Bearer " + token
+        req = Request(url + path, data=json.dumps(body, ensure_ascii=False).encode(), headers=headers)
         with urlopen(req, timeout=30) as response:
             return json.load(response)
     entry_path = "/api/entries/" + saved["id"]
+    assert post("/api/favorites", {"id": saved["id"], "favorite": True}, browser=True)["favorites"] == [saved["id"]]
+    assert post("/api/language-preference", {"language": "en"}, browser=True) == {"language": "en"}
+    try:
+        post("/api/language-preference", {"language": ["en"]}, browser=True)
+    except HTTPError as error:
+        assert error.code == 400
+    else:
+        raise AssertionError("语言设置必须拒绝非字符串")
     version = post(entry_path + "/versions", {"optimized": "安装后追加的新版本", "reason": "验证独立安装包追加版本", "expected_version": "v001", "based_on_version": "v001"})
     assert version["version"] == "v002"
     current = get(entry_path)
@@ -166,12 +195,36 @@ def main():
     assert "MCP 安装拆解" in rows[9]["analysis"]
     assert get("/api/library")["entry_count"] == expected_entries + 2
     report["mcp"] = "installed executable discovered 8 tools; save/read/version/source/analysis calls and readback passed"
+    restored = work / "还原 素材库"
+    with urlopen(url + "/download/library-backup", timeout=30) as response:
+        backup = response.read()
+    with ZipFile(BytesIO(backup)) as archive:
+        manifest = json.loads(archive.read("backup-manifest.json"))
+        assert "Liubai library backup" in archive.read("RESTORE.txt").decode("utf-8")
+        assert all(sha256(archive.read(row["path"])).hexdigest() == row["sha256"] for row in manifest["files"])
+        assert "desktop/.runtime/api-token" not in archive.namelist()
+        archive.extractall(restored)
     before = {str(p.relative_to(data)): sha256(p.read_bytes()).hexdigest() for p in (data / "entries").rglob("*") if p.is_file()}
     command([exe, "--data-root", data, "--stop", "--no-browser"])
     process.wait(timeout=15)
-    install()
+    restored_process = launch(restored)
+    try:
+        catalogue = get("/api/library")
+        assert catalogue["entry_count"] == expected_entries + 2 and catalogue["favorites"] == [saved["id"]]
+        restored_prompt = get(entry_path)
+        assert restored_prompt["original"] == original and restored_prompt["selected_version"] == "v002"
+        assert len(restored_prompt["record"]["source_notes"]) == 1 and "安装验证拆解" in restored_prompt["analysis"]
+        assert len(get("/api/references")["references"]) == expected_references
+    finally:
+        command([exe, "--data-root", restored, "--stop", "--no-browser"])
+        restored_process.wait(timeout=15)
+    report["backup_restore"] = "ZIP hashes, original, versions, analysis, source, favorites and references verified from a fresh data root"
+    install("chinesesimplified", ("留白.lnk", "关闭留白.lnk"))
+    report["installer_languages"] = ["english", "chinesesimplified"]
     process = launch()
     assert get("/api/library")["entry_count"] == expected_entries + 2
+    assert get("/api/language-preference") == {"language": "en"}
+    report["language_preference_persisted"] = True
     assert all(sha256((data / name).read_bytes()).hexdigest() == digest for name, digest in before.items())
     report["reinstall_preserves_data"] = True
     report["process_id"] = process.pid

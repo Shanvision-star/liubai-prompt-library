@@ -183,3 +183,197 @@ def test_html_is_protected_by_content_security_policy(endpoint):
     assert b"<script src=\"/app.js\" defer>" in body
     assert "script-src 'self'" in headers["Content-Security-Policy"]
     assert headers["X-Content-Type-Options"] == "nosniff"
+
+def test_feedback_window_offers_user_initiated_private_and_public_channels(endpoint):
+    status, page, _ = request(endpoint + "/")
+    html = page.decode("utf-8")
+    assert status == 200
+    assert 'id="feedback-dialog"' in html
+    assert 'mailto:rome@chatpaperhub.com' in html
+    assert 'https://github.com/Shanvision-star/liubai-prompt-library/issues/new/choose' in html
+    status, script, _ = request(endpoint + "/feedback.js")
+    assert status == 200 and b'showModal' in script
+
+
+def test_entry_exposes_english_translation_without_changing_chinese(library):
+    folder = library.root / 'entries' / 'PRM-0001'
+    path = folder / 'record.json'
+    record = json.loads(path.read_text(encoding='utf-8'))
+    en = b'English translation'
+    (folder / 'translation.en.md').write_bytes(en)
+    record['translations'] = {'en': {'status': 'ready', 'file': 'translation.en.md',
+         'source_sha256': sha256((folder / 'original.md').read_bytes()).hexdigest(),
+         'sha256': sha256(en).hexdigest()}}
+    path.write_text(json.dumps(record), encoding='utf-8')
+    detail = library.entry('PRM-0001')
+    assert detail['reading_pair_en']['translation'] == en.decode()
+    assert detail['reading_pair']['translation_status'] == 'missing'
+
+
+def test_catalogue_can_find_verified_english_translation(library):
+    folder = library.root / 'entries' / 'PRM-0001'
+    path = folder / 'record.json'
+    record = json.loads(path.read_text(encoding='utf-8'))
+    en = b'unique english search phrase'
+    (folder / 'translation.en.md').write_bytes(en)
+    record['translations'] = {'en': {'status': 'ready', 'file': 'translation.en.md',
+         'source_sha256': sha256((folder / 'original.md').read_bytes()).hexdigest(),
+         'sha256': sha256(en).hexdigest()}}
+    path.write_text(json.dumps(record), encoding='utf-8')
+    assert en.decode() in library.catalogue()['entries'][0]['search_text']
+
+
+def test_language_resources_and_system_locale_are_local(endpoint):
+    status, payload, headers = request(endpoint + '/api/system-language')
+    assert status == 200
+    assert set(json.loads(payload)) == {'language'}
+    status, script, _ = request(endpoint + '/language-choice.js')
+    assert status == 200 and b'resolveLanguage' in script
+    csp = headers['Content-Security-Policy']
+    assert "connect-src 'self';" in csp and "ipwho.is" not in csp
+
+
+def test_language_ui_resources_are_served(endpoint):
+    status, html, _ = request(endpoint + '/')
+    assert status == 200 and b'id="language-select"' in html
+    status, script, _ = request(endpoint + '/i18n.js')
+    assert status == 200 and b'LiubaiI18n' in script
+
+
+def test_motion_english_catalogue_is_bound_to_the_verified_original(library):
+    folder = library.root / 'entries' / 'PRM-0001'
+    path = folder / 'record.json'
+    record = json.loads(path.read_text(encoding='utf-8'))
+    original = b'Please use "Montage" (example).\nWhat it is: A run of short shots.\n'
+    (folder / 'original.md').write_bytes(original)
+    record['original']['sha256'] = sha256(original).hexdigest()
+    record['title'] = '示例'
+    record['summary'] = '说明'
+    record['source'] = {'type':'licensed_upstream','repository':'showheyohtaki/motion-prompt',
+                        'url':'https://github.com/showheyohtaki/motion-prompt/blob/commit/api/v1/en/p/192.txt'}
+    path.write_text(json.dumps(record), encoding='utf-8')
+    row = library.catalogue()['entries'][0]
+    assert row['english_catalogue'] == {'title':'Montage','summary':'A run of short shots.','original_language':'en'}
+    (folder / 'original.md').write_bytes(original + b'changed')
+    assert library.catalogue()['entries'][0]['english_catalogue'] is None
+
+
+def test_language_preference_persists_in_local_runtime_and_validates(endpoint, library):
+    headers = {'Origin':endpoint, 'X-Prompt-Library':'1', 'Content-Type':'application/json'}
+    assert request(endpoint + '/api/language-preference')[0] == 200
+    status, _, _ = request(endpoint + '/api/language-preference', {'language':'en'}, headers)
+    assert status == 200
+    assert json.loads(request(endpoint + '/api/language-preference')[1])['language'] == 'en'
+    assert server.Library(library.root, library.state_dir).language_preference() == 'en'
+    assert request(endpoint + '/api/language-preference', {'language':'fr'}, headers)[0] == 400
+    assert request(endpoint + '/api/language-preference', {'language':'auto'}, headers)[0] == 200
+    assert json.loads(request(endpoint + '/api/language-preference')[1])['language'] == 'auto'
+    assert request(endpoint + '/api/language-preference', {'language':'zh'}, {'Content-Type':'application/json'})[0] == 403
+    library.language_path.write_text('{"language":[]}', encoding='utf-8')
+    assert request(endpoint + '/api/language-preference')[0] == 400
+    assert json.loads(library.language_path.read_text(encoding='utf-8')) == {'language': []}
+
+
+def test_curated_english_metadata_matches_original_hash(library, tmp_path, monkeypatch):
+    folder = library.root / 'entries' / 'PRM-0001'
+    original = (folder / 'original.md').read_bytes()
+    metadata = {'PRM-0001': {'original_sha256':sha256(original).hexdigest(), 'title':'Example', 'summary':'Example summary', 'original_language':'en', 'title_source_sha256':sha256('示例'.encode()).hexdigest()}}
+    (tmp_path / 'public-en.json').write_text(json.dumps(metadata),encoding='utf-8')
+    monkeypatch.setattr(server, 'WEB_ROOT', tmp_path)
+    assert library.catalogue()['entries'][0]['english_catalogue']['title'] == 'Example'
+    (folder / 'original.md').write_bytes(original+b'!')
+    assert library.catalogue()['entries'][0]['english_catalogue'] is None
+
+
+def test_compact_settings_do_not_automatically_query_ip(endpoint):
+    status, html, _ = request(endpoint + '/')
+    assert status == 200 and b'id="settings-menu"' in html
+    assert b'ipwho.is' not in html and b'IPWhois' not in html
+    status, script, _ = request(endpoint + '/language-ui.js')
+    assert status == 200 and b'lookupCountry' not in script
+
+
+def test_bundled_english_catalogue_is_hash_bound_to_public_originals():
+    project = Path(__file__).resolve().parents[2]
+    curated = json.loads((project / 'desktop/web/public-en.json').read_text(encoding='utf-8'))
+    catalogue = json.loads((project / 'bundled-library/index.json').read_text(encoding='utf-8'))
+    by_id = {item['id']:item for item in catalogue['entries']}
+    assert len(curated) == 60
+    for entry_id, row in curated.items():
+        original = (project / 'bundled-library' / by_id[entry_id]['original_file']).read_bytes()
+        assert sha256(original).hexdigest() == row['original_sha256']
+        assert sha256(by_id[entry_id]['title'].encode('utf-8')).hexdigest() == row['title_source_sha256']
+        assert sha256(by_id[entry_id].get('summary','').encode('utf-8')).hexdigest() == row['summary_source_sha256']
+        assert row['title'].strip() and row['summary'].strip()
+        assert row['original_language'] in {'en','unknown'}
+        assert row['original_language'] == 'en' or row.get('translation')
+        if 'translation' in row:
+            assert sha256(row['translation'].encode('utf-8')).hexdigest() == row['translation_sha256']
+
+
+def test_bad_catalogue_translation_never_hides_user_originals(library, tmp_path, monkeypatch):
+    (tmp_path / 'public-en.json').write_text('{invalid', encoding='utf-8')
+    monkeypatch.setattr(server, 'WEB_ROOT', tmp_path)
+    result = library.catalogue()
+    assert result['entry_count'] == 1
+    assert '原文不改' in result['entries'][0]['search_text']
+
+
+def test_bundled_english_text_is_used_only_for_matching_original(library, tmp_path, monkeypatch):
+    original=(library.root / 'entries/PRM-0001/original.md').read_bytes()
+    english='Translated text'; data=english.encode('utf-8')
+    curated={'PRM-0001':{'original_sha256':sha256(original).hexdigest(),'title':'Example','summary':'',
+        'original_language':'unknown','translation':english,'translation_sha256':sha256(data).hexdigest()}}
+    (tmp_path/'public-en.json').write_text(json.dumps(curated),encoding='utf-8')
+    monkeypatch.setattr(server,'WEB_ROOT',tmp_path)
+    assert library.entry('PRM-0001')['reading_pair_en']['translation'] == english
+    curated['PRM-0001']['translation']='altered'
+    (tmp_path/'public-en.json').write_text(json.dumps(curated),encoding='utf-8')
+    assert library.entry('PRM-0001')['reading_pair_en']['translation'] == ''
+
+
+def test_curated_title_does_not_hide_a_user_renamed_item(library, tmp_path, monkeypatch):
+    original = (library.root / 'entries/PRM-0001/original.md').read_bytes()
+    metadata = {'PRM-0001': {'original_sha256':sha256(original).hexdigest(),
+        'title_source_sha256':sha256('旧标题'.encode()).hexdigest(), 'title':'Old title', 'summary':'', 'original_language':'unknown'}}
+    (tmp_path / 'public-en.json').write_text(json.dumps(metadata),encoding='utf-8')
+    monkeypatch.setattr(server,'WEB_ROOT',tmp_path)
+    assert library.catalogue()['entries'][0]['english_catalogue'] is None
+
+
+def test_upstream_title_extraction_does_not_replace_user_title(library):
+    folder=library.root/'entries/PRM-0001'
+    path=folder/'record.json'; record=json.loads(path.read_text(encoding='utf-8'))
+    original=b'Please use "Montage".\nWhat it is: Short shots.\n'
+    (folder/'original.md').write_bytes(original)
+    record['title']='Source title'
+    record['original']['sha256']=sha256(original).hexdigest()
+    record['source']={'type':'licensed_upstream','repository':'showheyohtaki/motion-prompt','url':'https://github.com/showheyohtaki/motion-prompt/blob/commit/api/v1/en/p/1.txt'}
+    path.write_text(json.dumps(record),encoding='utf-8')
+    assert library.catalogue()['entries'][0]['english_catalogue'] is None
+
+
+def test_curated_summary_does_not_hide_user_edited_summary(library, tmp_path, monkeypatch):
+    original=(library.root/'entries/PRM-0001/original.md').read_bytes()
+    metadata={'PRM-0001':{'original_sha256':sha256(original).hexdigest(),
+       'title_source_sha256':sha256('示例'.encode()).hexdigest(),
+       'summary_source_sha256':sha256('旧说明'.encode()).hexdigest(),
+       'title':'Example','summary':'Old description','original_language':'unknown'}}
+    (tmp_path/'public-en.json').write_text(json.dumps(metadata),encoding='utf-8')
+    monkeypatch.setattr(server,'WEB_ROOT',tmp_path)
+    assert library.catalogue()['entries'][0]['english_catalogue']['summary'] is None
+
+
+def test_public_translations_preserve_source_links_and_numeric_tokens():
+    import re
+    project=Path(__file__).resolve().parents[2]
+    curated=json.loads((project/'desktop/web/public-en.json').read_text(encoding='utf-8'))
+    for entry_id,row in curated.items():
+        if 'translation' not in row:
+            continue
+        original=(project/'bundled-library/entries'/entry_id/'original.md').read_text(encoding='utf-8')
+        translated=row['translation']
+        for url in re.findall(r'https?://[^\s)]+', original):
+            assert url in translated, (entry_id,url)
+        for number in re.findall(r'(?<!\w)\d+(?:\.\d+)?', original):
+            assert number in translated, (entry_id,number)
