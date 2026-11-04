@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "id": "PRM-0334",
+  "title": "Motion Prompt #092｜页面转场 · Page transition",
+  "summary": "连接两个页面的过渡动画",
+  "category_id": "motion_prompt_mit",
+  "classification_status": "classified",
+  "tags": [
+    "Motion Prompt",
+    "落地页与网页效果",
+    "中英对照",
+    "MIT"
+  ],
+  "source": {
+    "type": "licensed_upstream",
+    "repository": "showheyohtaki/motion-prompt",
+    "url": "https://github.com/showheyohtaki/motion-prompt/blob/7819d3879eb7d5a1475c11c001bedffb5cab64af/api/v1/en/p/092.txt",
+    "commit": "7819d3879eb7d5a1475c11c001bedffb5cab64af",
+    "license": "MIT",
+    "license_status": "allowed",
+    "provenance_file": "SOURCE.md",
+    "notice_file": "LICENSE.txt",
+    "note": "Shohei Ohtaki 原文；中文译文和拆解由留白整理，效果未实测。"
+  },
+  "created_at": "2026-11-04T09:00:00+08:00",
+  "updated_at": "2026-11-04T09:00:00+08:00",
+  "original": {
+    "file": "original.md",
+    "sha256": "95b0c6a79b738ea5879a2fd48bb7ef740f131d89575bdbf2dcc47cc0c83d0456",
+    "byte_count": 1397,
+    "encoding": "UTF-8"
+  },
+  "translation": {
+    "file": "translation-zh.md",
+    "status": "ready",
+    "language": "zh-Hans",
+    "source_sha256": "95b0c6a79b738ea5879a2fd48bb7ef740f131d89575bdbf2dcc47cc0c83d0456",
+    "sha256": "0bc4e6b1efce7ecab55a09fd4712e4be9af8872c19bc86960e2c1dce7bb7e119"
+  },
+  "related_ids": [],
+  "variables": [],
+  "applicable_models": [],
+  "open_questions": [],
+  "versions": [
+    {
+      "version": "v001",
+      "file": "optimized-v001.md",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "based_on": "original",
+      "reason": "保存来源原文副本，未改写",
+      "optimization_status": "not_optimized",
+      "evaluation_status": "untested",
+      "sha256": "95b0c6a79b738ea5879a2fd48bb7ef740f131d89575bdbf2dcc47cc0c83d0456"
+    }
+  ],
+  "optimization_status": "not_optimized",
+  "evaluation_status": "untested",
+  "loop_review": {
+    "reviewed_version": "v001",
+    "applicability": "conditional",
+    "max_rounds": 2,
+    "reminder": "一次只改变一个动作参数。按拆解页的检查点对比；无改善时停止并记录差异。",
+    "effectiveness_verified": false
+  },
+  "feedback": [],
+  "publication": {
+    "authorized_by_owner": true,
+    "edition": "public-2026.11.04",
+    "original_kind": "licensed_upstream"
+  }
+}

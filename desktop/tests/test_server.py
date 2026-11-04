@@ -61,6 +61,29 @@ def test_catalogue_reads_real_entries_and_full_text(library):
     assert library.entry("PRM-0001")["optimized"] == "请分析 {{主题}}"
 
 
+def test_regular_material_has_original_bound_reading_pair(library):
+    detail = library.entry("PRM-0001")
+    assert detail["reading_pair"]["original"] == detail["original"]
+    assert detail["reading_pair"]["translation_status"] == "missing"
+    assert detail["reading_pair"]["translation"] == ""
+
+
+def test_regular_translation_is_not_an_optimized_rewrite(library):
+    folder = library.root / "entries" / "PRM-0001"
+    path = folder / "record.json"
+    record = json.loads(path.read_text(encoding="utf-8"))
+    translated = "对应的中文译文，保留原文中的 SVG 代码。"
+    (folder / "translation.zh.md").write_bytes(translated.encode("utf-8"))
+    record["translation"] = {"status": "ready", "file": "translation.zh.md",
+                             "source_sha256": sha256((folder / "original.md").read_bytes()).hexdigest(),
+                             "sha256": sha256(translated.encode()).hexdigest()}
+    path.write_text(json.dumps(record), encoding="utf-8")
+    detail = library.entry("PRM-0001")
+    assert detail["reading_pair"]["translation"] == translated
+    assert detail["reading_pair"]["translation"] != detail["optimized"]
+    assert translated in library.catalogue()["entries"][0]["search_text"]
+
+
 def test_favorite_persists_without_changing_sources(library):
     before = {p: sha256(p.read_bytes()).digest() for p in library.root.rglob("*") if p.is_file()}
     library.set_favorite("PRM-0001", True)
@@ -87,6 +110,27 @@ def test_original_download_preserves_bytes(endpoint, library):
     assert status == 200
     assert body == (library.root / "entries/PRM-0001/original.md").read_bytes()
     assert "attachment" in headers["Content-Disposition"]
+
+
+def test_motion_curation_cannot_be_exported_as_source(endpoint, library):
+    path=library.root/'entries/PRM-0001/record.json'
+    record=json.loads(path.read_text(encoding='utf-8'));record['source']['url']='https://prompt-motion.com/example'
+    path.write_text(json.dumps(record),encoding='utf-8')
+    assert library.entry('PRM-0001')['source_prompt']['copyable'] is False
+    assert request(endpoint+'/download/PRM-0001/original')[0]==409
+
+
+def test_motion_original_download_uses_exact_source_body(endpoint, library):
+    path=library.root/'entries/PRM-0001/record.json'
+    raw='Animate a circle.\nFade out.'
+    for name,text in [('source.txt',raw),('translation.txt','圆形动画，随后淡出。')]:
+        (path.parent/name).write_bytes(text.encode('utf-8'))
+    record=json.loads(path.read_text(encoding='utf-8'));record['source']['url']='https://prompt-motion.com/example'
+    record['motion_source']={'status':'complete','original_file':'source.txt','original_sha256':sha256(raw.encode()).hexdigest(),
+                             'translation_file':'translation.txt','translation_sha256':sha256('圆形动画，随后淡出。'.encode()).hexdigest()}
+    path.write_text(json.dumps(record),encoding='utf-8')
+    status,body,_=request(endpoint+'/download/PRM-0001/original')
+    assert status==200 and body.decode('utf-8')==raw
 
 
 @pytest.mark.parametrize("path", ["/api/entries/PRM-9999", "/api/entries/../../index.json", "/desktop/.runtime/favorites.json", "/index.json"])

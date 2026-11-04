@@ -131,7 +131,7 @@ def test_validator_accepts_matching_files_and_is_read_only(public_fixture):
     assert before == {str(p): p.read_bytes() for p in bundle.parent.rglob("*") if p.is_file()}
 
 
-@pytest.mark.parametrize("fault", ["extra_entry", "hash", "binding", "brand", "escaped_brand", "loose_file", "old_card", "record_version", "default_missing", "default_invalid", "default_duplicate"])
+@pytest.mark.parametrize("fault", ["extra_entry", "hash", "binding", "brand", "escaped_brand", "loose_file", "old_card", "record_version", "default_missing", "default_invalid", "default_duplicate", "translation_binding", "translation_hash"])
 def test_validator_rejects_material_outside_selection_or_integrity_failure(public_fixture, fault):
     bundle, learning, selection = public_fixture
     if fault == "extra_entry":
@@ -172,6 +172,16 @@ def test_validator_rejects_material_outside_selection_or_integrity_failure(publi
         elif fault == "default_duplicate":
             taxonomy["categories"].extend([{"id": "uncategorized", "name": "未分类"}, {"id": "uncategorized", "name": "待归档"}])
         write_json(path, taxonomy)
+        refresh_manifest(bundle)
+    elif fault.startswith("translation_"):
+        path = bundle / "entries/PRM-0001/record.json"
+        record = json.loads(path.read_text(encoding="utf-8"))
+        translated = path.parent / "translation-zh.md"
+        translated.write_bytes("对应中文".encode("utf-8"))
+        record["translation"] = {"status": "ready", "file": translated.name,
+                                 "source_sha256": "0" * 64 if fault == "translation_binding" else record["original"]["sha256"],
+                                 "sha256": "0" * 64 if fault == "translation_hash" else digest(translated.read_bytes())}
+        write_json(path, record)
         refresh_manifest(bundle)
     else:
         path = bundle / "entries/PRM-0001/record.json"

@@ -116,6 +116,18 @@ def validate(collection, learning, selection):
                 errors.append(f"原文路径与记录不一致：{entry}")
             if digest(original) != record["original"]["sha256"] or digest(original) != item["original_sha256"]:
                 errors.append(f"原文哈希不一致：{entry}")
+            translation = record.get("translation")
+            if translation is not None:
+                if translation["source_sha256"] != digest(original):
+                    errors.append(f"译文未绑定当前原文：{entry}")
+                if translation["status"] == "ready":
+                    translated = safe_file(base, translation["file"])
+                    if (not translated.is_relative_to(base) or translated == original
+                            or digest(translated) != translation["sha256"]
+                            or not translated.read_text(encoding="utf-8-sig").strip()):
+                        errors.append(f"译文内容或路径无效：{entry}")
+                elif translation["status"] != "already_chinese":
+                    errors.append(f"译文状态无效：{entry}")
             versions = record["versions"]
             if len({v["version"] for v in versions}) != len(versions):
                 errors.append(f"保存版本编号重复：{entry}")

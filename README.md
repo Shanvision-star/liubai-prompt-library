@@ -2,9 +2,9 @@
 
 留白是一款本地提示词收藏、学习与复用工具。把提示词保存下来，按用途检索，读懂设计逻辑，再复制或交给自己的 Codex、Claude Code 使用。原文、改编版本、来源和分析分别保存，让每一次复用都可追溯。界面沿用简约白、中性灰和磨砂玻璃风格。
 
-当前版内置 **60 条素材、6 份参考、60 张教学卡**，筛除了商业与营销素材。教学包括结构、设计取舍、单变量反例、迁移练习与有界 Loop；属于分析解释，生成与学习效果仍待实测。新收藏可通过自己的 AI 生成拆解并回写；留白不提供模型额度。
+当前公开版内置 **252 条素材、6 份参考、252 张教学卡**。新增 [192 条 Motion Prompt 双语素材](docs/MOTION-PROMPT.md)，覆盖 UI 动效、镜头与构图等，可读英文原文、中文译文和逐条设计拆解。新收藏可通过自己的 AI 生成拆解并回写；留白不提供模型额度。
 
-**Windows 0.7.0** 安装包包含新的使用说明与全部 8 个 MCP 工具。已在 GitHub Windows runner 和本机 Windows 11 实际安装，核验说明页、新版本、来源补充、分析回写及数据保留。尚未完成独立干净 Windows 10/11 虚拟机与 5 位目标用户验收，详见 [验证记录](docs/VALIDATION.md)。
+**Windows 0.7.1** 延续 macOS 风格的磨砂玻璃布局，统一各分类的原文与译文阅读。主按钮只复制原提示词，来源可直接打开。程序支持 8 个 MCP 工具，安装包的核验范围见 [验证记录](docs/VALIDATION.md)。
 
 **Chinese prompt collection & design breakdowns · Windows installer · Local-first · REST API + MCP**
 
@@ -20,7 +20,7 @@
 
 ### Windows：下载安装即可使用
 
-下载 [Windows 安装包](https://github.com/Shanvision-star/liubai-prompt-library/releases/latest) 中的 `Liubai-Setup-0.7.0-windows-x64.exe`，运行安装向导，然后从开始菜单打开“留白”。**不需要安装 Python、Node 或数据库，也不需要模型 API 密钥。** 目标系统为 Windows 10/11 x64。
+下载 [Windows 安装包](https://github.com/Shanvision-star/liubai-prompt-library/releases/latest) 中的 `Liubai-Setup-0.7.1-windows-x64.exe`，运行安装向导，然后从开始菜单打开“留白”。**不需要安装 Python、Node 或数据库，也不需要模型 API 密钥。** 目标系统为 Windows 10/11 x64。
 
 首次启动会校验并准备该安装包附带的素材，显示准备窗口；随后打开应用。可浏览复用版、设计逻辑、Loop 和来源，复制后用于自己的工具。素材数量以安装包版本为准，已有库不会自动替换为新版公开集。
 
@@ -89,6 +89,12 @@ python -X utf8 start.py --data-root /absolute/path/to/my-library --port 8767
 支持GitHub搜索与文件链接导入、收藏、关注、原文优先阅读、拆解卡、版本差异和采用预览。上游变化进入新的快照与待分析队列，个人版本不会被静默覆盖。
 
 公开发行版内置库主人授权的整理成果，详见[素材集范围与许可](bundled-library/README.md)。已核对许可的 GitHub 来源保留原文与署名；Prompt Motion 来源只公开整理者的原创复用方案、拆解和链接，不分发许可未明确的站点原文及逐句译文。导入新来源时仍需核对许可和具体使用条件。
+
+0.7.1 将所有素材分类统一为“原文在上、中文在下”，共用 macOS 风格的磨砂玻璃与阅读布局。译文绑定当前原文 SHA-256，主复制按钮只取原文，复用改写和分析各有明确复制入口。没有译文时如实提示；已为中文时不重复生成。本机补充的私人译文不进入公开素材包。
+
+新增的 [Motion Prompt](docs/MOTION-PROMPT.md) 来自 Shohei Ohtaki 的 MIT 授权 GitHub 项目，每条保留固定提交、作者署名和许可；留白提供中文译文及文本拆解，效果尚未实测。
+
+Prompt Motion 网站条目可另存经核对的原文、中文译文与独立分析，来源链接直接跳转。仅有摘录时明确标注并禁用全文复制，旧整理稿与历史版本继续保留。这个显示能力不表示公开安装包已附带站点全文，详见[来源层说明](docs/MOTION-SOURCES.md)。
 
 增量检查与调度支持见 [参考库维护说明](docs/REFERENCE-UPDATES.md)。**独立安装默认没有已注册的调度器**；登记调度编号不等于创建定时任务。实际分析能力不可用时保持“待分析”，不使用固定文案模拟AI分析。
 

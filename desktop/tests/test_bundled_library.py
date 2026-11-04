@@ -23,12 +23,17 @@ def test_public_collection_is_readable_and_keeps_user_changes(tmp_path):
     assert install_collection(tmp_path)
     assert (tmp_path / "README.md").read_text(encoding="utf-8") == "用户说明保留"
     library = Library(tmp_path)
-    assert library.catalogue()["entry_count"] == 60
+    manifest = json.loads((COLLECTION / "manifest.json").read_text(encoding="utf-8"))
+    assert library.catalogue()["entry_count"] == manifest["entry_count"]
     assert len(ReferenceStore(tmp_path).catalogue()["references"]) == 6
     entry = library.entry("PRM-0218")
     assert entry["selected_version"] == "v002" and entry["analysis"]
     assert "非网站提示词原文" in entry["original"]
     assert "原语言短引" not in entry["original"]
+    motion = library.entry("PRM-0243")
+    assert motion["reading_pair"]["translation_status"] == "ready"
+    assert "Pop-in" in motion["original"] and "弹跳" in motion["reading_pair"]["translation"]
+    assert motion["teaching_status"] == "ready" and "角标" in motion["analysis"]
     saved = PromptStore(tmp_path).save_prompt({"title": "安装后的个人内容", "original": "不随升级覆盖"})
     before = (tmp_path / "index.json").read_bytes()
     assert not install_collection(tmp_path)

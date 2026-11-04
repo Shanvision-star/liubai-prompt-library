@@ -29,7 +29,11 @@ jobs:
       - name: Build installer
         run: python -X utf8 tools/build_windows.py --iscc "$env:LIUBAI_ISCC" --output dist/windows
       - name: Install, run, reinstall and uninstall
-        run: python -X utf8 tools/smoke_windows_installer.py --installer dist/windows/release/Liubai-Setup-0.7.0-windows-x64.exe --workdir "$env:RUNNER_TEMP/liubai-smoke"
+        shell: pwsh
+        run: |
+          $installers = @(Get-ChildItem dist/windows/release -Filter 'Liubai-Setup-*-windows-x64.exe')
+          if ($installers.Count -ne 1) { throw 'Expected one Windows installer' }
+          python -X utf8 tools/smoke_windows_installer.py --installer $installers[0].FullName --workdir "$env:RUNNER_TEMP/liubai-smoke"
       - uses: actions/upload-artifact@v4
         with:
           name: liubai-windows-installer

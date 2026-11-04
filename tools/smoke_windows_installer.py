@@ -76,6 +76,14 @@ def main():
     prompt = get("/api/entries/PRM-0218")
     assert prompt["selected_version"] == "v002" and prompt["analysis"] and "{{主体或项目}}" in prompt["optimized"]
     assert prompt["teaching_status"] == "ready" and "只改一个条件" in prompt["analysis"]
+    motion = get("/api/entries/PRM-0243")
+    pair = motion["reading_pair"]
+    assert pair["copyable"] and pair["translation_status"] == "ready"
+    assert pair["original"] == motion["original"] and "Pop-in" in pair["original"] and "弹跳" in pair["translation"]
+    assert motion["teaching_status"] == "ready" and "角标" in motion["analysis"]
+    with urlopen(url + "/download/PRM-0243/original", timeout=30) as response:
+        assert sha256(response.read()).hexdigest() == motion["record"]["original"]["sha256"]
+    report["bilingual_reading"] = "upstream original, matching Chinese translation, source and version-bound analysis"
     assets = installation / "_internal"
     assert "PRM-0218" in (assets / "learning-library/learning-route.md").read_text(encoding="utf-8")
     teaching = json.loads((assets / "learning-library/checksums.json").read_text(encoding="utf-8"))

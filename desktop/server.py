@@ -20,6 +20,8 @@ from integration_auth import integration_token
 from library_export import APP_VERSION, app_info, export_library
 from runtime_paths import resource_root
 from learning_store import teaching_card
+from motion_source import source_prompt
+from translation_store import reading_pair
 
 APP_ID = "prompt-library-desktop"
 WEB_ROOT = resource_root() / "desktop" / "web"
@@ -126,6 +128,8 @@ class Library:
             teaching = {"status": analysis_status, "revision": chosen.get("analysis_revision")}
         return {
             "item": item, "record": record, "selected_version": selected_version,
+            "source_prompt": source_prompt(folder, record),
+            "reading_pair": reading_pair(folder, record, original, original_sha),
             "original": original,
             "optimized_markdown": optimized_md, "optimized": optimized_md if chosen.get("optimization_status") in {"not_optimized", "provided"} or chosen.get("reference_provenance") else prompt_body(optimized_md),
             "original_sha256": original_sha, "optimized_sha256": optimized_sha,
@@ -145,7 +149,10 @@ class Library:
             source = record.get("source", {})
             rows.append({
                 **item, "source_label": source.get("repository") or "我的原创素材",
-                "search_text": "\n".join([entry["original"], entry["optimized"], entry["analysis"]]),
+                "search_text": "\n".join([entry["original"], entry["optimized"], entry["analysis"],
+                                           (entry.get("source_prompt") or {}).get("original", ""),
+                                           entry["reading_pair"]["translation"],
+                                           (entry.get("source_prompt") or {}).get("translation", "")]),
             })
         valid_ids = {e["id"] for e in rows}
         return {
@@ -254,6 +261,11 @@ class RequestHandler(BaseHTTPRequestHandler):
             if download:
                 entry_id, variant = download.groups()
                 entry = self.server.library.entry(entry_id, version)
+                motion = entry.get("source_prompt")
+                if variant == "original" and motion:
+                    if not motion["copyable"]:
+                        return self.reply(409, {"error":"来源全文未收录，不能把摘录或整理稿导出为原文。"})
+                    return self.reply(200, motion["original"].encode("utf-8"), "text/plain; charset=utf-8", f"{entry_id}-source-original.txt")
                 item = entry["item"]
                 relative = item["original_file"] if variant == "original" else item["optimized_file"]
                 if variant == "optimized" and version:

@@ -40,6 +40,13 @@
       "id": "uncategorized",
       "name": "待分类",
       "description": "用途信息不足，先保留原文并记录待确认项"
+    },
+    {
+      "id": "motion_prompt_mit",
+      "name": "Motion Prompt · 动效与镜头",
+      "description": "Shohei Ohtaki 的 MIT 动效词典：动态图形、UI、网页区块、镜头和构图的原文、译文与拆解",
+      "custom": true,
+      "created_at": "2026-11-04T09:00:00+08:00"
     }
   ]
 }

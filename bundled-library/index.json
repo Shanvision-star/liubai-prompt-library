@@ -3,8 +3,8 @@
   "library_name": "留白",
   "timezone": "Asia/Shanghai",
   "created_date": "2026-10-23",
-  "updated_at": "2026-10-31T00:00:00+08:00",
-  "entry_count": 60,
+  "updated_at": "2026-11-04T09:00:00+08:00",
+  "entry_count": 252,
   "entries": [
     {
       "id": "PRM-0001",
@@ -1456,6 +1456,3846 @@
       "evaluation_status": "untested",
       "created_at": "2026-10-27T11:41:24+08:00",
       "updated_at": "2026-10-27T11:41:24+08:00"
+    },
+    {
+      "id": "PRM-0243",
+      "title": "Motion Prompt #001｜弹性入场 · Pop-in",
+      "summary": "元素弹跳着出现",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0243/record.json",
+      "original_file": "entries/PRM-0243/original.md",
+      "original_sha256": "2096c94110744dedf106ecb3abb6175216a10237aac052fc2bcbf989d00880bc",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0243/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0244",
+      "title": "Motion Prompt #002｜交错动画 · Stagger",
+      "summary": "多个元素错开时间依次出现",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0244/record.json",
+      "original_file": "entries/PRM-0244/original.md",
+      "original_sha256": "9d2cab9dfd2f5b6966d6063c9f5bfe2da34578ce5a8c5e5312dc9ef4a22a5912",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0244/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0245",
+      "title": "Motion Prompt #003｜放射爆发 · Burst",
+      "summary": "元素出现时向外迸出线条和圆点",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0245/record.json",
+      "original_file": "entries/PRM-0245/original.md",
+      "original_sha256": "aaba9c63663bcc7f72f831b63e5d36707cef88f6b3b4b6b37f7006bf0b06de80",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0245/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0246",
+      "title": "Motion Prompt #004｜线条描绘 · Line draw",
+      "summary": "线条像被画出来一样逐渐延伸",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0246/record.json",
+      "original_file": "entries/PRM-0246/original.md",
+      "original_sha256": "2e5ff0b65f6ce3bb146425901baecbb166d0850bca3b4cb7db654f92a0e6cd25",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0246/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0247",
+      "title": "Motion Prompt #005｜遮罩显现 · Mask reveal",
+      "summary": "文字从不可见的边界后移出",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0247/record.json",
+      "original_file": "entries/PRM-0247/original.md",
+      "original_sha256": "29568a301b54c17e158d5ee379a54f3572077003a1ce87cc587e279a3934c893",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0247/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0248",
+      "title": "Motion Prompt #006｜打字机效果 · Typewriter",
+      "summary": "文字像打字一样逐字出现",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0248/record.json",
+      "original_file": "entries/PRM-0248/original.md",
+      "original_sha256": "a02f8a533ed87441befd238bb4a0db53be8792fee93b830ac20538eb2a55d6b6",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0248/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0249",
+      "title": "Motion Prompt #007｜数字递增 · Count-up",
+      "summary": "数字快速增长到目标值",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0249/record.json",
+      "original_file": "entries/PRM-0249/original.md",
+      "original_sha256": "2b6b51a6c28bb8d06adc1c41849eaa075e648ee1de7552339d9cbf0f9a537b2c",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0249/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0250",
+      "title": "Motion Prompt #008｜动态排版 · Kinetic typography",
+      "summary": "文字随含义和节奏移动、缩放与旋转",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0250/record.json",
+      "original_file": "entries/PRM-0250/original.md",
+      "original_sha256": "d1f0731d5581945a0406f39b9d586edaf44f52ef320063162e426c006f91652c",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0250/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0251",
+      "title": "Motion Prompt #009｜缓动 · Easing",
+      "summary": "动作通过加减速变化而非匀速移动",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0251/record.json",
+      "original_file": "entries/PRM-0251/original.md",
+      "original_sha256": "fd3b214aff9a4758652ff3e146d4913c48860d653de45b16b1647654b741bd9c",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0251/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0252",
+      "title": "Motion Prompt #010｜过冲回弹 · Overshoot",
+      "summary": "越过目标后回到目标位置并停稳",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0252/record.json",
+      "original_file": "entries/PRM-0252/original.md",
+      "original_sha256": "d1b6be874b14e163208b3ab651d1b582c0d03723c309a0b263fe52fb69217754",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0252/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0253",
+      "title": "Motion Prompt #011｜挤压与拉伸 · Squash & stretch",
+      "summary": "通过压扁和拉长表现弹性",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0253/record.json",
+      "original_file": "entries/PRM-0253/original.md",
+      "original_sha256": "835df0f60e5f4e434bff6477734999e198e82282951861b0cfdd2e0d9ede5a97",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0253/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0254",
+      "title": "Motion Prompt #012｜形状变形 · Shape morph",
+      "summary": "一种形状平滑变成另一种",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0254/record.json",
+      "original_file": "entries/PRM-0254/original.md",
+      "original_sha256": "6fa79e16416e7486ebc4d8f3fd0e8f1317e23b99aa9de56d3370e68a6b9177e6",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0254/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0255",
+      "title": "Motion Prompt #013｜液态动效 · Liquid motion",
+      "summary": "形状像液体一样流动和融合",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0255/record.json",
+      "original_file": "entries/PRM-0255/original.md",
+      "original_sha256": "e214fee3109bf6b2789cedd61a3dac986cff5e03130f6b8bb79537e8edd2cebe",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0255/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0256",
+      "title": "Motion Prompt #014｜运动拖尾 · Motion trail",
+      "summary": "运动物体身后留下逐渐淡去的轨迹",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0256/record.json",
+      "original_file": "entries/PRM-0256/original.md",
+      "original_sha256": "a76447b03de9daac506f0303a2a4c29f6e0e7b71c81b5410e2c3aead5d0694ff",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0256/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0257",
+      "title": "Motion Prompt #015｜粒子效果 · Particles",
+      "summary": "大量小碎片喷出并散开",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0257/record.json",
+      "original_file": "entries/PRM-0257/original.md",
+      "original_sha256": "ab14330afa30acd0e7172b95109c9683bccfcb3a015b196c2638145fa09efe6a",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0257/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0258",
+      "title": "Motion Prompt #016｜视差 · Parallax",
+      "summary": "远近图层以不同速度移动形成纵深",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0258/record.json",
+      "original_file": "entries/PRM-0258/original.md",
+      "original_sha256": "eb3c6625f5e59c9fc75572a6c89f65798a388ea571062ad3fc9c235f97cfbf2a",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0258/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0259",
+      "title": "Motion Prompt #017｜遮罩转场 · Mask transition",
+      "summary": "扩大的形状内部显现下一场景",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0259/record.json",
+      "original_file": "entries/PRM-0259/original.md",
+      "original_sha256": "c1d48844b8a7294e50576ac8a23d5dad9b5043dfb283fa5fd07f367d07989235",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0259/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0260",
+      "title": "Motion Prompt #018｜图形转场 · Shape transition",
+      "summary": "图形覆盖画面后揭示下一场景",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0260/record.json",
+      "original_file": "entries/PRM-0260/original.md",
+      "original_sha256": "a4ad17c27812448743c9ac19bb66b41679de0afce0252abbbb7df54f1a0adb3f",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0260/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0261",
+      "title": "Motion Prompt #019｜液态转场 · Liquid transition",
+      "summary": "液体流入画面并替换场景",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0261/record.json",
+      "original_file": "entries/PRM-0261/original.md",
+      "original_sha256": "286d4ddace2a249564880a157aaf437528d5cdbddb956b7d7ce364ae3577035e",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0261/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0262",
+      "title": "Motion Prompt #020｜穿越缩放 · Zoom through",
+      "summary": "放大并穿过物体进入下一场景",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0262/record.json",
+      "original_file": "entries/PRM-0262/original.md",
+      "original_sha256": "a7cd788777617fdae3dfa87536847c212eaf55134409508ce3f1874fdf063cd1",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0262/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0263",
+      "title": "Motion Prompt #021｜翻转 · Flip",
+      "summary": "像卡片翻面一样展示另一侧",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0263/record.json",
+      "original_file": "entries/PRM-0263/original.md",
+      "original_sha256": "ddeb4e96cd7d7481aa44e1058e1eb763f9b4976b6ec532a2afd92f5d28f8218b",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0263/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0264",
+      "title": "Motion Prompt #022｜扫光 · Light sweep",
+      "summary": "光带扫过物体表面",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0264/record.json",
+      "original_file": "entries/PRM-0264/original.md",
+      "original_sha256": "8083649541c3fffab8a3fc867ad924c616cb6a252159d00ac472008c9f2f2bbc",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0264/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0265",
+      "title": "Motion Prompt #023｜故障效果 · Glitch",
+      "summary": "画面像发生故障一样错位和分色",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0265/record.json",
+      "original_file": "entries/PRM-0265/original.md",
+      "original_sha256": "1f8b3fc74dfe700d4d93b8d96ae2a1b98d6475a2081c44b273c1d78b39419a04",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0265/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0266",
+      "title": "Motion Prompt #024｜冲击震动 · Impact shake",
+      "summary": "物体落下时带动整个画面震动",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0266/record.json",
+      "original_file": "entries/PRM-0266/original.md",
+      "original_sha256": "645e4e16d5a0c20c8c1539959033815be428f6d1b66724dcb6d833e76db2505d",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0266/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0267",
+      "title": "Motion Prompt #025｜水平摇镜头 · Pan",
+      "summary": "机位固定，向左或右转动镜头",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0267/record.json",
+      "original_file": "entries/PRM-0267/original.md",
+      "original_sha256": "44906f978e05e838dd1ab0a6b619ac064b0baad0d55bb8c2d22d2822379a0fd0",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0267/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0268",
+      "title": "Motion Prompt #026｜垂直摇镜头 · Tilt",
+      "summary": "机位固定，向上或下转动镜头",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0268/record.json",
+      "original_file": "entries/PRM-0268/original.md",
+      "original_sha256": "c9d74ad723a5a680a400807135f142bf5c9c8c265170a78eb96199200915cab8",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0268/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0269",
+      "title": "Motion Prompt #027｜推镜头 · Dolly in",
+      "summary": "相机整体向主体靠近",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0269/record.json",
+      "original_file": "entries/PRM-0269/original.md",
+      "original_sha256": "7351d8596a89eba05a37a6f92d68e298b74f64bedc282492dff9450ca45fba3e",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0269/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0270",
+      "title": "Motion Prompt #028｜变焦推近 · Zoom in",
+      "summary": "相机不动，通过镜头变焦放大",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0270/record.json",
+      "original_file": "entries/PRM-0270/original.md",
+      "original_sha256": "d0d29f07de1bfe66c8e8b5204bb0f80ded2a272eafa27b6b1f5f6a5423b7e62e",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0270/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0271",
+      "title": "Motion Prompt #029｜跟拍 · Tracking shot",
+      "summary": "相机随主体一起移动",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0271/record.json",
+      "original_file": "entries/PRM-0271/original.md",
+      "original_sha256": "cfc0a2bd1e2f517a03406b5a36efb2ad073d709b566a66d62595ca2ba29231f5",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0271/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0272",
+      "title": "Motion Prompt #030｜环绕镜头 · Orbit (Arc shot)",
+      "summary": "相机绕主体移动",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0272/record.json",
+      "original_file": "entries/PRM-0272/original.md",
+      "original_sha256": "1535dc44f47f2f68e48370b3b9118237945cb28772b5d284c20347c9868eaab7",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0272/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0273",
+      "title": "Motion Prompt #031｜升镜头 · Crane up",
+      "summary": "相机整体向上升起",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0273/record.json",
+      "original_file": "entries/PRM-0273/original.md",
+      "original_sha256": "6302909f42c5c5acad04a138befaa125ec9b35dc983c6f2c0953acbe70bcc10a",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0273/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0274",
+      "title": "Motion Prompt #032｜滑动变焦 · Dolly zoom (Vertigo)",
+      "summary": "主体大小不变，背景发生透视变化",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0274/record.json",
+      "original_file": "entries/PRM-0274/original.md",
+      "original_sha256": "ff11779b1d2483a9e8dc77aa69237d63035b3e053309af88103505ba2d0c3e83",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0274/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0275",
+      "title": "Motion Prompt #033｜焦点转移 · Rack focus",
+      "summary": "在近处与远处之间切换对焦",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0275/record.json",
+      "original_file": "entries/PRM-0275/original.md",
+      "original_sha256": "92f126b2519dea8f4748a58adc14fe05234fe228b11f5fc7a6d6dc51c9b7d531",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0275/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0276",
+      "title": "Motion Prompt #034｜手持镜头 · Handheld",
+      "summary": "像手持相机一样轻微晃动",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0276/record.json",
+      "original_file": "entries/PRM-0276/original.md",
+      "original_sha256": "0012221f7f432c9d353edc2d0596b09dbb2180d145e39957282cd470e9fad1be",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0276/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0277",
+      "title": "Motion Prompt #035｜FPV 穿越机镜头 · FPV drone shot",
+      "summary": "以第一人称快速穿越场景",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0277/record.json",
+      "original_file": "entries/PRM-0277/original.md",
+      "original_sha256": "c44758ee66df76d87609e8696d23bc09445c87b44e29e236edc383afad24ac16",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0277/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0278",
+      "title": "Motion Prompt #036｜荷兰角 · Dutch angle",
+      "summary": "倾斜相机，使地平线呈对角线",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0278/record.json",
+      "original_file": "entries/PRM-0278/original.md",
+      "original_sha256": "26977b0ef92dc1fd7cf10072aa047ea9a449c71d16eead0d81186a0e52c12307",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0278/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0279",
+      "title": "Motion Prompt #037｜慢动作 · Slow motion",
+      "summary": "放慢动作的播放速度",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0279/record.json",
+      "original_file": "entries/PRM-0279/original.md",
+      "original_sha256": "c95b510c8cfded41d8a2e96870ad82348d0473c4ba8eabc07d525b60cd6e7201",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0279/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0280",
+      "title": "Motion Prompt #038｜速度渐变 · Speed ramp",
+      "summary": "在同一镜头中改变播放速度",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0280/record.json",
+      "original_file": "entries/PRM-0280/original.md",
+      "original_sha256": "d52263f57e7359e918cf3f32e0de44f12805a4dab629835821b778a8cc3b9509",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0280/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0281",
+      "title": "Motion Prompt #039｜延时摄影 · Time-lapse",
+      "summary": "把数小时压缩成几秒",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0281/record.json",
+      "original_file": "entries/PRM-0281/original.md",
+      "original_sha256": "d1e09a71c022c8c603df8f062c27ad7e26c4f8f53a969929124c444328a4db27",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0281/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0282",
+      "title": "Motion Prompt #040｜定格 · Freeze frame",
+      "summary": "让动作暂停片刻",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0282/record.json",
+      "original_file": "entries/PRM-0282/original.md",
+      "original_sha256": "e97a4d4cf09161960808f10e7c8427e037ceb6b7f251cb5b6dc4246abcdfe214",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0282/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0283",
+      "title": "Motion Prompt #041｜跳切 · Jump cut",
+      "summary": "构图不变，跳过一段时间",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0283/record.json",
+      "original_file": "entries/PRM-0283/original.md",
+      "original_sha256": "b96026ddb248108ec7e895f64d771bf8ff5c71e8d48ab0576df937c43e3b45a6",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0283/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0284",
+      "title": "Motion Prompt #042｜匹配剪辑 · Match cut",
+      "summary": "利用相似形状或动作衔接镜头",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0284/record.json",
+      "original_file": "entries/PRM-0284/original.md",
+      "original_sha256": "24cad705b12e65ff8ee75798de216a6816b70d5406354d2f523a00159505e101",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0284/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0285",
+      "title": "Motion Prompt #043｜甩镜头转场 · Whip pan",
+      "summary": "快速横摇形成模糊并切入下一镜头",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0285/record.json",
+      "original_file": "entries/PRM-0285/original.md",
+      "original_sha256": "8bd5eb52015d1957bd557deccf2d12023dbeb427c7c9b3a0ec4ae7257fcf7fe2",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0285/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0286",
+      "title": "Motion Prompt #044｜交叉溶解 · Cross dissolve",
+      "summary": "两个镜头逐渐叠化切换",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0286/record.json",
+      "original_file": "entries/PRM-0286/original.md",
+      "original_sha256": "4c639a0a160bfb2e7a14a6fce665713a053575725da0f0f833c198c62ef5228f",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0286/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0287",
+      "title": "Motion Prompt #045｜划像转场 · Wipe",
+      "summary": "移动的边界逐步替换画面",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0287/record.json",
+      "original_file": "entries/PRM-0287/original.md",
+      "original_sha256": "b09ae4b9a5c99e63d3bab31c3987b02ef21834296cecb31c3ee355cd8cf79294",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0287/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0288",
+      "title": "Motion Prompt #046｜突切 · Smash cut",
+      "summary": "突然切到反差强烈的场景",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0288/record.json",
+      "original_file": "entries/PRM-0288/original.md",
+      "original_sha256": "cdeaba472856e43d31cf25f78bcc749080b868ec350ed355bb930172aee11a48",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0288/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0289",
+      "title": "Motion Prompt #047｜J 型剪辑 · J-cut",
+      "summary": "下一场景的声音先于画面进入",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0289/record.json",
+      "original_file": "entries/PRM-0289/original.md",
+      "original_sha256": "eac797f286c699c358ffac82f8dda45161eea609c2a48485f66bb6c0dce5d948",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0289/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0290",
+      "title": "Motion Prompt #048｜L 型剪辑 · L-cut",
+      "summary": "前一场景的声音延续到下一画面",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0290/record.json",
+      "original_file": "entries/PRM-0290/original.md",
+      "original_sha256": "ffe94598ecf79dc414fbe2765324325ce42f816586f7430c3dbd8b87afc0b069",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0290/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0291",
+      "title": "Motion Prompt #049｜模态对话框 · Modal dialog",
+      "summary": "打开浮窗并暂时阻止操作背景",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0291/record.json",
+      "original_file": "entries/PRM-0291/original.md",
+      "original_sha256": "650efb507f7a3be660e32c6011c95dfb4f2a7d50246870a86bd7279389c3d882",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0291/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0292",
+      "title": "Motion Prompt #050｜抽屉面板 · Drawer (Off-canvas)",
+      "summary": "从屏幕侧边滑出的面板",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0292/record.json",
+      "original_file": "entries/PRM-0292/original.md",
+      "original_sha256": "05e29662d618c9d2df60c03cab9121c8f24d567a73a1ac037dd3457cd7c77700",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0292/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0293",
+      "title": "Motion Prompt #051｜底部面板 · Bottom sheet",
+      "summary": "从屏幕底部升起的面板",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0293/record.json",
+      "original_file": "entries/PRM-0293/original.md",
+      "original_sha256": "474c4f14186cc13b43ec28f99d09da7bd7da6db91028b446878fc48ffd04bb2f",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0293/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0294",
+      "title": "Motion Prompt #052｜折叠面板 · Accordion",
+      "summary": "点击标题展开或收起内容",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0294/record.json",
+      "original_file": "entries/PRM-0294/original.md",
+      "original_sha256": "d37a2c9b7e42dd8edcc346e3f3b9515a4fa651777c56a6afa0296ad1dea105c9",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0294/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0295",
+      "title": "Motion Prompt #053｜下拉选择框 · Dropdown (select)",
+      "summary": "点击字段展开选项列表",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0295/record.json",
+      "original_file": "entries/PRM-0295/original.md",
+      "original_sha256": "91af206e70f0ac72997d25ffbdc1f1d12606c625294344cc6151d585917af325",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0295/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0296",
+      "title": "Motion Prompt #054｜文字提示 · Tooltip",
+      "summary": "悬停时显示简短说明",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0296/record.json",
+      "original_file": "entries/PRM-0296/original.md",
+      "original_sha256": "64ff3825d46c77f1f9a69f1275b453a580caed8ab93f96317ee99eb8076bd62a",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0296/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0297",
+      "title": "Motion Prompt #055｜气泡卡片 · Popover",
+      "summary": "点击后显示指向触发按钮的小面板",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0297/record.json",
+      "original_file": "entries/PRM-0297/original.md",
+      "original_sha256": "1b9105a1af131fee891692f523d1323aaa5b7cc43ed470d92d5ec11b340d9e52",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0297/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0298",
+      "title": "Motion Prompt #056｜轻提示 · Toast notification",
+      "summary": "短消息出现后自动消失",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0298/record.json",
+      "original_file": "entries/PRM-0298/original.md",
+      "original_sha256": "16b91e9e4074b5aeab80cfd2586aac2bc16ad59a2d0ee2f230bd0851dac0b510",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0298/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0299",
+      "title": "Motion Prompt #057｜标签页 · Tabs",
+      "summary": "点击标签切换内容面板",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0299/record.json",
+      "original_file": "entries/PRM-0299/original.md",
+      "original_sha256": "1ca74775437ba01bcba2e3067cf6891bc652487ef7d6bce060e67e5aaf5de717",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0299/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0300",
+      "title": "Motion Prompt #058｜轮播图 · Carousel",
+      "summary": "横向滑动切换展示项",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0300/record.json",
+      "original_file": "entries/PRM-0300/original.md",
+      "original_sha256": "b7e6f1bfd6a063d9109e6b05f5a13d8c28b6f85eae0522cd39480272eeffc309",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0300/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0301",
+      "title": "Motion Prompt #059｜开关 · Toggle switch",
+      "summary": "切换设置的开启与关闭状态",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0301/record.json",
+      "original_file": "entries/PRM-0301/original.md",
+      "original_sha256": "3299d97d13700f64b729db0edc015a776b6fc24687f156fd73fc814c50a1ad3c",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0301/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0302",
+      "title": "Motion Prompt #060｜分段控制器 · Segmented control",
+      "summary": "一排相连按钮用于切换视图",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0302/record.json",
+      "original_file": "entries/PRM-0302/original.md",
+      "original_sha256": "27c8b995cbc5f1de832a909819224131ee027f1fd3cd87e4767bba178984c683",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0302/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0303",
+      "title": "Motion Prompt #061｜筛选标签 · Filter chips",
+      "summary": "点击小标签组合筛选条件",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0303/record.json",
+      "original_file": "entries/PRM-0303/original.md",
+      "original_sha256": "1791a5458238a8b1ac0feea1972253eba9d7d269c58b536a12e28e0ed026ef04",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0303/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0304",
+      "title": "Motion Prompt #062｜范围滑块 · Range slider",
+      "summary": "双滑块选择最小值与最大值",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0304/record.json",
+      "original_file": "entries/PRM-0304/original.md",
+      "original_sha256": "225451428739ab22f955efdc1dd91aa02ebc44045ae49c30f29967c872d6e9bb",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0304/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0305",
+      "title": "Motion Prompt #063｜步进器 · Stepper (+/−)",
+      "summary": "通过加减按钮逐次修改数值",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0305/record.json",
+      "original_file": "entries/PRM-0305/original.md",
+      "original_sha256": "c24da88be8222aa72922d6939d76437f302910c66cc8112663d1a20f2547a7e7",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0305/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0306",
+      "title": "Motion Prompt #064｜分页 · Pagination",
+      "summary": "通过页码切换列表页面",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0306/record.json",
+      "original_file": "entries/PRM-0306/original.md",
+      "original_sha256": "78d9da298c4f670c4c3ea29fc6062d548ca2ef51e5fffce253a7f487817e4085",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0306/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0307",
+      "title": "Motion Prompt #065｜汉堡菜单 · Hamburger menu",
+      "summary": "三横线图标点击后展开菜单",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0307/record.json",
+      "original_file": "entries/PRM-0307/original.md",
+      "original_sha256": "8e18e090b96dcb014b966bd3cacc78ea1c078d7145b318010c955cd1a884b32b",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0307/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0308",
+      "title": "Motion Prompt #066｜面包屑导航 · Breadcrumbs",
+      "summary": "显示页面层级位置的链接路径",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0308/record.json",
+      "original_file": "entries/PRM-0308/original.md",
+      "original_sha256": "8eee5f4e68678f5b2836266a322bb13c49e6e07fa4d7026b5e8bdbe1a20ed6e6",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0308/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0309",
+      "title": "Motion Prompt #067｜巨型菜单 · Mega menu",
+      "summary": "主导航展开的宽幅分组链接面板",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0309/record.json",
+      "original_file": "entries/PRM-0309/original.md",
+      "original_sha256": "5361d0251045e80aa398e4421476e627da941242cfb5b93467cd486f09ee301a",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0309/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0310",
+      "title": "Motion Prompt #068｜步骤指示器 · Step indicator",
+      "summary": "显示流程的当前步骤与进度",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0310/record.json",
+      "original_file": "entries/PRM-0310/original.md",
+      "original_sha256": "37384d1a3e3c14316b877343973c08478c80810d832119a3575f41ad1d8aff8a",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0310/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0311",
+      "title": "Motion Prompt #069｜骨架屏 · Skeleton screen",
+      "summary": "加载时以灰色块预示内容布局",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0311/record.json",
+      "original_file": "entries/PRM-0311/original.md",
+      "original_sha256": "c3bc536b462f4b7c1533a67cab7ac0c5f3c1539efe1a8a562c9a82b15eeb4dd5",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0311/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0312",
+      "title": "Motion Prompt #070｜加载转圈 · Spinner",
+      "summary": "旋转圆环表示等待",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0312/record.json",
+      "original_file": "entries/PRM-0312/original.md",
+      "original_sha256": "fbc98e1e7102f5a4ed7e141fb579ee4484bc0bab10daae93972d4e6956a47731",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0312/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0313",
+      "title": "Motion Prompt #071｜徽标 · Badge",
+      "summary": "用小圆点或数字显示数量",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0313/record.json",
+      "original_file": "entries/PRM-0313/original.md",
+      "original_sha256": "51efa2f8b20fb3106a709a7a6ca979248017db12277905d573a905fe9e1f04b1",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0313/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0314",
+      "title": "Motion Prompt #072｜空状态 · Empty state",
+      "summary": "列表没有内容时显示的界面",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "UI 组件",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0314/record.json",
+      "original_file": "entries/PRM-0314/original.md",
+      "original_sha256": "f3f3be9d89b139d5ee9e2eb623beeb64848b5e9b0a1bfcca3caa2890b2dc6203",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0314/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0315",
+      "title": "Motion Prompt #073｜视差滚动 · Parallax scrolling",
+      "summary": "滚动时背景层比内容移动得慢",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0315/record.json",
+      "original_file": "entries/PRM-0315/original.md",
+      "original_sha256": "4c0ee695e09bafa9aa9b7c9d1137beaae927a2746742d863e59750e2c33d6001",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0315/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0316",
+      "title": "Motion Prompt #074｜滚动淡入 · Fade-in on scroll",
+      "summary": "元素进入视口时逐渐出现",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0316/record.json",
+      "original_file": "entries/PRM-0316/original.md",
+      "original_sha256": "caae68a5f9d584bd80b828f77ef39e5ef92e2df3a7692a9f35f72c0bb2cb6916",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0316/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0317",
+      "title": "Motion Prompt #075｜吸顶页头 · Sticky header",
+      "summary": "滚动时页头停留在屏幕顶部",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0317/record.json",
+      "original_file": "entries/PRM-0317/original.md",
+      "original_sha256": "f172c51e7a1c150eb3a5f64cb21605e85a452a22ac67debd854d46194cac1cc6",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0317/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0318",
+      "title": "Motion Prompt #076｜滚动固定 · Pinning",
+      "summary": "区块固定，滚动推动内部内容变化",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0318/record.json",
+      "original_file": "entries/PRM-0318/original.md",
+      "original_sha256": "92d90fc7632e161f09678b740687d55ee3f0daf09ecca3629dd3530c56f61c8b",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0318/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0319",
+      "title": "Motion Prompt #077｜横向滚动 · Horizontal scroll",
+      "summary": "纵向滚动驱动内容横移",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0319/record.json",
+      "original_file": "entries/PRM-0319/original.md",
+      "original_sha256": "30c60d8cad093ef6208c6a7981135933d4bae7949b1212c60ba7755a9c734873",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0319/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0320",
+      "title": "Motion Prompt #078｜滚动吸附 · Scroll snap",
+      "summary": "滚动结束时自动对齐区块",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0320/record.json",
+      "original_file": "entries/PRM-0320/original.md",
+      "original_sha256": "560bf4d4431df3528784acdea43a077867a997665fc2711ab6d2ddc7cf792548",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0320/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0321",
+      "title": "Motion Prompt #079｜滚动进度条 · Scroll progress bar",
+      "summary": "顶部条显示阅读进度",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0321/record.json",
+      "original_file": "entries/PRM-0321/original.md",
+      "original_sha256": "5c2d9fd148cc4d7775e2e48f31651b3535743b46d2100b9ffc26e229662006a6",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0321/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0322",
+      "title": "Motion Prompt #080｜荧光笔标记动画 · Highlighter animation",
+      "summary": "重点文字下方逐渐画出色带",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0322/record.json",
+      "original_file": "entries/PRM-0322/original.md",
+      "original_sha256": "9f56345486af9275b002fd8bf17ab8e22d50a692b497e63dd0c627f138f261e2",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0322/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0323",
+      "title": "Motion Prompt #081｜悬停抬升 · Hover lift",
+      "summary": "悬停时元素抬高并加深阴影",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0323/record.json",
+      "original_file": "entries/PRM-0323/original.md",
+      "original_sha256": "d2143b887bc3622acbce0857d3fcb23f1a44e2c53cc6a9ea65a3b0104302dc85",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0323/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0324",
+      "title": "Motion Prompt #082｜悬停图片放大 · Image zoom on hover",
+      "summary": "图片在固定边框内放大",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0324/record.json",
+      "original_file": "entries/PRM-0324/original.md",
+      "original_sha256": "cefd83ab567ab5a47c1e5733a88756471c9eea0acdcbaf393e50ddb6f5b62395",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0324/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0325",
+      "title": "Motion Prompt #083｜光标跟随 · Cursor follower",
+      "summary": "图形略带延迟地跟随指针",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0325/record.json",
+      "original_file": "entries/PRM-0325/original.md",
+      "original_sha256": "221b1ee7a3a0cae5d0452f1db2c386769b7606d4107cf21129952a39ab7d88b6",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0325/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0326",
+      "title": "Motion Prompt #084｜磁吸按钮 · Magnetic button",
+      "summary": "按钮向附近光标偏移",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0326/record.json",
+      "original_file": "entries/PRM-0326/original.md",
+      "original_sha256": "dc3bd681b0a23c453df0173b2a94693d5e1d177f14009ea69fb704147477ee7e",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0326/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0327",
+      "title": "Motion Prompt #085｜涟漪效果 · Ripple effect",
+      "summary": "从点击位置扩散的圆形波纹",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0327/record.json",
+      "original_file": "entries/PRM-0327/original.md",
+      "original_sha256": "f2277607ec168b0933a528aac6884bf4fd512d0487820641fe06fd3357ca4af3",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0327/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0328",
+      "title": "Motion Prompt #086｜下划线动画 · Underline animation",
+      "summary": "悬停时链接下划线从左展开",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0328/record.json",
+      "original_file": "entries/PRM-0328/original.md",
+      "original_sha256": "510a7fa66eeee6f16143f833be768b8d6abcda51d82a7f936aaa08a870091acb",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0328/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0329",
+      "title": "Motion Prompt #087｜前后对比滑块 · Before/after slider",
+      "summary": "拖动分隔线比较处理前后",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0329/record.json",
+      "original_file": "entries/PRM-0329/original.md",
+      "original_sha256": "71055288e617eacd7bebd82d3e5ddcac1e3dad0ba7a6ddee649612ff841ffc47",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0329/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0330",
+      "title": "Motion Prompt #088｜离站挽留弹窗 · Exit-intent popup",
+      "summary": "访客准备离开时出现的弹窗",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0330/record.json",
+      "original_file": "entries/PRM-0330/original.md",
+      "original_sha256": "a15871a7914209be184c8a37b31909de0fd045624eadc6338a3b97ca0ef76199",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0330/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0331",
+      "title": "Motion Prompt #089｜预加载画面 · Preloader",
+      "summary": "页面加载期间显示的过渡界面",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0331/record.json",
+      "original_file": "entries/PRM-0331/original.md",
+      "original_sha256": "430da200c972117eb8d01558e44d75f6b88b6aa43929aeae67f3b63f42877d63",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0331/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0332",
+      "title": "Motion Prompt #090｜懒加载 · Lazy loading",
+      "summary": "图片接近视口时才开始加载",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0332/record.json",
+      "original_file": "entries/PRM-0332/original.md",
+      "original_sha256": "19180157e1bdd750b2653186275bcabe683765527f75077741e900c2f003e045",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0332/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0333",
+      "title": "Motion Prompt #091｜无限滚动 · Infinite scroll",
+      "summary": "滚动到底部时自动加载更多条目",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0333/record.json",
+      "original_file": "entries/PRM-0333/original.md",
+      "original_sha256": "41eaf22b4cc9f8386f8330e4f06a95a546c516981c0ac588c58a1ccc4ddcd497",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0333/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0334",
+      "title": "Motion Prompt #092｜页面转场 · Page transition",
+      "summary": "连接两个页面的过渡动画",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0334/record.json",
+      "original_file": "entries/PRM-0334/original.md",
+      "original_sha256": "95b0c6a79b738ea5879a2fd48bb7ef740f131d89575bdbf2dcc47cc0c83d0456",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0334/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0335",
+      "title": "Motion Prompt #093｜平滑滚动 · Smooth scroll",
+      "summary": "页内链接平滑移动到目标位置",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0335/record.json",
+      "original_file": "entries/PRM-0335/original.md",
+      "original_sha256": "389ac20ade4b68117aca3ac35a68a89e92fc258b4c91ae29d049f2040f5582bf",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0335/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0336",
+      "title": "Motion Prompt #094｜跑马灯 · Marquee",
+      "summary": "文字或标志组成连续滚动带",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0336/record.json",
+      "original_file": "entries/PRM-0336/original.md",
+      "original_sha256": "f0eb5b1a9812a1d8364bb954068a157a822484d573026c16ca684460aacb5f3d",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0336/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0337",
+      "title": "Motion Prompt #095｜动态渐变 · Animated gradient",
+      "summary": "背景颜色持续移动和交融",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0337/record.json",
+      "original_file": "entries/PRM-0337/original.md",
+      "original_sha256": "b788712d5221c62c6a6d8fdf8303d058ce05708d52cb8a7839a578ec70475f8d",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0337/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0338",
+      "title": "Motion Prompt #096｜悬浮动画 · Floating animation",
+      "summary": "元素轻柔地上下浮动",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0338/record.json",
+      "original_file": "entries/PRM-0338/original.md",
+      "original_sha256": "5c373985e99684ab7ed92ace866a134245ce73fb678c90407ab959e361ace357",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0338/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0339",
+      "title": "Motion Prompt #097｜逆光 · Backlighting",
+      "summary": "光源位于主体后方",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0339/record.json",
+      "original_file": "entries/PRM-0339/original.md",
+      "original_sha256": "ba1f4d1e71e8c0ebaeee969a4c0d50e98447db0174e37b96c02e1d7839a93e89",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0339/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0340",
+      "title": "Motion Prompt #098｜轮廓光 · Rim light",
+      "summary": "后侧光勾勒主体边缘",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0340/record.json",
+      "original_file": "entries/PRM-0340/original.md",
+      "original_sha256": "8d81cc89825122e4b3ac6d5cf8526dfb6e92ed52ede1602582060d5a139a3c98",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0340/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0341",
+      "title": "Motion Prompt #099｜剪影 · Silhouette",
+      "summary": "主体成为明亮背景前的深色轮廓",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0341/record.json",
+      "original_file": "entries/PRM-0341/original.md",
+      "original_sha256": "346f5701a55bbbf0826dba2e74d09c387da868bc260bbbe47f3050f524bcb3cf",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0341/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0342",
+      "title": "Motion Prompt #100｜分割光 · Split lighting",
+      "summary": "侧面光让脸一半明亮、一半阴暗",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0342/record.json",
+      "original_file": "entries/PRM-0342/original.md",
+      "original_sha256": "7b78800f7a8273155deb3ad4b0e573308744cbb0ff488749d6e74f452453ea31",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0342/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0343",
+      "title": "Motion Prompt #101｜伦勃朗光 · Rembrandt lighting",
+      "summary": "侧上方光在背光脸颊留下亮三角",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0343/record.json",
+      "original_file": "entries/PRM-0343/original.md",
+      "original_sha256": "62f52cfd3f425cc049c56066272fed402a05390699f866b9dbdc0b58e60cd81c",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0343/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0344",
+      "title": "Motion Prompt #102｜蝴蝶光 · Butterfly lighting",
+      "summary": "正面高位光在鼻下形成蝶形阴影",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0344/record.json",
+      "original_file": "entries/PRM-0344/original.md",
+      "original_sha256": "0ede15b7ee2afd8bd200b4048452e79d3fce909e1105e75284d6f0a0578fcc2b",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0344/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0345",
+      "title": "Motion Prompt #103｜黄金时刻 · Golden hour",
+      "summary": "日出后或日落前的低角度暖光",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0345/record.json",
+      "original_file": "entries/PRM-0345/original.md",
+      "original_sha256": "b7beb996b320e90b2e365c9fe813173f71e7259175e10ea19ab1837ac705dca6",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0345/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0346",
+      "title": "Motion Prompt #104｜蓝调时刻 · Blue hour",
+      "summary": "日落后或日出前的深蓝天空时段",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0346/record.json",
+      "original_file": "entries/PRM-0346/original.md",
+      "original_sha256": "ef866347301abc8a58c8b19f38afa533d5e1be904d4c59d07255534eff24bf4b",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0346/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0347",
+      "title": "Motion Prompt #105｜散景 · Bokeh",
+      "summary": "失焦光点化为柔和光斑",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0347/record.json",
+      "original_file": "entries/PRM-0347/original.md",
+      "original_sha256": "d582acd0203ccd75d4b5b3ab5861adbbaf55464ae034e072844622ff84c854af",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0347/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0348",
+      "title": "Motion Prompt #106｜移轴效果 · Tilt-shift",
+      "summary": "通过选择性模糊让实景像微缩模型",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0348/record.json",
+      "original_file": "entries/PRM-0348/original.md",
+      "original_sha256": "24ebe100bd4bb369c346c47c31d62331c9c12adb53c88011d559a236ec7e40da",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0348/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0349",
+      "title": "Motion Prompt #107｜长曝光 · Long exposure",
+      "summary": "延长快门时间，让移动光源留下轨迹",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0349/record.json",
+      "original_file": "entries/PRM-0349/original.md",
+      "original_sha256": "b663ce3c902cfb28a3e44045c9334df35edd7f4edd9c52e69483f105b5fe6e48",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0349/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0350",
+      "title": "Motion Prompt #108｜追随拍摄 · Panning shot",
+      "summary": "跟随运动主体，使背景产生拖影",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0350/record.json",
+      "original_file": "entries/PRM-0350/original.md",
+      "original_sha256": "dbb20873439cf5c0b5c94120dabfc7402285954037fb16ec3421eddb4d3d2d8a",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0350/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0351",
+      "title": "Motion Prompt #109｜镜头眩光 · Lens flare",
+      "summary": "强光在镜头内产生光环和光斑",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0351/record.json",
+      "original_file": "entries/PRM-0351/original.md",
+      "original_sha256": "4b7a89402a9170772413f91bbca7f3d64d6c853f58f50c5ba3779e6bb3a7aeb1",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0351/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0352",
+      "title": "Motion Prompt #110｜鱼眼镜头 · Fisheye lens",
+      "summary": "超广角使中心鼓起、直线弯曲",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0352/record.json",
+      "original_file": "entries/PRM-0352/original.md",
+      "original_sha256": "a087787f2b0623199661030fce7ecc0ff774334ac140a3650ed799337854eef3",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0352/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0353",
+      "title": "Motion Prompt #111｜色差 · Chromatic aberration",
+      "summary": "高反差边缘出现不同颜色的色边",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0353/record.json",
+      "original_file": "entries/PRM-0353/original.md",
+      "original_sha256": "ae0f3baec6ce4c4460ba3823b05a51cd51180b283982ad7f648e1b91766adcc3",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0353/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0354",
+      "title": "Motion Prompt #112｜暗角 · Vignette",
+      "summary": "画面四角变暗，视线集中到中央",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0354/record.json",
+      "original_file": "entries/PRM-0354/original.md",
+      "original_sha256": "4c7664209c62db69559389472d41c701f21cc40e9fb08e134d8faa400d82ffe4",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0354/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0355",
+      "title": "Motion Prompt #113｜高调 · High-key",
+      "summary": "整体明亮、接近白色且阴影很浅",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0355/record.json",
+      "original_file": "entries/PRM-0355/original.md",
+      "original_sha256": "69a0dd320b9a5427bbc7da0ee64693c55e5742eb8a34b8f5114305a22055fbc2",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0355/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0356",
+      "title": "Motion Prompt #114｜低调 · Low-key",
+      "summary": "以暗色为主，只突出受光部分",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0356/record.json",
+      "original_file": "entries/PRM-0356/original.md",
+      "original_sha256": "9fe0408156b65d7fe8678faafcb48dbb698569ba5ce2729b200c4e88d1040969",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0356/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0357",
+      "title": "Motion Prompt #115｜黑白 · Black and white",
+      "summary": "去除颜色，仅保留明暗",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0357/record.json",
+      "original_file": "entries/PRM-0357/original.md",
+      "original_sha256": "e92e81f9226d2ee549e303a944d836b44b49c1c6c73e177c3bdfe9bc1f46be7c",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0357/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0358",
+      "title": "Motion Prompt #116｜双色调 · Duotone",
+      "summary": "用一种颜色映射暗部，另一种映射亮部",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0358/record.json",
+      "original_file": "entries/PRM-0358/original.md",
+      "original_sha256": "35fe5250073dba07b615abc716e463c010386de94dc3e3c957ea55e5699ccedb",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0358/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0359",
+      "title": "Motion Prompt #117｜青橙色调 · Teal and orange",
+      "summary": "阴影偏青，肤色与高光偏橙",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0359/record.json",
+      "original_file": "entries/PRM-0359/original.md",
+      "original_sha256": "2a17dc0b8b6a30c56bd34f073e39c27dd08cb78e00ec1025b6606283eee2a307",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0359/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0360",
+      "title": "Motion Prompt #118｜胶片颗粒 · Film grain",
+      "summary": "画面覆盖细微胶片质感颗粒",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0360/record.json",
+      "original_file": "entries/PRM-0360/original.md",
+      "original_sha256": "e91f13ff00e944350cce667c7495efd6a084a026905a85369c107f459e0c87e3",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0360/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0361",
+      "title": "Motion Prompt #119｜漏光 · Light leak",
+      "summary": "红橙色光像漏入胶片一样侵入画面",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0361/record.json",
+      "original_file": "entries/PRM-0361/original.md",
+      "original_sha256": "cde1078fe994565278c0ce9457b73f74c02916063964a341d909d397019d631f",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0361/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0362",
+      "title": "Motion Prompt #120｜双重曝光 · Double exposure",
+      "summary": "两幅影像叠合在同一画面",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "摄影效果、光线与风格",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0362/record.json",
+      "original_file": "entries/PRM-0362/original.md",
+      "original_sha256": "9fb8ee8a65e2384fbbfe35384be80f43735df222d20857e3100b0d9a43e531ca",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0362/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0363",
+      "title": "Motion Prompt #121｜预备动作 · Anticipation",
+      "summary": "运动前先向反方向稍稍蓄力",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0363/record.json",
+      "original_file": "entries/PRM-0363/original.md",
+      "original_sha256": "00e32d33701abc59b8695df3eb9eb89d81f6cf0508421620dd25949eaf5a1de5",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0363/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0364",
+      "title": "Motion Prompt #122｜跟随动作 · Follow-through",
+      "summary": "主体停下后，局部仍延迟摆动",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0364/record.json",
+      "original_file": "entries/PRM-0364/original.md",
+      "original_sha256": "7c2bb3d0ab97113c0b74f134b824b863dac6cdc7a8ff6a80e21ae5bdead1975f",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0364/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0365",
+      "title": "Motion Prompt #123｜弹跳 · Bounce",
+      "summary": "落下后越弹越低直至停下",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0365/record.json",
+      "original_file": "entries/PRM-0365/original.md",
+      "original_sha256": "dd5308ba4102592af0f7363c9a8f61c15a7e66850c692602ef0471e0aa79ca6a",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0365/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0366",
+      "title": "Motion Prompt #124｜随机抖动 · Wiggle",
+      "summary": "小幅、随机地持续晃动",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0366/record.json",
+      "original_file": "entries/PRM-0366/original.md",
+      "original_sha256": "e05496b63ed596e2e29b65c98cbad2b84f5dbc85cddfa0a2b110dc4acdedb2ec",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0366/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0367",
+      "title": "Motion Prompt #125｜脉冲动画 · Pulse",
+      "summary": "像心跳一样有节奏地缩放",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0367/record.json",
+      "original_file": "entries/PRM-0367/original.md",
+      "original_sha256": "5bde430ad79a9ede9ace50d2e9009fdf5fee4a81eafe79adcc2ad1ffaed19306",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0367/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0368",
+      "title": "Motion Prompt #126｜运动路径 · Motion path",
+      "summary": "沿设定的曲线移动",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0368/record.json",
+      "original_file": "entries/PRM-0368/original.md",
+      "original_sha256": "fcc4bfbdf14bc621adc8f75c568c96acaffc5ab73c6797bca75f3af4762b268c",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0368/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0369",
+      "title": "Motion Prompt #127｜往返循环 · Ping-pong loop",
+      "summary": "正放后倒放，反复来回",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0369/record.json",
+      "original_file": "entries/PRM-0369/original.md",
+      "original_sha256": "4489da54c21a9bc140626d18c7511a950d5d230fa75de14c3b2b6a67a3fe43e4",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0369/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0370",
+      "title": "Motion Prompt #128｜定格动画风格 · Stop-motion style",
+      "summary": "抽帧后动作一顿一顿",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0370/record.json",
+      "original_file": "entries/PRM-0370/original.md",
+      "original_sha256": "ef171203f2fb2a8c10ae9f78609f64fff88cc73830c3f35c08d7a998a0c123ae",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0370/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0371",
+      "title": "Motion Prompt #129｜文字乱码效果 · Text scramble",
+      "summary": "字符随机变换后定格为正确文字",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0371/record.json",
+      "original_file": "entries/PRM-0371/original.md",
+      "original_sha256": "6aaf91f34223f0375cea43b9bd882e38f149607969914872ec18f46be5bb20b3",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0371/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0372",
+      "title": "Motion Prompt #130｜波浪文字 · Wave text",
+      "summary": "文字像波浪一样依次上下起伏",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0372/record.json",
+      "original_file": "entries/PRM-0372/original.md",
+      "original_sha256": "4153c3d0e4efa1fa195fd270f8704769afc902358eaf84c724d537da46f505a1",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0372/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0373",
+      "title": "Motion Prompt #131｜路径文字 · Text on a path",
+      "summary": "文字沿线条或曲线流动",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0373/record.json",
+      "original_file": "entries/PRM-0373/original.md",
+      "original_sha256": "1834e60e243add4b725b41fc7354add10de48bba7411f2e31124def55aac9a57",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0373/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0374",
+      "title": "Motion Prompt #132｜可变字体动画 · Variable font animation",
+      "summary": "文字粗细平滑变化",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0374/record.json",
+      "original_file": "entries/PRM-0374/original.md",
+      "original_sha256": "1b16b5a5c7419e76dc3009f79c83e0a21b4c5cda36393d0bde5b08bb7776a7e9",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0374/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0375",
+      "title": "Motion Prompt #133｜文字遮罩 · Text mask",
+      "summary": "镂空成文字形状，透出内部画面",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0375/record.json",
+      "original_file": "entries/PRM-0375/original.md",
+      "original_sha256": "eb9d8953bff29025f407cbcbe09b8c9fe8162b08475f91997cbcbfd65bc47377",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0375/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0376",
+      "title": "Motion Prompt #134｜中继器 · Repeater",
+      "summary": "复制图形并排列旋转",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0376/record.json",
+      "original_file": "entries/PRM-0376/original.md",
+      "original_sha256": "21d84d3847b7eef9f8155e7173e0b8476ce7d633608f9f8bbe4257bce6320687",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0376/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0377",
+      "title": "Motion Prompt #135｜万花筒 · Kaleidoscope",
+      "summary": "像万花筒一样对称展开",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0377/record.json",
+      "original_file": "entries/PRM-0377/original.md",
+      "original_sha256": "f32f3cbebcbf2c62298a38251fe5e840adbc119b4438d89441cbf2e66118a76e",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0377/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0378",
+      "title": "Motion Prompt #136｜线条抖动 · Line boil",
+      "summary": "手绘线条逐帧轻微抖动",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0378/record.json",
+      "original_file": "entries/PRM-0378/original.md",
+      "original_sha256": "db92333251ea90dddc0e4c5654f5784757671c8a375f9feecff1063f8e2b86a6",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0378/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0379",
+      "title": "Motion Prompt #137｜推入转场 · Push transition",
+      "summary": "下一画面把当前画面推出",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0379/record.json",
+      "original_file": "entries/PRM-0379/original.md",
+      "original_sha256": "d9b6109a8dd6797975be2da2d8640f92f6d5b7ae03bee3869c7f4653a08a2430",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0379/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0380",
+      "title": "Motion Prompt #138｜百叶窗转场 · Blinds transition",
+      "summary": "从细条缝隙中打开下一画面",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0380/record.json",
+      "original_file": "entries/PRM-0380/original.md",
+      "original_sha256": "506c376036f50422915cf75999a9ca41204f6b050b9e11189172c286f08f5480",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0380/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0381",
+      "title": "Motion Prompt #139｜立方体转场 · Cube transition",
+      "summary": "像立方体旋转一样切换画面",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0381/record.json",
+      "original_file": "entries/PRM-0381/original.md",
+      "original_sha256": "b31006e6d98cfdb446f334eb6193cd67f538a8c8209e7720f48a3000e5d037cf",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0381/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0382",
+      "title": "Motion Prompt #140｜翻页转场 · Page curl",
+      "summary": "像纸张一样卷起，翻到下一页",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0382/record.json",
+      "original_file": "entries/PRM-0382/original.md",
+      "original_sha256": "3981388b25dbef5aa49d8a76926df3fa5044456cb020d03deb9b63bb191bef1b",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0382/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0383",
+      "title": "Motion Prompt #141｜像素化转场 · Pixelate",
+      "summary": "马赛克逐渐变粗后切换画面",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0383/record.json",
+      "original_file": "entries/PRM-0383/original.md",
+      "original_sha256": "0b45cfe363c42fce1ea31adbef9b4aad54bb9765388c7209d5bceff6e6549db0",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0383/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0384",
+      "title": "Motion Prompt #142｜玻璃碎裂 · Shatter",
+      "summary": "像玻璃一样碎裂，碎片飞散",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0384/record.json",
+      "original_file": "entries/PRM-0384/original.md",
+      "original_sha256": "306558559c3cbecfabdfe81427d390a0bc09faceafd06f0ace308c217f648b48",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0384/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0385",
+      "title": "Motion Prompt #143｜爆炸图 · Exploded view",
+      "summary": "零件分离，展示内部结构",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0385/record.json",
+      "original_file": "entries/PRM-0385/original.md",
+      "original_sha256": "1822122922435f3bd896e51bca57591cae27e3a87a54815c72e87e4e31e51bb8",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0385/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0386",
+      "title": "Motion Prompt #144｜分屏 · Split screen",
+      "summary": "分割画面，同时展示多个场景",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "动态图形（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0386/record.json",
+      "original_file": "entries/PRM-0386/original.md",
+      "original_sha256": "111fcdaa52393f61db6d6b0244b9202d9db206867cc7ee7e7c8b0aae9d2bb002",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0386/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0387",
+      "title": "Motion Prompt #145｜滚动时间轴 · Timeline on scroll",
+      "summary": "滚动时时间轴的线条随之延伸",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0387/record.json",
+      "original_file": "entries/PRM-0387/original.md",
+      "original_sha256": "f989abc5ba452e7f8d8f7150996ef0a518bf83b2bd92233ac66ae6e4d3bff0c3",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0387/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0388",
+      "title": "Motion Prompt #146｜滚动文字显现 · Scroll text reveal",
+      "summary": "随着阅读，文字逐字变深",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0388/record.json",
+      "original_file": "entries/PRM-0388/original.md",
+      "original_sha256": "181b693a9e43707708278a77bf2a4519635513f21382f6454a6927b99daa9283",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0388/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0389",
+      "title": "Motion Prompt #147｜堆叠卡片 · Stacking cards",
+      "summary": "滚动时卡片层层叠起",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0389/record.json",
+      "original_file": "entries/PRM-0389/original.md",
+      "original_sha256": "b47adea79469bb6dcd62263a7748b127f0a3d07682ee2cfed485dd4840a0ebbf",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0389/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0390",
+      "title": "Motion Prompt #148｜滚动切换背景色 · Background color change on scroll",
+      "summary": "按区块切换页面背景色",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0390/record.json",
+      "original_file": "entries/PRM-0390/original.md",
+      "original_sha256": "347dc3e280ffd06c549346ef26970c31bffad400b59b9dbee9d898e9d35b2592",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0390/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0391",
+      "title": "Motion Prompt #149｜滚动隐藏页头 · Hide-on-scroll header",
+      "summary": "向下滚动时隐藏，向上滚动时出现",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0391/record.json",
+      "original_file": "entries/PRM-0391/original.md",
+      "original_sha256": "9209c905ead4560b373644f0d5d770de2ba7d65d95c1920d9f1b5f67e50791f9",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0391/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0392",
+      "title": "Motion Prompt #150｜滚动监听 · Scrollspy",
+      "summary": "目录高亮当前阅读的章节",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0392/record.json",
+      "original_file": "entries/PRM-0392/original.md",
+      "original_sha256": "8991bd1b1da9415e7f8d42b1350035720fb2ec4dde4163a78e2d51be0e6c5217",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0392/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0393",
+      "title": "Motion Prompt #151｜回到顶部按钮 · Back-to-top button",
+      "summary": "往下滚动后出现，点击回到顶部",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0393/record.json",
+      "original_file": "entries/PRM-0393/original.md",
+      "original_sha256": "aa85f1f0f905809adf094f0c9d45de4ec78edc0f2713a1364b3fc04fe8a9e4ec",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0393/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0394",
+      "title": "Motion Prompt #152｜滚动放大 · Zoom on scroll",
+      "summary": "图片随滚动放大至铺满屏幕",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0394/record.json",
+      "original_file": "entries/PRM-0394/original.md",
+      "original_sha256": "8dfdf4ac71b015ce0a3cbe214db6226fed1620caa81f9bed387e747196516fd7",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0394/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0395",
+      "title": "Motion Prompt #153｜3D 倾斜 · 3D tilt on hover",
+      "summary": "卡片随光标方向立体倾斜",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0395/record.json",
+      "original_file": "entries/PRM-0395/original.md",
+      "original_sha256": "52169ba66f9ccd0d29a64d20b2495532dce87ef816441958a8f32c4daffc4703",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0395/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0396",
+      "title": "Motion Prompt #154｜聚光灯悬停 · Spotlight hover",
+      "summary": "只有光标周围变亮",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0396/record.json",
+      "original_file": "entries/PRM-0396/original.md",
+      "original_sha256": "bd86c0a551d37eebd9286910061f466b419761073719e949a739db9211cf784b",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0396/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0397",
+      "title": "Motion Prompt #155｜悬停切换图片 · Image swap on hover",
+      "summary": "悬停时换成另一张照片",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0397/record.json",
+      "original_file": "entries/PRM-0397/original.md",
+      "original_sha256": "408fb90b95b59a07900f19844775f5dec9aa7f45e06490af0a71bd610ad6fb31",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0397/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0398",
+      "title": "Motion Prompt #156｜悬停文字翻滚 · Text roll on hover",
+      "summary": "文字向上翻转并替换",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0398/record.json",
+      "original_file": "entries/PRM-0398/original.md",
+      "original_sha256": "cfe93e844e08f5970b08a5a9631350e29668aedcad71c5ebab40ac5f9f108d5f",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0398/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0399",
+      "title": "Motion Prompt #157｜悬停图片预览 · Hover image reveal",
+      "summary": "悬停列表项时显示对应照片",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0399/record.json",
+      "original_file": "entries/PRM-0399/original.md",
+      "original_sha256": "3ca2eb62202f8f17107cbfe410a939efefa0df9339ba9cbd751e6142859eb0ff",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0399/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0400",
+      "title": "Motion Prompt #158｜浮动标签 · Floating label",
+      "summary": "开始输入时标签上移",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0400/record.json",
+      "original_file": "entries/PRM-0400/original.md",
+      "original_sha256": "0680c91b3f5bda067cf6a3fe5a3f0c4495e8d18ae5c6bae50d149a02c4d18562",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0400/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0401",
+      "title": "Motion Prompt #159｜实时校验 · Inline validation",
+      "summary": "输入时即时显示对错",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0401/record.json",
+      "original_file": "entries/PRM-0401/original.md",
+      "original_sha256": "3d5301d1a552c8191d12d3eed818e2ecbb318d471c5370c378516dc9c44a99c3",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0401/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0402",
+      "title": "Motion Prompt #160｜加载按钮 · Loading button",
+      "summary": "点击后在按钮内显示加载中到完成",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0402/record.json",
+      "original_file": "entries/PRM-0402/original.md",
+      "original_sha256": "12f883b039a2b9794386b008dfe860df61bfea5bcad9d5f4403a993084466c92",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0402/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0403",
+      "title": "Motion Prompt #161｜视图过渡 · View transition (shared element)",
+      "summary": "列表中的照片直接展开为详情页",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0403/record.json",
+      "original_file": "entries/PRM-0403/original.md",
+      "original_sha256": "f06f6781eb79f69a7a7add2d72d1143bf823874708d6ffe859e3e808dbdae0d1",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0403/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0404",
+      "title": "Motion Prompt #162｜灯箱 · Lightbox",
+      "summary": "点击图片后在变暗的背景上放大",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0404/record.json",
+      "original_file": "entries/PRM-0404/original.md",
+      "original_sha256": "834d665000416828071cf59159116779a43153fd2aba3174d2fd69c85e717b29",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0404/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0405",
+      "title": "Motion Prompt #163｜图片热点 · Hotspots",
+      "summary": "点击图片上的圆点显示说明",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0405/record.json",
+      "original_file": "entries/PRM-0405/original.md",
+      "original_sha256": "e72f0c618260a8577c9a84cf0fa6a0c42ed9befe24d7340ed6563f960aabed60",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0405/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0406",
+      "title": "Motion Prompt #164｜倒计时 · Countdown timer",
+      "summary": "显示距截止时间的剩余时间并递减",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0406/record.json",
+      "original_file": "entries/PRM-0406/original.md",
+      "original_sha256": "5d962f0a84d35e3c7839892497961f7b6550f3e780b8f1a30f549c5bdcf83e05",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0406/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0407",
+      "title": "Motion Prompt #165｜动态形状分隔线 · Animated shape divider",
+      "summary": "持续摆动的波浪形区块分隔线",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0407/record.json",
+      "original_file": "entries/PRM-0407/original.md",
+      "original_sha256": "3eb60285889ede859bd750c86ce81e733f679b4ded3ff275fd2f0524a338cf48",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0407/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0408",
+      "title": "Motion Prompt #166｜点赞动画 · Like button animation",
+      "summary": "点击后爱心迸发弹出",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0408/record.json",
+      "original_file": "entries/PRM-0408/original.md",
+      "original_sha256": "44c824deb61c866313ce9c33df81340942b8ff8831737b774a4effd66b1d51a0",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0408/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0409",
+      "title": "Motion Prompt #167｜向下滚动提示 · Scroll-down cue",
+      "summary": "持续循环、引导向下滚动的动画",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0409/record.json",
+      "original_file": "entries/PRM-0409/original.md",
+      "original_sha256": "80c16e2af621541209ac058f474a0aca6e3880ba7aaae4d2899e61a1752d4b88",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0409/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0410",
+      "title": "Motion Prompt #168｜背景视频 · Background video",
+      "summary": "首屏背景中播放视频",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "落地页与网页效果（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0410/record.json",
+      "original_file": "entries/PRM-0410/original.md",
+      "original_sha256": "68d3e860af26aed97f17a01610b45c3fa15f2ed6603762da70d895b76a73a200",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0410/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0411",
+      "title": "Motion Prompt #169｜垂直升降镜头 · Pedestal",
+      "summary": "相机整体垂直上下平移",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0411/record.json",
+      "original_file": "entries/PRM-0411/original.md",
+      "original_sha256": "d16f54ffe39b9b09d58938f44723b39982976000b85fd538c0ea81f4935810d9",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0411/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0412",
+      "title": "Motion Prompt #170｜横滚镜头 · Barrel roll",
+      "summary": "相机绕镜头光轴旋转一整圈",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0412/record.json",
+      "original_file": "entries/PRM-0412/original.md",
+      "original_sha256": "7801cebd34786166951f1b9e63854f0bbd3dc378e38be480f423be7bf53f106f",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0412/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0413",
+      "title": "Motion Prompt #171｜移动延时 · Hyperlapse",
+      "summary": "相机边移动边拍的延时摄影",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0413/record.json",
+      "original_file": "entries/PRM-0413/original.md",
+      "original_sha256": "e49b0ad92aeada64c9fd5ceec338c68a7bf81827b0baf31de0c28d4b1bc7246b",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0413/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0414",
+      "title": "Motion Prompt #172｜长镜头 · Long take",
+      "summary": "不切换，一个镜头连续拍到底",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0414/record.json",
+      "original_file": "entries/PRM-0414/original.md",
+      "original_sha256": "7ee8e1b4cf4625ae7ad170af32429c6de7f06431123012cb480f50c563e555ed",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0414/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0415",
+      "title": "Motion Prompt #173｜斯坦尼康 · Steadicam",
+      "summary": "消除抖动，平稳流畅地移动",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0415/record.json",
+      "original_file": "entries/PRM-0415/original.md",
+      "original_sha256": "1a7819f0201cd03b23c793661236f42dbcff2f7de066d93d678636efa40bd49a",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0415/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0416",
+      "title": "Motion Prompt #174｜背后跟拍 · Follow shot",
+      "summary": "跟在主体身后移动",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0416/record.json",
+      "original_file": "entries/PRM-0416/original.md",
+      "original_sha256": "6a42d1e0cfcc1b4f8ddfc464a24aef485d8a99c3ffae6501f8e09500b5ff4128",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0416/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0417",
+      "title": "Motion Prompt #175｜固定镜头 · Locked-off shot",
+      "summary": "相机固定不动，只有主体移动",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0417/record.json",
+      "original_file": "entries/PRM-0417/original.md",
+      "original_sha256": "47a912c00754474790ed8aa5d3bfea81a6e040cf582a6f8caf180978d34e2fd6",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0417/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0418",
+      "title": "Motion Prompt #176｜穿越镜头 · Fly-through",
+      "summary": "穿过窗户或门进入下一个空间",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0418/record.json",
+      "original_file": "entries/PRM-0418/original.md",
+      "original_sha256": "8047a6727b21ca5d7afcb941dbfe2fc2085d35e3a72627a9bacd5897e4817bae",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0418/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0419",
+      "title": "Motion Prompt #177｜低角度镜头 · Low angle",
+      "summary": "从低处向上拍",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0419/record.json",
+      "original_file": "entries/PRM-0419/original.md",
+      "original_sha256": "57914bf4647cac1173e9c56cd7b66dfa3d23464412bd18e61acd100ed018b2f8",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0419/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0420",
+      "title": "Motion Prompt #178｜高角度镜头 · High angle",
+      "summary": "从高处向下拍",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0420/record.json",
+      "original_file": "entries/PRM-0420/original.md",
+      "original_sha256": "b1da9851086ddf2b56c5cfc87fef86ac57cd3e727bac74850d6a5d6481683ac4",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0420/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0421",
+      "title": "Motion Prompt #179｜POV 镜头 · POV shot",
+      "summary": "以角色的视线观看",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0421/record.json",
+      "original_file": "entries/PRM-0421/original.md",
+      "original_sha256": "9c2dbcc9229a627adf75d7499f990f0cd49080926800d7c05e1aedc4cc1fcf04",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0421/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0422",
+      "title": "Motion Prompt #180｜过肩镜头 · Over-the-shoulder",
+      "summary": "越过一人的肩膀拍另一人",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0422/record.json",
+      "original_file": "entries/PRM-0422/original.md",
+      "original_sha256": "8a11a163c2bed8be678bdd5bc86b315c0502c9da0dcbadbcd8fe0b0bbfc4358f",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0422/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0423",
+      "title": "Motion Prompt #181｜鸟瞰镜头 · Bird's-eye view",
+      "summary": "从正上方垂直向下拍",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0423/record.json",
+      "original_file": "entries/PRM-0423/original.md",
+      "original_sha256": "d1dd76cb5f31477db14dd3198830f5f654d2cffb2dc5c560a9266f957b35d8fe",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0423/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0424",
+      "title": "Motion Prompt #182｜深焦镜头 · Deep focus",
+      "summary": "从近处到远处全部清晰",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0424/record.json",
+      "original_file": "entries/PRM-0424/original.md",
+      "original_sha256": "f8d22e4eca7bf76310ab7ec6a577f35cd5fb93921e8c0ad5aeabd8c0f096f025",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0424/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0425",
+      "title": "Motion Prompt #183｜定场镜头 · Establishing shot",
+      "summary": "开场交代地点的远景",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0425/record.json",
+      "original_file": "entries/PRM-0425/original.md",
+      "original_sha256": "2e60dd69aa5cef59e29c3a0bb96c42e7b923a6f92af47db7e444163b4cd065ea",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0425/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0426",
+      "title": "Motion Prompt #184｜大特写 · Extreme close-up",
+      "summary": "只放大眼睛或指尖等局部",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0426/record.json",
+      "original_file": "entries/PRM-0426/original.md",
+      "original_sha256": "d2a60081149f82b984d34ef4af86ee93b8ce6d4d1befa7a4ac9a040f13617c7a",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0426/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0427",
+      "title": "Motion Prompt #185｜插入镜头 · Insert shot",
+      "summary": "插入同一场景中的细节",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0427/record.json",
+      "original_file": "entries/PRM-0427/original.md",
+      "original_sha256": "9ed476a91afda4dd8f5340412e8bcf6b39588005786664109bfe7b0892ad9076",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0427/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0428",
+      "title": "Motion Prompt #186｜变形剪切 · Morph cut",
+      "summary": "平滑衔接相同构图的两段画面",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0428/record.json",
+      "original_file": "entries/PRM-0428/original.md",
+      "original_sha256": "bc253232072d3347f2829ddcaa05df12b005b0596a993db6a7e668539c7eb5b4",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0428/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0429",
+      "title": "Motion Prompt #187｜淡出到黑场 · Fade to black",
+      "summary": "画面逐渐变暗直至全黑",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0429/record.json",
+      "original_file": "entries/PRM-0429/original.md",
+      "original_sha256": "7a15d25bbb246affc136194b0a089cb6b0922146c881873a27a066a34d5fa366",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0429/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0430",
+      "title": "Motion Prompt #188｜圈出 · Iris out",
+      "summary": "圆形窗口收拢，画面变黑",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0430/record.json",
+      "original_file": "entries/PRM-0430/original.md",
+      "original_sha256": "3522e340024c22cf2d90f62919964e8a079201535bd5aa5a9dde41a81c8e8ca9",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0430/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0431",
+      "title": "Motion Prompt #189｜切出镜头 · Cutaway",
+      "summary": "切到其他对象后再切回",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0431/record.json",
+      "original_file": "entries/PRM-0431/original.md",
+      "original_sha256": "d0e5ea9fb9f6a2f40062d7f8270efb82426f6f5907f13bc1ed3fcbb9b9aafba2",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0431/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0432",
+      "title": "Motion Prompt #190｜交叉剪辑 · Cross-cutting",
+      "summary": "交替呈现同时发生的两个场景",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0432/record.json",
+      "original_file": "entries/PRM-0432/original.md",
+      "original_sha256": "fee0e080f1908033b737b236898e74ecd3713487ee53699aaa950e8a4db324c1",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0432/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0433",
+      "title": "Motion Prompt #191｜子弹时间 · Bullet time",
+      "summary": "时间静止，相机绕主体旋转",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0433/record.json",
+      "original_file": "entries/PRM-0433/original.md",
+      "original_sha256": "2eb32e2368c398ee130cfa49dbf86b789b464b5530f65c3d234feec73eb486ed",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0433/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
+    },
+    {
+      "id": "PRM-0434",
+      "title": "Motion Prompt #192｜蒙太奇 · Montage",
+      "summary": "用一连串短镜头压缩时间",
+      "category_id": "motion_prompt_mit",
+      "tags": [
+        "Motion Prompt",
+        "镜头运动与转场（第 2 弹）",
+        "中英对照",
+        "MIT"
+      ],
+      "record_file": "entries/PRM-0434/record.json",
+      "original_file": "entries/PRM-0434/original.md",
+      "original_sha256": "cc985b94b9ea96bae175a734d4ada2d497f4c7375e3ef8e5c7d0764326572e7f",
+      "latest_version": "v001",
+      "optimized_file": "entries/PRM-0434/optimized-v001.md",
+      "evaluation_status": "untested",
+      "created_at": "2026-11-04T09:00:00+08:00",
+      "updated_at": "2026-11-04T09:00:00+08:00"
     }
   ]
 }
