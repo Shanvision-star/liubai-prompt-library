@@ -1,7 +1,7 @@
 #ifndef BuildDir
   #define BuildDir "..\dist"
 #endif
-#define AppVersion "0.7.1"
+#define AppVersion "0.8.0"
 
 [Setup]
 AppId=Shanvision.Liubai.PromptLibrary

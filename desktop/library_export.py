@@ -14,7 +14,7 @@ from reference_store import ReferenceStore, ENTRY_ID, REF_ID, _now
 from runtime_paths import bundled_mcp
 
 
-APP_VERSION = "0.7.1"
+APP_VERSION = "0.8.0"
 MAX_BACKUP_BYTES = 256 * 1024 * 1024
 MAX_BACKUP_FILES = 10000
 

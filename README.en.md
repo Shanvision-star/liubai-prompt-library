@@ -4,7 +4,7 @@
 
 Liubai is a local-first tool for collecting, finding, reading and reusing prompts. It keeps original text, adaptations, sources and analysis separate so that changes remain traceable. Browsing, saving, copying and backups do not require a model account; AI-assisted analysis uses your own client and provider.
 
-The current source includes a Chinese and English interface. The Windows download follows the version shown on GitHub Releases. To try the bilingual changes from this source, use the source instructions below.
+Liubai 0.8.0 includes a Chinese and English interface and Windows setup wizard. All 252 items in the bundled collection can be read in English, using either the original or a separate translation linked to the source text.
 
 [Download for Windows](https://github.com/Shanvision-star/liubai-prompt-library/releases/latest) · [Chinese user guide](docs/USER-GUIDE.md) · [Integrations](docs/INTEGRATIONS.md) · [Report an issue](https://github.com/Shanvision-star/liubai-prompt-library/issues)
 
