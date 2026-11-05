@@ -6,7 +6,7 @@
 
 当前公开版内置 **252 条素材、6 份参考、252 张教学卡**。新增 [192 条 Motion Prompt 双语素材](docs/MOTION-PROMPT.md)，覆盖 UI 动效、镜头与构图等，可读英文原文、中文译文和逐条设计拆解。新收藏可通过自己的 AI 生成拆解并回写；留白不提供模型额度。
 
-**Windows 0.7.1** 延续 macOS 风格的磨砂玻璃布局，统一各分类的原文与译文阅读。主按钮只复制原提示词，来源可直接打开。程序支持 8 个 MCP 工具，安装包的核验范围见 [验证记录](docs/VALIDATION.md)。
+**Windows 0.8.0** 支持中英文界面和安装向导。语言与反馈入口收在顶栏的磨砂玻璃菜单中。252 条公开素材均可英文阅读，主按钮只复制原提示词。程序支持 8 个 MCP 工具，发行包的安装检查见 [GitHub Releases](https://github.com/Shanvision-star/liubai-prompt-library/releases)。
 
 **本地素材库 · Windows 安装包 · REST API + MCP**
 
@@ -22,7 +22,7 @@
 
 ### Windows：下载安装即可使用
 
-下载 [Windows 安装包](https://github.com/Shanvision-star/liubai-prompt-library/releases/latest) 中的 `Liubai-Setup-0.7.1-windows-x64.exe`，运行安装向导，然后从开始菜单打开“留白”。**不需要安装 Python、Node 或数据库，也不需要模型 API 密钥。** 目标系统为 Windows 10/11 x64。
+从 [GitHub Releases](https://github.com/Shanvision-star/liubai-prompt-library/releases/latest) 下载最新的 `Liubai-Setup-*-windows-x64.exe`，运行安装向导，然后从开始菜单打开“留白”或 “Liubai”。**不需要安装 Python、Node 或数据库，也不需要模型 API 密钥。** 目标系统为 Windows 10/11 x64。
 
 首次启动会校验并准备该安装包附带的素材，显示准备窗口；随后打开应用。可浏览复用版、设计逻辑、Loop 和来源，复制后用于自己的工具。素材数量以安装包版本为准，已有库不会自动替换为新版公开集。
 
@@ -58,7 +58,7 @@ python -X utf8 start.py --data-root /absolute/path/to/my-library --port 8767
 
 当前源码支持中文与英文。打开顶栏 **•••** 可选择 **中文**、**English** 或**自动**。手动选择保存在本机，语言选择无需查询 IP。英文界面优先显示与原文校验一致的英文内容。展开折叠区即可阅读另一种语言，原文和译文可分别复制。
 
-**反馈**也在 **•••** 菜单中。邮件会打开本机邮件应用，GitHub Issues 公开可见且可能需要登录。预编译安装包版本以 [GitHub Releases](https://github.com/Shanvision-star/liubai-prompt-library/releases/latest) 为准，可用上述源码方式体验当前双语改动。
+**反馈**也在 **•••** 菜单中。邮件会打开本机邮件应用，GitHub Issues 公开可见且可能需要登录。
 
 ## 保存与分类
 
