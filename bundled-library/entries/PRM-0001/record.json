@@ -17,15 +17,15 @@
   "source": {
     "type": "user_submission",
     "url": null,
-    "note": "根据用户本次明确入库请求，从会话原始消息文本提取。保留标题、INSTRUCTIONS 标签、全部章节、截断开头、编号及 Markdown 原格式；不包含运行环境信息，也未补写缺失段落。"
+    "note": "公开来源为独立脱敏整理的通用示例，不是私人会话或项目指令的逐字副本。"
   },
   "created_at": "2026-10-23T17:50:36+08:00",
   "updated_at": "2026-10-23T23:14:47+08:00",
   "original": {
     "file": "original.md",
-    "sha256": "70bb707d48e951109fbfbd252ecf45fb3ee143fe946da29056f7f18d40dc5f00",
+    "sha256": "7a1ace34b7ba6fd3e0ec21170d4d08272b1642a50ca37e63660c0937e6ab1411",
     "encoding": "UTF-8",
-    "byte_count": 7395
+    "byte_count": 1073
   },
   "related_ids": [],
   "variables": [
@@ -76,7 +76,7 @@
       "created_by": "当前 Codex 对话助手",
       "reason": "用户要求将既有项目经验优化为其他项目可复用的开发协作提示词。",
       "changes": [
-        "将 ChatPaperHub、具体主线和未来层清单替换为 7 个可填写的项目参数；参数缺失时先核查仓库。",
+        "用 7 个可填参数替代具体项目背景；参数缺失时先核查仓库。",
         "合并重复的操作规则、经验总结与启动清单，整理为项目地图、缺口分类、编辑纪律、验证、Agent 条件规则、文档同步和交付要求。",
         "明确代码证明实际状态、权威文档约束目标；冲突先辨别缺口，避免盲从旧计划或默认现有代码即正确。",
         "保留 Python、前端和 Agent 的核心约束，按项目实际技术栈和任务启用；避免把特定技术栈强加给所有项目。",
@@ -133,6 +133,6 @@
     "authorized_by_owner": true,
     "edition": "public-2026.10.31-selected",
     "private_original_preserved": true,
-    "original_kind": "original"
+    "original_kind": "adaptation"
   }
 }

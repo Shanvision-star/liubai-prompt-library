@@ -5,6 +5,7 @@ from hashlib import sha256
 from pathlib import Path
 import importlib.util
 import json
+import re
 import threading
 import urllib.error
 import urllib.request
@@ -184,13 +185,18 @@ def test_html_is_protected_by_content_security_policy(endpoint):
     assert "script-src 'self'" in headers["Content-Security-Policy"]
     assert headers["X-Content-Type-Options"] == "nosniff"
 
-def test_feedback_window_offers_user_initiated_private_and_public_channels(endpoint):
+
+def test_feedback_window_offers_only_its_public_issues(endpoint):
     status, page, _ = request(endpoint + "/")
     html = page.decode("utf-8")
     assert status == 200
-    assert 'id="feedback-dialog"' in html
-    assert 'mailto:rome@chatpaperhub.com' in html
-    assert 'https://github.com/Shanvision-star/liubai-prompt-library/issues/new/choose' in html
+    assert 'mailto:' not in html.lower()
+    dialog = re.search(r'<dialog\b[^>]*id="feedback-dialog"[^>]*>(.*?)</dialog>', html, re.S)
+    assert dialog
+    assert re.findall(r'<a\b[^>]*\bhref="([^"]+)"', dialog[1]) == [
+        'https://github.com/Shanvision-star/liubai-prompt-library/issues/new/choose',
+    ]
+    assert '公开可见' in dialog[1] and '私人素材' in dialog[1]
     status, script, _ = request(endpoint + "/feedback.js")
     assert status == 200 and b'showModal' in script
 

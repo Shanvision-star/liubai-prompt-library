@@ -5,6 +5,7 @@ from io import BytesIO
 import json
 import os
 from pathlib import Path
+import re
 import socket
 import subprocess
 import sys
@@ -17,6 +18,31 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "desktop"))
 from library_export import APP_VERSION
 
+UNINSTALL_ROOT = r"Software\Microsoft\Windows\CurrentVersion\Uninstall"
+INSTALLER_APP_ID = "Liubai.PromptLibrary"
+
+
+def assert_no_existing_installation(winreg):
+    """Protect recognized older installs without retaining their private installer ID."""
+    try:
+        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, UNINSTALL_ROOT) as uninstall:
+            for index in range(winreg.QueryInfoKey(uninstall)[0]):
+                subkey = winreg.EnumKey(uninstall, index)
+                existing = subkey.casefold() == (INSTALLER_APP_ID + "_is1").casefold()
+                if not existing:
+                    try:
+                        with winreg.OpenKey(uninstall, subkey) as installed:
+                            display_name = winreg.QueryValueEx(installed, "DisplayName")[0]
+                    except FileNotFoundError:
+                        continue
+                    existing = isinstance(display_name, str) and display_name.casefold().startswith(
+                        ("liubai · prompt library", "留白 · 提示词素材库")
+                    )
+                if existing:
+                    raise SystemExit("当前用户已有留白安装记录；请换测试用户，不能覆盖日常安装")
+    except FileNotFoundError:
+        pass
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -27,12 +53,8 @@ def main():
     collection = json.loads((ROOT / "bundled-library/manifest.json").read_text(encoding="utf-8"))
     expected_entries, expected_references = collection["entry_count"], collection["reference_count"]
     import winreg
-    key = r"Software\Microsoft\Windows\CurrentVersion\Uninstall\Shanvision.Liubai.PromptLibrary_is1"
-    try:
-        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, key):
-            raise SystemExit("当前用户已有留白安装记录；请换测试用户，不能覆盖日常安装")
-    except FileNotFoundError:
-        pass
+    key = UNINSTALL_ROOT + "\\" + INSTALLER_APP_ID + "_is1"
+    assert_no_existing_installation(winreg)
     menu_root = Path(os.environ["APPDATA"]) / "Microsoft/Windows/Start Menu/Programs"
     # 禁用分组选择页的安装包会忽略 /GROUP，即使没有注册表记录也可能已有快捷方式。
     if any((menu_root / name).exists() for name in ("Liubai", "留白")):
@@ -111,7 +133,11 @@ def main():
         page = response.read().decode("utf-8")
     assert 'data-guide-open="start"' in page and 'id="guide-tab-connect"' in page
     assert 'id="guide-tab-workflow"' in page and "Claude Code" in page
-    assert 'id="language-select"' in page and 'id="feedback-dialog"' in page
+    assert 'id="language-select"' in page and 'mailto:' not in page.lower()
+    dialog = re.search(r'<dialog\b[^>]*id="feedback-dialog"[^>]*>(.*?)</dialog>', page, re.S)
+    assert dialog and re.findall(r'<a\b[^>]*\bhref="([^"]+)"', dialog[1]) == [
+        'https://github.com/Shanvision-star/liubai-prompt-library/issues/new/choose',
+    ]
     for name in ("guide.js", "guide.css", "lifecycle.js", "language-choice.js", "i18n.js", "language-ui.js", "feedback.js"):
         with urlopen(url + "/" + name, timeout=30) as response:
             assert response.status == 200 and response.read()

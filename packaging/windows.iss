@@ -4,10 +4,11 @@
 #define AppVersion "0.8.0"
 
 [Setup]
-AppId=Shanvision.Liubai.PromptLibrary
+; Stable public installer identity. Previously installed builds need a documented migration before distribution with this ID.
+AppId=Liubai.PromptLibrary
 AppName={cm:AppTitle}
 AppVersion={#AppVersion}
-AppPublisher=Shanvision
+AppPublisher=Liubai
 AppPublisherURL=https://github.com/Shanvision-star/liubai-prompt-library
 DefaultDirName={localappdata}\Programs\Liubai
 DefaultGroupName={cm:MenuGroup}

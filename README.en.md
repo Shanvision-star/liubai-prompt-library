@@ -52,4 +52,4 @@ python -X utf8 -m pytest desktop/tests tests -q
 node --test "desktop/tests/*.test.js"
 ```
 
-The application code is [MIT licensed](LICENSE). Source prompts and reference materials retain their own licences; inclusion does not make them MIT licensed. Please report issues through GitHub or email rome@chatpaperhub.com. GitHub issues are public.
+The application code is [MIT licensed](LICENSE). Source prompts and reference materials retain their own licences; inclusion does not make them MIT licensed. Please report issues through GitHub Issues. Issues are public; use a generic example and omit private data.
